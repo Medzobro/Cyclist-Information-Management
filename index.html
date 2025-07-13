@@ -72,6 +72,7 @@
         }
         
         .user-info {
+            position: relative;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -79,6 +80,11 @@
             padding: 8px 15px;
             border-radius: 30px;
             cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .user-info:hover {
+            background: rgba(255, 255, 255, 0.3);
         }
         
         .user-info img {
@@ -87,6 +93,53 @@
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid white;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%; /* Position below the user-info */
+            right: 0; /* Align to the right of user-info */
+            background: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            min-width: 180px;
+            margin-top: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 200;
+        }
+
+        .dropdown-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px 20px;
+            background: none;
+            border: none;
+            text-align: right;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--dark);
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .dropdown-menu button:hover {
+            background: #f0f7ff;
+            color: var(--primary);
+        }
+
+        .dropdown-menu button i {
+            width: 20px; /* Ensure icon alignment */
+            text-align: center;
         }
         
         /* صفحة تسجيل الدخول */
@@ -208,6 +261,14 @@
         
         .btn-secondary:hover {
             background: #27ae60;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
         }
         
         .social-login {
@@ -408,6 +469,9 @@
             box-shadow: var(--shadow);
             transition: transform 0.3s;
             border: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Pushes delete button to bottom */
         }
         
         .driver-card:hover {
@@ -434,6 +498,13 @@
             justify-content: center;
             font-size: 2.5rem;
             color: var(--gray);
+            overflow: hidden; /* To ensure image fits */
+        }
+
+        .driver-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         .driver-name {
@@ -449,6 +520,7 @@
         
         .driver-details {
             padding: 20px;
+            flex-grow: 1; /* Allow details to take available space */
         }
         
         .detail-item {
@@ -460,6 +532,12 @@
             border-bottom: 1px solid #f0f0f0;
         }
         
+        .detail-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
         .detail-icon {
             width: 40px;
             height: 40px;
@@ -499,8 +577,29 @@
             background: #fff3e0;
             color: #f39c12;
         }
+
+        .driver-card .delete-driver-btn {
+            display: block;
+            width: calc(100% - 40px); /* Account for padding */
+            margin: 20px; /* Add margin around the button */
+            padding: 10px 15px;
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
+            text-align: center;
+        }
+
+        .driver-card .delete-driver-btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
         
-        /* نموذج إضافة سائق */
+        /* نموذج إضافة سائق / إعدادات */
         .form-container {
             max-width: 700px;
             margin: 0 auto;
@@ -571,6 +670,35 @@
         .file-name {
             color: var(--primary);
             font-weight: 500;
+        }
+
+        /* Profile settings specific styles */
+        #profileSettingsForm .profile-settings-avatar-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        #profileSettingsForm .profile-settings-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        #profileSettingsForm .profile-settings-avatar:hover {
+            border-color: var(--secondary);
+        }
+
+        #profileSettingsForm .profile-settings-avatar-text {
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
         }
         
         .btn-group {
@@ -750,9 +878,13 @@
                 </div>
                 
                 <div class="user-info" id="userInfo">
-                    <img src="https://ui-avatars.com/api/?name=المدير&background=0D8ABC&color=fff" alt="صورة المستخدم">
+                    <img id="headerUserAvatar" src="https://ui-avatars.com/api/?name=المدير&background=0D8ABC&color=fff" alt="صورة المستخدم">
                     <span id="loggedInUserName">مدير النظام</span>
                     <i class="fas fa-chevron-down"></i>
+                    <div class="dropdown-menu" id="userDropdownMenu">
+                        <button id="dropdownSettingsBtn"><i class="fas fa-cog"></i> الإعدادات</button>
+                        <button id="dropdownLogoutBtn"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</button>
+                    </div>
                 </div>
             </div>
         </header>
@@ -781,10 +913,10 @@
                         <i class="fas fa-cog"></i>
                         <span>الإعدادات</span>
                     </div>
-                    <div class="nav-item" id="logoutBtn">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span>تسجيل الخروج</span>
-                    </div>
+                    <a href="https://telegram.org/dl" target="_blank" class="nav-item" id="navSupport">
+                        <i class="fas fa-life-ring"></i>
+                        <span>الدعم</span>
+                    </a>
                 </div>
                 
                 <div class="main-content">
@@ -898,6 +1030,50 @@
                             </form>
                         </div>
                     </div>
+
+                    <div id="settingsView" style="display: none;">
+                        <div class="section-header">
+                            <h2><i class="fas fa-cog"></i> الإعدادات</h2>
+                        </div>
+                        <div class="form-container">
+                            <div class="alert alert-success" id="settingsSuccessAlert" style="display: none;">
+                                <i class="fas fa-check-circle"></i>
+                                <div>
+                                    <h3>تم الحفظ بنجاح!</h3>
+                                    <p>تم تحديث إعدادات ملفك الشخصي.</p>
+                                </div>
+                            </div>
+                            <div class="alert alert-error" id="settingsErrorAlert" style="display: none;">
+                                <i class="fas fa-times-circle"></i>
+                                <span id="settingsErrorMessage"></span>
+                            </div>
+                            <form id="profileSettingsForm">
+                                <div class="profile-settings-avatar-upload">
+                                    <img id="settingsUserAvatar" class="profile-settings-avatar" src="https://ui-avatars.com/api/?name=المدير&background=0D8ABC&color=fff" alt="صورة المستخدم">
+                                    <input type="file" id="settingsAvatarInput" accept="image/*" style="display: none;">
+                                    <span id="settingsAvatarText" class="profile-settings-avatar-text">تغيير الصورة الشخصية</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="settingsUserName">اسم المستخدم</label>
+                                    <input type="text" id="settingsUserName" placeholder="أدخل اسمك الجديد">
+                                </div>
+                                <div class="form-group">
+                                    <label for="settingsEmail">البريد الإلكتروني</label>
+                                    <input type="email" id="settingsEmail" placeholder="أدخل بريدك الإلكتروني الجديد" disabled style="background-color: #f0f0f0;">
+                                    <small style="color: #777;">(لا يمكن تغيير البريد الإلكتروني)</small>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="submit" class="btn btn-secondary">
+                                        <i class="fas fa-save"></i> حفظ التغييرات
+                                    </button>
+                                    <button type="button" class="btn btn-danger" id="settingsLogoutBtn">
+                                        <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -924,10 +1100,17 @@
         const facebookLogin = document.getElementById('facebookLogin');
         const phoneLogin = document.getElementById('phoneLogin');
         
+        const userInfo = document.getElementById('userInfo');
+        const userDropdownMenu = document.getElementById('userDropdownMenu');
+        const dropdownSettingsBtn = document.getElementById('dropdownSettingsBtn');
+        const dropdownLogoutBtn = document.getElementById('dropdownLogoutBtn');
+
         const navDashboard = document.getElementById('navDashboard');
         const navDrivers = document.getElementById('navDrivers');
         const navAddDriver = document.getElementById('navAddDriver');
-        const logoutBtn = document.getElementById('logoutBtn');
+        const navReports = document.getElementById('navReports');
+        const navSettings = document.getElementById('navSettings');
+        const navSupport = document.getElementById('navSupport');
         const addDriverBtn = document.getElementById('addDriverBtn');
         const startBtn = document.getElementById('startBtn');
         const cancelBtn = document.getElementById('cancelBtn');
@@ -935,6 +1118,7 @@
         const dashboardView = document.getElementById('dashboardView');
         const driversView = document.getElementById('driversView');
         const addDriverView = document.getElementById('addDriverView');
+        const settingsView = document.getElementById('settingsView'); // New settings view
         const driversList = document.getElementById('driversList');
         const noDriversMessage = document.getElementById('noDriversMessage');
         const driverForm = document.getElementById('driverForm');
@@ -942,7 +1126,7 @@
         const driverFormError = document.getElementById('driverFormError');
         const driverFormErrorMessage = document.getElementById('driverFormErrorMessage');
 
-        // File upload elements
+        // File upload elements (Add Driver Form)
         const profileUpload = document.getElementById('profileUpload');
         const profileInput = document.getElementById('profileInput');
         const profileFileName = document.getElementById('profileFileName');
@@ -960,10 +1144,30 @@
         const bikeFileName = document.getElementById('bikeFileName');
 
         const loggedInUserName = document.getElementById('loggedInUserName');
+        const headerUserAvatar = document.getElementById('headerUserAvatar');
+
+        // Settings Page Elements
+        const profileSettingsForm = document.getElementById('profileSettingsForm');
+        const settingsUserAvatar = document.getElementById('settingsUserAvatar');
+        const settingsAvatarInput = document.getElementById('settingsAvatarInput');
+        const settingsAvatarText = document.getElementById('settingsAvatarText');
+        const settingsUserNameInput = document.getElementById('settingsUserName');
+        const settingsEmailInput = document.getElementById('settingsEmail');
+        const settingsLogoutBtn = document.getElementById('settingsLogoutBtn'); // Logout button in settings
+        const settingsSuccessAlert = document.getElementById('settingsSuccessAlert');
+        const settingsErrorAlert = document.getElementById('settingsErrorAlert');
+        const settingsErrorMessage = document.getElementById('settingsErrorMessage');
 
         // --- Data Storage (using localStorage to simulate a backend) ---
-        let users = JSON.parse(localStorage.getItem('users')) || [];
+        let users = JSON.parse(localStorage.getItem('users')) || [{
+            fullName: 'مدير النظام',
+            email: 'admin@admin.com',
+            password: 'password',
+            avatar: 'https://ui-avatars.com/api/?name=مدير+النظام&background=0D8ABC&color=fff'
+        }]; // Default admin user
         let driversData = JSON.parse(localStorage.getItem('drivers')) || [];
+
+        let currentLoggedInUser = null; // To store the currently logged-in user object
 
         // Function to save users to localStorage
         function saveUsers() {
@@ -975,9 +1179,29 @@
             localStorage.setItem('drivers', JSON.stringify(driversData));
         }
 
+        function saveLoggedInUser() {
+            localStorage.setItem('currentLoggedInUser', JSON.stringify(currentLoggedInUser));
+        }
+
+        function loadLoggedInUser() {
+            const storedUser = localStorage.getItem('currentLoggedInUser');
+            if (storedUser) {
+                currentLoggedInUser = JSON.parse(storedUser);
+                updateHeaderUserInfo();
+                return true;
+            }
+            return false;
+        }
+
         // --- Utility Functions ---
         function showMessage(element, message, type = 'error') {
-            element.querySelector('span').textContent = message;
+            if (element.id === 'errorMessage') { // Specific handling for login/signup error
+                errorMessageText.textContent = message;
+            } else if (element.id === 'driverFormError') {
+                driverFormErrorMessage.textContent = message;
+            } else if (element.id === 'settingsErrorAlert') {
+                settingsErrorMessage.textContent = message;
+            }
             element.className = `alert alert-${type}`; // Update class for styling
             element.style.display = 'flex';
         }
@@ -994,23 +1218,38 @@
         }
 
         // Add shake animation CSS if not already present
-        const style = document.createElement('style');
-        style.innerHTML = `
-            @keyframes shake {
-                0% { transform: translateX(0); }
-                25% { transform: translateX(10px); }
-                50% { transform: translateX(-10px); }
-                75% { transform: translateX(10px); }
-                100% { transform: translateX(0); }
+        if (!document.getElementById('shake-animation-style')) {
+            const style = document.createElement('style');
+            style.id = 'shake-animation-style';
+            style.innerHTML = `
+                @keyframes shake {
+                    0% { transform: translateX(0); }
+                    25% { transform: translateX(10px); }
+                    50% { transform: translateX(-10px); }
+                    75% { transform: translateX(10px); }
+                    100% { transform: translateX(0); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Function to update header user info (name and avatar)
+        function updateHeaderUserInfo() {
+            if (currentLoggedInUser) {
+                loggedInUserName.textContent = currentLoggedInUser.fullName;
+                headerUserAvatar.src = currentLoggedInUser.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(currentLoggedInUser.fullName)}&background=0D8ABC&color=fff`;
+            } else {
+                loggedInUserName.textContent = 'الزائر';
+                headerUserAvatar.src = `https://ui-avatars.com/api/?name=الزائر&background=0D8ABC&color=fff`;
             }
-        `;
-        document.head.appendChild(style);
+        }
 
         // Function to switch between dashboard views
         function showView(view) {
             dashboardView.style.display = 'none';
             driversView.style.display = 'none';
             addDriverView.style.display = 'none';
+            settingsView.style.display = 'none'; // Hide settings view by default
             view.style.display = 'block';
 
             // Update active state in sidebar
@@ -1021,7 +1260,12 @@
                 navDrivers.classList.add('active');
             } else if (view === addDriverView) {
                 navAddDriver.classList.add('active');
+            } else if (view === settingsView) {
+                navSettings.classList.add('active');
+                populateSettingsForm(); // Populate settings form when shown
             }
+            // Close dropdown if open
+            userDropdownMenu.classList.remove('show');
         }
         
         // Function to load and display drivers
@@ -1034,6 +1278,7 @@
                 driversData.forEach(driver => {
                     const driverCard = document.createElement('div');
                     driverCard.className = 'driver-card';
+                    driverCard.dataset.driverId = driver.id; // Store ID for deletion
                     
                     const statusClass = driver.status === 'active' ? 'status-active' : 'status-pending';
                     const statusText = driver.status === 'active' ? 'نشط' : 'في انتظار الموافقة';
@@ -1076,12 +1321,32 @@
                                 </div>
                             </div>
                         </div>
+                        <button class="delete-driver-btn" data-id="${driver.id}">
+                            <i class="fas fa-trash-alt"></i> حذف السائق
+                        </button>
                     `;
                     driversList.appendChild(driverCard);
+                });
+
+                // Add event listeners for delete buttons after they are created
+                document.querySelectorAll('.delete-driver-btn').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const driverId = parseInt(e.target.dataset.id);
+                        if (confirm(`هل أنت متأكد من حذف السائق رقم #${driverId}؟`)) {
+                            deleteDriver(driverId);
+                        }
+                    });
                 });
             }
         }
         
+        function deleteDriver(id) {
+            driversData = driversData.filter(driver => driver.id !== id);
+            saveDrivers();
+            loadDrivers(); // Reload the list
+            alert('تم حذف السائق بنجاح.');
+        }
+
         function resetFileNames() {
             profileFileName.textContent = 'لم يتم رفع أي ملف';
             idFileName.textContent = 'لم يتم رفع أي ملف';
@@ -1092,6 +1357,15 @@
             idInput.value = '';
             licenseInput.value = '';
             bikeInput.value = '';
+        }
+
+        // Populate settings form with current user data
+        function populateSettingsForm() {
+            if (currentLoggedInUser) {
+                settingsUserNameInput.value = currentLoggedInUser.fullName;
+                settingsEmailInput.value = currentLoggedInUser.email; // Email is disabled for editing
+                settingsUserAvatar.src = currentLoggedInUser.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(currentLoggedInUser.fullName)}&background=0D8ABC&color=fff`;
+            }
         }
 
         // --- Event Listeners ---
@@ -1133,9 +1407,11 @@
             const user = users.find(u => u.email === username && u.password === password);
 
             if (user) {
+                currentLoggedInUser = user; // Set the logged-in user
+                saveLoggedInUser(); // Save to localStorage
                 loginPage.style.display = 'none';
                 dashboard.style.display = 'block';
-                loggedInUserName.textContent = user.fullName; // Display logged in user's name
+                updateHeaderUserInfo(); // Update header with logged-in user
                 showView(dashboardView); // Show dashboard by default
                 loadDrivers(); // Load drivers when logging in
             } else {
@@ -1190,7 +1466,8 @@
                 fullName,
                 email,
                 phone,
-                password: newPassword // In a real app, hash this password!
+                password: newPassword, // In a real app, hash this password!
+                avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(fullName)}&background=0D8ABC&color=fff`
             });
             saveUsers();
             
@@ -1205,20 +1482,22 @@
         // Social login (mock)
         googleLogin.addEventListener('click', () => {
             alert('سيتم محاكاة تسجيل الدخول باستخدام Google. لن يتم تسجيل حساب جديد فعليًا.');
-            // Simulate a successful login with a default user
+            currentLoggedInUser = { fullName: 'مستخدم جوجل', email: 'google@example.com', avatar: 'https://ui-avatars.com/api/?name=مستخدم+جوجل&background=DB4437&color=fff' };
+            saveLoggedInUser();
             loginPage.style.display = 'none';
             dashboard.style.display = 'block';
-            loggedInUserName.textContent = 'مستخدم جوجل';
+            updateHeaderUserInfo();
             showView(dashboardView);
             loadDrivers();
         });
         
         facebookLogin.addEventListener('click', () => {
             alert('سيتم محاكاة تسجيل الدخول باستخدام Facebook. لن يتم تسجيل حساب جديد فعليًا.');
-            // Simulate a successful login with a default user
+            currentLoggedInUser = { fullName: 'مستخدم فيسبوك', email: 'facebook@example.com', avatar: 'https://ui-avatars.com/api/?name=مستخدم+فيسبوك&background=4267B2&color=fff' };
+            saveLoggedInUser();
             loginPage.style.display = 'none';
             dashboard.style.display = 'block';
-            loggedInUserName.textContent = 'مستخدم فيسبوك';
+            updateHeaderUserInfo();
             showView(dashboardView);
             loadDrivers();
         });
@@ -1231,9 +1510,11 @@
                     alert(`تم إرسال رمز التحقق إلى ${phoneNumber}`);
                     const code = prompt('الرجاء إدخال رمز التحقق الذي تم إرساله (الكود التجريبي: 1234):');
                     if (code === '1234') { // Fixed code for demo purposes
+                        currentLoggedInUser = { fullName: `مستخدم هاتف (${phoneNumber})`, email: `phone_${phoneNumber}@example.com`, avatar: `https://ui-avatars.com/api/?name=مستخدم+هاتف&background=25D366&color=fff` };
+                        saveLoggedInUser();
                         loginPage.style.display = 'none';
                         dashboard.style.display = 'block';
-                        loggedInUserName.textContent = `مستخدم هاتف (${phoneNumber})`;
+                        updateHeaderUserInfo();
                         showView(dashboardView);
                         loadDrivers();
                     } else {
@@ -1255,11 +1536,26 @@
             showView(addDriverView);
             hideMessage(successAlert); // Hide previous success message
             hideMessage(driverFormError); // Hide previous error message
+            driverForm.reset(); // Clear form fields
+            resetFileNames(); // Clear file names
         });
+        navReports.addEventListener('click', () => alert('صفحة التقارير قيد الإنشاء.'));
+        navSettings.addEventListener('click', () => {
+            showView(settingsView);
+            hideMessage(settingsSuccessAlert);
+            hideMessage(settingsErrorAlert);
+        });
+        navSupport.addEventListener('click', (e) => {
+            // The href is already set in HTML, so this just logs (or could add a custom message)
+            console.log('Redirecting to Telegram support...');
+        });
+
         addDriverBtn.addEventListener('click', () => {
             showView(addDriverView);
             hideMessage(successAlert);
             hideMessage(driverFormError);
+            driverForm.reset(); // Clear form fields
+            resetFileNames(); // Clear file names
         });
         startBtn.addEventListener('click', () => {
             showView(driversView);
@@ -1273,18 +1569,53 @@
             hideMessage(driverFormError);
         });
         
-        logoutBtn.addEventListener('click', () => {
+        // User Info Dropdown Toggle
+        userInfo.addEventListener('click', (event) => {
+            // Prevent click inside dropdown from closing it immediately
+            event.stopPropagation();
+            userDropdownMenu.classList.toggle('show');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!userInfo.contains(event.target) && !userDropdownMenu.contains(event.target)) {
+                userDropdownMenu.classList.remove('show');
+            }
+        });
+
+        // Dropdown menu settings button
+        dropdownSettingsBtn.addEventListener('click', () => {
+            showView(settingsView);
+            hideMessage(settingsSuccessAlert);
+            hideMessage(settingsErrorAlert);
+        });
+
+        // Dropdown menu logout button
+        dropdownLogoutBtn.addEventListener('click', () => {
+            handleLogout();
+        });
+
+        // Logout from settings page
+        settingsLogoutBtn.addEventListener('click', () => {
+            handleLogout();
+        });
+
+        function handleLogout() {
             if (confirm('هل أنت متأكد من تسجيل الخروج؟')) {
+                currentLoggedInUser = null; // Clear current user
+                localStorage.removeItem('currentLoggedInUser'); // Remove from local storage
                 dashboard.style.display = 'none';
                 loginPage.style.display = 'flex';
                 usernameInput.value = '';
                 passwordInput.value = '';
                 hideMessage(errorMessage); // Clear any login errors
-                showView(dashboardView); // Reset dashboard view state
+                // Reset dashboard view state for next login
+                showView(dashboardView); 
+                updateHeaderUserInfo(); // Reset header info
             }
-        });
+        }
         
-        // File upload event listeners
+        // File upload event listeners (Add Driver Form)
         profileUpload.addEventListener('click', () => profileInput.click());
         profileInput.addEventListener('change', () => {
             profileFileName.textContent = profileInput.files.length > 0 ? profileInput.files[0].name : 'لم يتم رفع أي ملف';
@@ -1309,6 +1640,7 @@
         driverForm.addEventListener('submit', (e) => {
             e.preventDefault();
             hideMessage(driverFormError); // Hide previous errors
+            hideMessage(successAlert); // Hide previous success alerts
 
             const driverName = document.getElementById('driverName').value.trim();
             const driverPhone = document.getElementById('driverPhone').value.trim();
@@ -1354,7 +1686,6 @@
             saveDrivers(); // Save updated drivers array to localStorage
 
             showMessage(successAlert, 'تم إضافة السائق بنجاح إلى قاعدة البيانات.', 'success');
-            successAlert.style.display = 'flex'; // Ensure it's shown
             
             setTimeout(() => {
                 hideMessage(successAlert);
@@ -1365,36 +1696,79 @@
             }, 3000); // Hide after 3 seconds and navigate
         });
 
-        // Initial load (if logged in, which we can simulate after refresh if needed)
+        // Settings form submission
+        profileSettingsForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            hideMessage(settingsErrorAlert);
+            hideMessage(settingsSuccessAlert);
+
+            const newUserName = settingsUserNameInput.value.trim();
+            const newAvatarFile = settingsAvatarInput.files[0];
+
+            if (!newUserName) {
+                showMessage(settingsErrorAlert, 'الرجاء إدخال اسم المستخدم.', 'error');
+                shakeInput(settingsUserNameInput);
+                return;
+            }
+
+            if (currentLoggedInUser) {
+                currentLoggedInUser.fullName = newUserName;
+                
+                if (newAvatarFile) {
+                    currentLoggedInUser.avatar = URL.createObjectURL(newAvatarFile);
+                }
+                
+                // Update the user in the main 'users' array as well
+                const userIndex = users.findIndex(u => u.email === currentLoggedInUser.email);
+                if (userIndex !== -1) {
+                    users[userIndex].fullName = currentLoggedInUser.fullName;
+                    if (newAvatarFile) {
+                        users[userIndex].avatar = currentLoggedInUser.avatar;
+                    }
+                }
+
+                saveUsers();
+                saveLoggedInUser();
+                updateHeaderUserInfo(); // Update header immediately
+                
+                showMessage(settingsSuccessAlert, 'تم تحديث إعدادات ملفك الشخصي.', 'success');
+                settingsAvatarInput.value = ''; // Clear file input after upload
+            } else {
+                showMessage(settingsErrorAlert, 'لم يتم تسجيل الدخول. لا يمكن حفظ الإعدادات.', 'error');
+            }
+
+            setTimeout(() => {
+                hideMessage(settingsSuccessAlert);
+                hideMessage(settingsErrorAlert);
+            }, 3000);
+        });
+
+        // Settings avatar upload
+        settingsUserAvatar.addEventListener('click', () => settingsAvatarInput.click());
+        settingsAvatarText.addEventListener('click', () => settingsAvatarInput.click());
+        settingsAvatarInput.addEventListener('change', () => {
+            if (settingsAvatarInput.files.length > 0) {
+                const file = settingsAvatarInput.files[0];
+                settingsUserAvatar.src = URL.createObjectURL(file);
+                settingsAvatarText.textContent = file.name;
+            } else {
+                settingsAvatarText.textContent = 'تغيير الصورة الشخصية';
+            }
+        });
+
+
+        // Initial load
         document.addEventListener('DOMContentLoaded', () => {
-            // Check if there's a logged-in user simulation
-            const currentUser = localStorage.getItem('currentUser');
-            if (currentUser) {
+            if (loadLoggedInUser()) { // Try to load a previously logged-in user
                 loginPage.style.display = 'none';
                 dashboard.style.display = 'block';
-                loggedInUserName.textContent = currentUser;
-                showView(dashboardView);
-                loadDrivers();
+                showView(dashboardView); // Show dashboard by default
+                loadDrivers(); // Load drivers
             } else {
                 loginPage.style.display = 'flex';
                 dashboard.style.display = 'none';
             }
-        });
-
-        // Store current user on successful login (for refresh persistence)
-        loginBtn.addEventListener('click', () => {
-            const username = usernameInput.value.trim();
-            const password = passwordInput.value.trim();
-            const user = users.find(u => u.email === username && u.password === password);
-            if (user) {
-                localStorage.setItem('currentUser', user.fullName);
-            }
-            // ... rest of login logic
-        });
-
-        logoutBtn.addEventListener('click', () => {
-            localStorage.removeItem('currentUser'); // Clear logged-in user
-            // ... rest of logout logic
+            updateHeaderUserInfo(); // Ensure header reflects current user state
         });
     </script>
 </body>
