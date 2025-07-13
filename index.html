@@ -407,6 +407,7 @@
             cursor: pointer;
             transition: background 0.3s;
             color: #555;
+            text-decoration: none; /* For the anchor tag */
         }
         
         .nav-item:hover, .nav-item.active {
@@ -913,9 +914,8 @@
                         <i class="fas fa-cog"></i>
                         <span>الإعدادات</span>
                     </div>
-                    <a href="https://telegram.org/dl" target="_blank" class="nav-item" id="navSupport">
-                        <i class="fas fa-life-ring"></i>
-                        <span>الدعم</span>
+                    <a href="https://t.me/isgjobro" target="_blank" class="nav-item" id="navSupport">
+                        <i class="fab fa-telegram-plane"></i> <span>الدعم</span>
                     </a>
                 </div>
                 
@@ -1110,7 +1110,7 @@
         const navAddDriver = document.getElementById('navAddDriver');
         const navReports = document.getElementById('navReports');
         const navSettings = document.getElementById('navSettings');
-        const navSupport = document.getElementById('navSupport');
+        const navSupport = document.getElementById('navSupport'); // Support link
         const addDriverBtn = document.getElementById('addDriverBtn');
         const startBtn = document.getElementById('startBtn');
         const cancelBtn = document.getElementById('cancelBtn');
@@ -1118,7 +1118,7 @@
         const dashboardView = document.getElementById('dashboardView');
         const driversView = document.getElementById('driversView');
         const addDriverView = document.getElementById('addDriverView');
-        const settingsView = document.getElementById('settingsView'); // New settings view
+        const settingsView = document.getElementById('settingsView');
         const driversList = document.getElementById('driversList');
         const noDriversMessage = document.getElementById('noDriversMessage');
         const driverForm = document.getElementById('driverForm');
@@ -1153,7 +1153,7 @@
         const settingsAvatarText = document.getElementById('settingsAvatarText');
         const settingsUserNameInput = document.getElementById('settingsUserName');
         const settingsEmailInput = document.getElementById('settingsEmail');
-        const settingsLogoutBtn = document.getElementById('settingsLogoutBtn'); // Logout button in settings
+        const settingsLogoutBtn = document.getElementById('settingsLogoutBtn');
         const settingsSuccessAlert = document.getElementById('settingsSuccessAlert');
         const settingsErrorAlert = document.getElementById('settingsErrorAlert');
         const settingsErrorMessage = document.getElementById('settingsErrorMessage');
@@ -1534,242 +1534,4 @@
         });
         navAddDriver.addEventListener('click', () => {
             showView(addDriverView);
-            hideMessage(successAlert); // Hide previous success message
-            hideMessage(driverFormError); // Hide previous error message
-            driverForm.reset(); // Clear form fields
-            resetFileNames(); // Clear file names
-        });
-        navReports.addEventListener('click', () => alert('صفحة التقارير قيد الإنشاء.'));
-        navSettings.addEventListener('click', () => {
-            showView(settingsView);
-            hideMessage(settingsSuccessAlert);
-            hideMessage(settingsErrorAlert);
-        });
-        navSupport.addEventListener('click', (e) => {
-            // The href is already set in HTML, so this just logs (or could add a custom message)
-            console.log('Redirecting to Telegram support...');
-        });
-
-        addDriverBtn.addEventListener('click', () => {
-            showView(addDriverView);
-            hideMessage(successAlert);
-            hideMessage(driverFormError);
-            driverForm.reset(); // Clear form fields
-            resetFileNames(); // Clear file names
-        });
-        startBtn.addEventListener('click', () => {
-            showView(driversView);
-            loadDrivers();
-        });
-        cancelBtn.addEventListener('click', () => {
-            showView(driversView);
-            driverForm.reset();
-            resetFileNames();
-            hideMessage(successAlert);
-            hideMessage(driverFormError);
-        });
-        
-        // User Info Dropdown Toggle
-        userInfo.addEventListener('click', (event) => {
-            // Prevent click inside dropdown from closing it immediately
-            event.stopPropagation();
-            userDropdownMenu.classList.toggle('show');
-        });
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', (event) => {
-            if (!userInfo.contains(event.target) && !userDropdownMenu.contains(event.target)) {
-                userDropdownMenu.classList.remove('show');
-            }
-        });
-
-        // Dropdown menu settings button
-        dropdownSettingsBtn.addEventListener('click', () => {
-            showView(settingsView);
-            hideMessage(settingsSuccessAlert);
-            hideMessage(settingsErrorAlert);
-        });
-
-        // Dropdown menu logout button
-        dropdownLogoutBtn.addEventListener('click', () => {
-            handleLogout();
-        });
-
-        // Logout from settings page
-        settingsLogoutBtn.addEventListener('click', () => {
-            handleLogout();
-        });
-
-        function handleLogout() {
-            if (confirm('هل أنت متأكد من تسجيل الخروج؟')) {
-                currentLoggedInUser = null; // Clear current user
-                localStorage.removeItem('currentLoggedInUser'); // Remove from local storage
-                dashboard.style.display = 'none';
-                loginPage.style.display = 'flex';
-                usernameInput.value = '';
-                passwordInput.value = '';
-                hideMessage(errorMessage); // Clear any login errors
-                // Reset dashboard view state for next login
-                showView(dashboardView); 
-                updateHeaderUserInfo(); // Reset header info
-            }
-        }
-        
-        // File upload event listeners (Add Driver Form)
-        profileUpload.addEventListener('click', () => profileInput.click());
-        profileInput.addEventListener('change', () => {
-            profileFileName.textContent = profileInput.files.length > 0 ? profileInput.files[0].name : 'لم يتم رفع أي ملف';
-        });
-        
-        idUpload.addEventListener('click', () => idInput.click());
-        idInput.addEventListener('change', () => {
-            idFileName.textContent = idInput.files.length > 0 ? idInput.files[0].name : 'لم يتم رفع أي ملف';
-        });
-        
-        licenseUpload.addEventListener('click', () => licenseInput.click());
-        licenseInput.addEventListener('change', () => {
-            licenseFileName.textContent = licenseInput.files.length > 0 ? licenseInput.files[0].name : 'لم يتم رفع أي ملف';
-        });
-        
-        bikeUpload.addEventListener('click', () => bikeInput.click());
-        bikeInput.addEventListener('change', () => {
-            bikeFileName.textContent = bikeInput.files.length > 0 ? bikeInput.files[0].name : 'لم يتم رفع أي ملف';
-        });
-        
-        // Driver form submission
-        driverForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            hideMessage(driverFormError); // Hide previous errors
-            hideMessage(successAlert); // Hide previous success alerts
-
-            const driverName = document.getElementById('driverName').value.trim();
-            const driverPhone = document.getElementById('driverPhone').value.trim();
-            const profilePicFile = profileInput.files[0];
-            const idPicFile = idInput.files[0];
-            const licensePicFile = licenseInput.files[0];
-            const bikePicFile = bikeInput.files[0];
-
-            if (!driverName || !driverPhone) {
-                showMessage(driverFormError, 'الرجاء ملء اسم السائق ورقم الهاتف.', 'error');
-                return;
-            }
-
-            // Simple validation for phone number (can be enhanced)
-            if (!/^\+?\d{8,15}$/.test(driverPhone)) { // Basic check for 8-15 digits, optional +
-                showMessage(driverFormError, 'الرجاء إدخال رقم هاتف صالح.', 'error');
-                return;
-            }
-
-            // You might want to enforce file uploads for certain documents
-            if (!profilePicFile) {
-                showMessage(driverFormError, 'الرجاء رفع صورة شخصية للسائق.', 'error');
-                return;
-            }
-            // Add similar checks for ID, License, Bike pics if they are mandatory
-
-            // Simulate file upload by getting a URL for the image
-            const getFileURL = (file) => file ? URL.createObjectURL(file) : '';
-
-            const newDriver = {
-                id: driversData.length > 0 ? Math.max(...driversData.map(d => d.id)) + 1 : 1,
-                name: driverName,
-                phone: driverPhone,
-                profilePic: getFileURL(profilePicFile),
-                idPic: getFileURL(idPicFile),
-                licensePic: getFileURL(licensePicFile),
-                bikePic: getFileURL(bikePicFile),
-                status: "pending", // New drivers start as pending
-                registrationDate: new Date().toISOString()
-            };
-            
-            driversData.push(newDriver);
-            saveDrivers(); // Save updated drivers array to localStorage
-
-            showMessage(successAlert, 'تم إضافة السائق بنجاح إلى قاعدة البيانات.', 'success');
-            
-            setTimeout(() => {
-                hideMessage(successAlert);
-                showView(driversView); // Go back to drivers list
-                driverForm.reset(); // Clear the form
-                resetFileNames(); // Clear file names
-                loadDrivers(); // Reload drivers list to show the new one
-            }, 3000); // Hide after 3 seconds and navigate
-        });
-
-        // Settings form submission
-        profileSettingsForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            hideMessage(settingsErrorAlert);
-            hideMessage(settingsSuccessAlert);
-
-            const newUserName = settingsUserNameInput.value.trim();
-            const newAvatarFile = settingsAvatarInput.files[0];
-
-            if (!newUserName) {
-                showMessage(settingsErrorAlert, 'الرجاء إدخال اسم المستخدم.', 'error');
-                shakeInput(settingsUserNameInput);
-                return;
-            }
-
-            if (currentLoggedInUser) {
-                currentLoggedInUser.fullName = newUserName;
-                
-                if (newAvatarFile) {
-                    currentLoggedInUser.avatar = URL.createObjectURL(newAvatarFile);
-                }
-                
-                // Update the user in the main 'users' array as well
-                const userIndex = users.findIndex(u => u.email === currentLoggedInUser.email);
-                if (userIndex !== -1) {
-                    users[userIndex].fullName = currentLoggedInUser.fullName;
-                    if (newAvatarFile) {
-                        users[userIndex].avatar = currentLoggedInUser.avatar;
-                    }
-                }
-
-                saveUsers();
-                saveLoggedInUser();
-                updateHeaderUserInfo(); // Update header immediately
-                
-                showMessage(settingsSuccessAlert, 'تم تحديث إعدادات ملفك الشخصي.', 'success');
-                settingsAvatarInput.value = ''; // Clear file input after upload
-            } else {
-                showMessage(settingsErrorAlert, 'لم يتم تسجيل الدخول. لا يمكن حفظ الإعدادات.', 'error');
-            }
-
-            setTimeout(() => {
-                hideMessage(settingsSuccessAlert);
-                hideMessage(settingsErrorAlert);
-            }, 3000);
-        });
-
-        // Settings avatar upload
-        settingsUserAvatar.addEventListener('click', () => settingsAvatarInput.click());
-        settingsAvatarText.addEventListener('click', () => settingsAvatarInput.click());
-        settingsAvatarInput.addEventListener('change', () => {
-            if (settingsAvatarInput.files.length > 0) {
-                const file = settingsAvatarInput.files[0];
-                settingsUserAvatar.src = URL.createObjectURL(file);
-                settingsAvatarText.textContent = file.name;
-            } else {
-                settingsAvatarText.textContent = 'تغيير الصورة الشخصية';
-            }
-        });
-
-
-        // Initial load
-        document.addEventListener('DOMContentLoaded', () => {
-            if (loadLoggedInUser()) { // Try to load a previously logged-in user
-                loginPage.style.display = 'none';
-                dashboard.style.display = 'block';
-                showView(dashboardView); // Show dashboard by default
-                loadDrivers(); // Load drivers
-            } else {
-                loginPage.style.display = 'flex';
-                dashboard.style.display = 'none';
-            }
-            updateHeaderUserInfo(); // Ensure header reflects current user state
-        });
-    </script>
-</body>
-</html>
+            hideMessage(successAlert); // Hide previous
