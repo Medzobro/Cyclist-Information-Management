@@ -1,1 +1,1300 @@
-
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إدارة سائقي الدراجات للتوصيل</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2ecc71;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --gray: #95a5a6;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --google: #DB4437;
+            --facebook: #4267B2;
+            --phone: #25D366;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* ترويسة الصفحة */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo i {
+            font-size: 2.2rem;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+        
+        .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+        }
+        
+        /* صفحة تسجيل الدخول */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 20px;
+        }
+        
+        .login-box {
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .login-box h2 {
+            margin-bottom: 30px;
+            color: var(--dark);
+            font-size: 1.8rem;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 12px 0;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 500;
+            color: #777;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .tab.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
+            margin-top: 10px;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background: #27ae60;
+        }
+        
+        .social-login {
+            margin-top: 25px;
+        }
+        
+        .social-login p {
+            position: relative;
+            margin: 20px 0;
+            color: #777;
+        }
+        
+        .social-login p::before,
+        .social-login p::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background: #ddd;
+        }
+        
+        .social-login p::before {
+            left: 0;
+        }
+        
+        .social-login p::after {
+            right: 0;
+        }
+        
+        .social-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 5px;
+            border: none;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .social-btn.google {
+            background: var(--google);
+        }
+        
+        .social-btn.facebook {
+            background: var(--facebook);
+        }
+        
+        .social-btn.phone {
+            background: var(--phone);
+        }
+        
+        .social-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        .error-message {
+            background: #fce4e4;
+            color: var(--danger);
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            display: none;
+        }
+        
+        .error-message i {
+            font-size: 1.2rem;
+        }
+        
+        .forgot-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .signup-link {
+            margin-top: 20px;
+            text-align: center;
+            color: #777;
+        }
+        
+        .signup-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        /* لوحة التحكم */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        /* القائمة الجانبية */
+        .sidebar {
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 20px;
+            height: fit-content;
+        }
+        
+        .sidebar h3 {
+            margin-bottom: 20px;
+            color: var(--dark);
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            color: #555;
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            background: #f0f7ff;
+            color: var(--primary);
+        }
+        
+        .nav-item i {
+            font-size: 1.2rem;
+        }
+        
+        /* محتوى الصفحة الرئيسية */
+        .main-content {
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 25px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .section-header h2 {
+            color: var(--dark);
+        }
+        
+        .add-driver-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--secondary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .add-driver-btn:hover {
+            background: #27ae60;
+        }
+        
+        /* بطاقات السائقين */
+        .drivers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .driver-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            border: 1px solid #eee;
+        }
+        
+        .driver-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .driver-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+        
+        .driver-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            margin: 0 auto 15px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--gray);
+        }
+        
+        .driver-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .driver-id {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .driver-details {
+            padding: 20px;
+        }
+        
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .detail-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f0f7ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+        
+        .detail-text h4 {
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 3px;
+        }
+        
+        .detail-text p {
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .status-active {
+            background: #d4f8e8;
+            color: #27ae60;
+        }
+        
+        /* نموذج إضافة سائق */
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .form-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--dark);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .file-upload {
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.3s;
+            background: #fafafa;
+        }
+        
+        .file-upload:hover {
+            border-color: var(--primary);
+        }
+        
+        .file-upload i {
+            font-size: 3rem;
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+        
+        .file-upload p {
+            color: #777;
+            margin-bottom: 10px;
+        }
+        
+        .file-name {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        /* رسالة ترحيبية */
+        .welcome-message {
+            text-align: center;
+            padding: 50px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .welcome-message i {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .welcome-message h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .welcome-message p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.8;
+        }
+        
+        /* رسائل التنبيه */
+        .alert {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .alert-success {
+            background: #d4f8e8;
+            color: #27ae60;
+            border: 1px solid #a3e6c5;
+        }
+        
+        /* تصميم متجاوب */
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .social-buttons {
+                flex-direction: column;
+            }
+            
+            .login-box {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- صفحة تسجيل الدخول -->
+    <div id="loginPage" class="login-container">
+        <div class="login-box">
+            <i class="fas fa-bicycle fa-3x" style="color: #3498db; margin-bottom: 20px;"></i>
+            <h2>نظام إدارة سائقي الدراجات</h2>
+            
+            <!-- علامات التبويب -->
+            <div class="tabs">
+                <div class="tab active" data-tab="login">تسجيل الدخول</div>
+                <div class="tab" data-tab="signup">إنشاء حساب</div>
+            </div>
+            
+            <!-- رسالة الخطأ -->
+            <div class="error-message" id="errorMessage">
+                <i class="fas fa-exclamation-circle"></i>
+                <span>اسم المستخدم أو كلمة المرور غير صحيحة. الرجاء المحاولة مرة أخرى.</span>
+            </div>
+            
+            <!-- تسجيل الدخول -->
+            <div class="tab-content active" id="loginTab">
+                <div class="input-group">
+                    <label for="username">اسم المستخدم أو البريد الإلكتروني</label>
+                    <input type="text" id="username" placeholder="أدخل اسم المستخدم أو البريد الإلكتروني">
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">كلمة المرور</label>
+                    <input type="password" id="password" placeholder="أدخل كلمة المرور">
+                </div>
+                
+                <button id="loginBtn" class="btn">تسجيل الدخول</button>
+                
+                <a href="#" class="forgot-link">نسيت كلمة المرور؟</a>
+                
+                <div class="social-login">
+                    <p>أو تسجيل الدخول باستخدام</p>
+                    <div class="social-buttons">
+                        <button class="social-btn google" id="googleLogin">
+                            <i class="fab fa-google"></i> Google
+                        </button>
+                        <button class="social-btn facebook" id="facebookLogin">
+                            <i class="fab fa-facebook-f"></i> Facebook
+                        </button>
+                        <button class="social-btn phone" id="phoneLogin">
+                            <i class="fas fa-phone"></i> Phone
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="signup-link">
+                    ليس لديك حساب؟ <a href="#" id="goToSignup">إنشاء حساب جديد</a>
+                </div>
+            </div>
+            
+            <!-- إنشاء حساب -->
+            <div class="tab-content" id="signupTab">
+                <div class="input-group">
+                    <label for="fullName">الاسم الكامل</label>
+                    <input type="text" id="fullName" placeholder="أدخل الاسم الكامل">
+                </div>
+                
+                <div class="input-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" placeholder="أدخل البريد الإلكتروني">
+                </div>
+                
+                <div class="input-group">
+                    <label for="phoneNumber">رقم الهاتف</label>
+                    <input type="tel" id="phoneNumber" placeholder="أدخل رقم الهاتف">
+                </div>
+                
+                <div class="input-group">
+                    <label for="newPassword">كلمة المرور</label>
+                    <input type="password" id="newPassword" placeholder="أدخل كلمة المرور">
+                </div>
+                
+                <div class="input-group">
+                    <label for="confirmPassword">تأكيد كلمة المرور</label>
+                    <input type="password" id="confirmPassword" placeholder="أعد إدخال كلمة المرور">
+                </div>
+                
+                <button id="signupBtn" class="btn btn-secondary">إنشاء حساب</button>
+                
+                <div class="signup-link">
+                    لديك حساب بالفعل؟ <a href="#" id="goToLogin">تسجيل الدخول</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- لوحة التحكم -->
+    <div id="dashboard" style="display: none;">
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-bicycle"></i>
+                    <h1>نظام إدارة سائقي الدراجات</h1>
+                </div>
+                
+                <div class="user-info" id="userInfo">
+                    <img src="https://ui-avatars.com/api/?name=المدير&background=0D8ABC&color=fff" alt="صورة المستخدم">
+                    <span>مدير النظام</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </header>
+        
+        <div class="container">
+            <div class="dashboard">
+                <!-- القائمة الجانبية -->
+                <div class="sidebar">
+                    <h3>القائمة الرئيسية</h3>
+                    <div class="nav-item active" id="navDashboard">
+                        <i class="fas fa-home"></i>
+                        <span>لوحة التحكم</span>
+                    </div>
+                    <div class="nav-item" id="navDrivers">
+                        <i class="fas fa-users"></i>
+                        <span>إدارة السائقين</span>
+                    </div>
+                    <div class="nav-item" id="navAddDriver">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>إضافة سائق جديد</span>
+                    </div>
+                    <div class="nav-item" id="navReports">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>التقارير والإحصائيات</span>
+                    </div>
+                    <div class="nav-item" id="navSettings">
+                        <i class="fas fa-cog"></i>
+                        <span>الإعدادات</span>
+                    </div>
+                    <div class="nav-item" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>تسجيل الخروج</span>
+                    </div>
+                </div>
+                
+                <!-- المحتوى الرئيسي -->
+                <div class="main-content">
+                    <!-- لوحة التحكم الرئيسية -->
+                    <div id="dashboardView">
+                        <div class="welcome-message">
+                            <i class="fas fa-bicycle"></i>
+                            <h2>مرحباً بك في نظام إدارة سائقي الدراجات</h2>
+                            <p>هذا النظام يسمح لك بإدارة سائقي الدراجات بسهولة وأمان. يمكنك إضافة سائقين جدد، مراجعة بياناتهم، وتنظيم عمليات التوصيل بشكل احترافي.</p>
+                            <button class="btn" id="startBtn">ابدأ إضافة السائقين</button>
+                        </div>
+                    </div>
+                    
+                    <!-- قائمة السائقين -->
+                    <div id="driversView" style="display: none;">
+                        <div class="section-header">
+                            <h2><i class="fas fa-users"></i> قائمة السائقين</h2>
+                            <div class="add-driver-btn" id="addDriverBtn">
+                                <i class="fas fa-plus"></i>
+                                <span>إضافة سائق جديد</span>
+                            </div>
+                        </div>
+                        
+                        <div class="drivers-grid" id="driversList">
+                            <!-- سيتم ملء هذا القسم بالبيانات -->
+                        </div>
+                    </div>
+                    
+                    <!-- نموذج إضافة سائق -->
+                    <div id="addDriverView" style="display: none;">
+                        <div class="section-header">
+                            <h2><i class="fas fa-plus-circle"></i> إضافة سائق جديد</h2>
+                        </div>
+                        
+                        <div class="form-container">
+                            <div class="alert alert-success" id="successAlert" style="display: none;">
+                                <i class="fas fa-check-circle"></i>
+                                <div>
+                                    <h3>تمت العملية بنجاح!</h3>
+                                    <p>تم إضافة السائق بنجاح إلى قاعدة البيانات.</p>
+                                </div>
+                            </div>
+                            
+                            <form id="driverForm">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="driverName">اسم السائق</label>
+                                        <input type="text" id="driverName" placeholder="أدخل الاسم الكامل" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="driverPhone">رقم الهاتف</label>
+                                        <input type="tel" id="driverPhone" placeholder="أدخل رقم الهاتف" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>صورة شخصية</label>
+                                        <div class="file-upload" id="profileUpload">
+                                            <i class="fas fa-user-circle"></i>
+                                            <p>انقر لرفع صورة شخصية</p>
+                                            <span class="file-name" id="profileFileName">لم يتم رفع أي ملف</span>
+                                        </div>
+                                        <input type="file" id="profileInput" accept="image/*" style="display: none;">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>صورة الهوية</label>
+                                        <div class="file-upload" id="idUpload">
+                                            <i class="fas fa-id-card"></i>
+                                            <p>انقر لرفع صورة الهوية</p>
+                                            <span class="file-name" id="idFileName">لم يتم رفع أي ملف</span>
+                                        </div>
+                                        <input type="file" id="idInput" accept="image/*" style="display: none;">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>صورة الرخصة</label>
+                                        <div class="file-upload" id="licenseUpload">
+                                            <i class="fas fa-id-card"></i>
+                                            <p>انقر لرفع صورة الرخصة</p>
+                                            <span class="file-name" id="licenseFileName">لم يتم رفع أي ملف</span>
+                                        </div>
+                                        <input type="file" id="licenseInput" accept="image/*" style="display: none;">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>صورة الدراجة</label>
+                                        <div class="file-upload" id="bikeUpload">
+                                            <i class="fas fa-bicycle"></i>
+                                            <p>انقر لرفع صورة الدراجة</p>
+                                            <span class="file-name" id="bikeFileName">لم يتم رفع أي ملف</span>
+                                        </div>
+                                        <input type="file" id="bikeInput" accept="image/*" style="display: none;">
+                                    </div>
+                                </div>
+                                
+                                <div class="btn-group">
+                                    <button type="submit" class="btn btn-secondary">
+                                        <i class="fas fa-save"></i> حفظ السائق
+                                    </button>
+                                    <button type="button" class="btn" style="background: #95a5a6;" id="cancelBtn">
+                                        <i class="fas fa-times"></i> إلغاء
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // بيانات تجريبية للسائقين
+        const driversData = [
+            {
+                id: 1,
+                name: "أحمد محمد",
+                phone: "0551234567",
+                profilePic: "https://randomuser.me/api/portraits/men/32.jpg",
+                status: "active"
+            },
+            {
+                id: 2,
+                name: "سامي عبدالله",
+                phone: "0557654321",
+                profilePic: "https://randomuser.me/api/portraits/men/22.jpg",
+                status: "active"
+            },
+            {
+                id: 3,
+                name: "يوسف خالد",
+                phone: "0551122334",
+                profilePic: "https://randomuser.me/api/portraits/men/41.jpg",
+                status: "pending"
+            }
+        ];
+        
+        // عناصر DOM
+        const loginPage = document.getElementById('loginPage');
+        const dashboard = document.getElementById('dashboard');
+        const loginBtn = document.getElementById('loginBtn');
+        const signupBtn = document.getElementById('signupBtn');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const errorMessage = document.getElementById('errorMessage');
+        
+        const tabs = document.querySelectorAll('.tab');
+        const loginTab = document.getElementById('loginTab');
+        const signupTab = document.getElementById('signupTab');
+        const goToSignup = document.getElementById('goToSignup');
+        const goToLogin = document.getElementById('goToLogin');
+        
+        const googleLogin = document.getElementById('googleLogin');
+        const facebookLogin = document.getElementById('facebookLogin');
+        const phoneLogin = document.getElementById('phoneLogin');
+        
+        const navDashboard = document.getElementById('navDashboard');
+        const navDrivers = document.getElementById('navDrivers');
+        const navAddDriver = document.getElementById('navAddDriver');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const addDriverBtn = document.getElementById('addDriverBtn');
+        const startBtn = document.getElementById('startBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+        
+        const dashboardView = document.getElementById('dashboardView');
+        const driversView = document.getElementById('driversView');
+        const addDriverView = document.getElementById('addDriverView');
+        const driversList = document.getElementById('driversList');
+        const driverForm = document.getElementById('driverForm');
+        const successAlert = document.getElementById('successAlert');
+        
+        // عناصر رفع الملفات
+        const profileUpload = document.getElementById('profileUpload');
+        const profileInput = document.getElementById('profileInput');
+        const profileFileName = document.getElementById('profileFileName');
+        
+        const idUpload = document.getElementById('idUpload');
+        const idInput = document.getElementById('idInput');
+        const idFileName = document.getElementById('idFileName');
+        
+        const licenseUpload = document.getElementById('licenseUpload');
+        const licenseInput = document.getElementById('licenseInput');
+        const licenseFileName = document.getElementById('licenseFileName');
+        
+        const bikeUpload = document.getElementById('bikeUpload');
+        const bikeInput = document.getElementById('bikeInput');
+        const bikeFileName = document.getElementById('bikeFileName');
+        
+        // أحداث التبويبات
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                loginTab.classList.remove('active');
+                signupTab.classList.remove('active');
+                
+                if (tab.dataset.tab === 'login') {
+                    loginTab.classList.add('active');
+                } else {
+                    signupTab.classList.add('active');
+                }
+                
+                // إخفاء رسالة الخطأ عند تغيير التبويب
+                errorMessage.style.display = 'none';
+            });
+        });
+        
+        goToSignup.addEventListener('click', (e) => {
+            e.preventDefault();
+            tabs.forEach(t => t.classList.remove('active'));
+            document.querySelector('.tab[data-tab="signup"]').classList.add('active');
+            loginTab.classList.remove('active');
+            signupTab.classList.add('active');
+            errorMessage.style.display = 'none';
+        });
+        
+        goToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            tabs.forEach(t => t.classList.remove('active'));
+            document.querySelector('.tab[data-tab="login"]').classList.add('active');
+            signupTab.classList.remove('active');
+            loginTab.classList.add('active');
+            errorMessage.style.display = 'none';
+        });
+        
+        // أحداث تسجيل الدخول
+        loginBtn.addEventListener('click', () => {
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+            
+            if (username === 'admin' && password === 'admin') {
+                loginPage.style.display = 'none';
+                dashboard.style.display = 'block';
+                loadDrivers();
+            } else {
+                // إظهار رسالة الخطأ بشكل واضح
+                errorMessage.style.display = 'flex';
+                // هزة للمدخلات لإظهار الخطأ
+                usernameInput.style.animation = 'shake 0.5s';
+                passwordInput.style.animation = 'shake 0.5s';
+                
+                setTimeout(() => {
+                    usernameInput.style.animation = '';
+                    passwordInput.style.animation = '';
+                }, 500);
+            }
+        });
+        
+        // إضافة هزة للمدخلات عند الخطأ
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes shake {
+                0% { transform: translateX(0); }
+                25% { transform: translateX(10px); }
+                50% { transform: translateX(-10px); }
+                75% { transform: translateX(10px); }
+                100% { transform: translateX(0); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // أحداث التسجيل
+        signupBtn.addEventListener('click', () => {
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phoneNumber').value.trim();
+            const password = document.getElementById('newPassword').value.trim();
+            const confirmPassword = document.getElementById('confirmPassword').value.trim();
+            
+            if (!fullName || !email || !phone || !password || !confirmPassword) {
+                errorMessage.querySelector('span').textContent = 'الرجاء ملء جميع الحقول المطلوبة';
+                errorMessage.style.display = 'flex';
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                errorMessage.querySelector('span').textContent = 'كلمتا المرور غير متطابقتين';
+                errorMessage.style.display = 'flex';
+                return;
+            }
+            
+            // في الواقع الفعلي، سيتم إرسال البيانات للخادم
+            // هنا سنحاكي نجاح التسجيل
+            alert(`تم إنشاء حساب بنجاح!\nاسم المستخدم: ${email}\nكلمة المرور: ${password}`);
+            
+            // الانتقال إلى تسجيل الدخول
+            tabs.forEach(t => t.classList.remove('active'));
+            document.querySelector('.tab[data-tab="login"]').classList.add('active');
+            signupTab.classList.remove('active');
+            loginTab.classList.add('active');
+            errorMessage.style.display = 'none';
+            
+            // تعبئة بيانات تسجيل الدخول تلقائياً
+            usernameInput.value = email;
+            passwordInput.value = password;
+        });
+        
+        // أحداث تسجيل الدخول عبر وسائل التواصل
+        googleLogin.addEventListener('click', () => {
+            alert('سيتم تسجيل الدخول باستخدام حساب Google');
+            // في الواقع الفعلي، سيتم استخدام واجهة Google API
+            // هنا سنحاكي تسجيل الدخول الناجح
+            loginPage.style.display = 'none';
+            dashboard.style.display = 'block';
+            loadDrivers();
+        });
+        
+        facebookLogin.addEventListener('click', () => {
+            alert('سيتم تسجيل الدخول باستخدام حساب Facebook');
+            // في الواقع الفعلي، سيتم استخدام واجهة Facebook API
+            // هنا سنحاكي تسجيل الدخول الناجح
+            loginPage.style.display = 'none';
+            dashboard.style.display = 'block';
+            loadDrivers();
+        });
+        
+        phoneLogin.addEventListener('click', () => {
+            const phoneNumber = prompt('الرجاء إدخال رقم الهاتف الموريتاني (مثال: +22212345678):');
+            if (phoneNumber) {
+                if (phoneNumber.startsWith('+222') && phoneNumber.length === 12) {
+                    alert(`تم إرسال رمز التحقق إلى ${phoneNumber}`);
+                    const code = prompt('الرجاء إدخال رمز التحقق الذي تم إرساله:');
+                    if (code === '1234') { // كود ثابت للعرض
+                        loginPage.style.display = 'none';
+                        dashboard.style.display = 'block';
+                        loadDrivers();
+                    } else {
+                        alert('رمز التحقق غير صحيح');
+                    }
+                } else {
+                    alert('رقم الهاتف غير صالح. الرجاء استخدام تنسيق موريتاني صحيح (+222xxxxxxxx)');
+                }
+            }
+        });
+        
+        // أحداث التنقل
+        navDashboard.addEventListener('click', () => {
+            showView(dashboardView);
+        });
+        
+        navDrivers.addEventListener('click', () => {
+            showView(driversView);
+            loadDrivers();
+        });
+        
+        navAddDriver.addEventListener('click', () => {
+            showView(addDriverView);
+        });
+        
+        addDriverBtn.addEventListener('click', () => {
+            showView(addDriverView);
+        });
+        
+        startBtn.addEventListener('click', () => {
+            showView(driversView);
+            loadDrivers();
+        });
+        
+        cancelBtn.addEventListener('click', () => {
+            showView(driversView);
+            driverForm.reset();
+            resetFileNames();
+            successAlert.style.display = 'none';
+        });
+        
+        logoutBtn.addEventListener('click', () => {
+            if (confirm('هل أنت متأكد من تسجيل الخروج؟')) {
+                dashboard.style.display = 'none';
+                loginPage.style.display = 'flex';
+                usernameInput.value = '';
+                passwordInput.value = '';
+                showView(dashboardView);
+                // إخفاء رسالة الخطأ عند الخروج
+                errorMessage.style.display = 'none';
+            }
+        });
+        
+        // أحداث رفع الملفات
+        profileUpload.addEventListener('click', () => {
+            profileInput.click();
+        });
+        
+        profileInput.addEventListener('change', () => {
+            if (profileInput.files.length > 0) {
+                profileFileName.textContent = profileInput.files[0].name;
+            } else {
+                profileFileName.textContent = 'لم يتم رفع أي ملف';
+            }
+        });
+        
+        idUpload.addEventListener('click', () => {
+            idInput.click();
+        });
+        
+        idInput.addEventListener('change', () => {
+            if (idInput.files.length > 0) {
+                idFileName.textContent = idInput.files[0].name;
+            } else {
+                idFileName.textContent = 'لم يتم رفع أي ملف';
+            }
+        });
+        
+        licenseUpload.addEventListener('click', () => {
+            licenseInput.click();
+        });
+        
+        licenseInput.addEventListener('change', () => {
+            if (licenseInput.files.length > 0) {
+                licenseFileName.textContent = licenseInput.files[0].name;
+            } else {
+                licenseFileName.textContent = 'لم يتم رفع أي ملف';
+            }
+        });
+        
+        bikeUpload.addEventListener('click', () => {
+            bikeInput.click();
+        });
+        
+        bikeInput.addEventListener('change', () => {
+            if (bikeInput.files.length > 0) {
+                bikeFileName.textContent = bikeInput.files[0].name;
+            } else {
+                bikeFileName.textContent = 'لم يتم رفع أي ملف';
+            }
+        });
+        
+        // حدث إرسال النموذج
+        driverForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // هنا يتم إرسال البيانات إلى الخادم أو حفظها محلياً
+            // في هذا المثال، سنظهر رسالة نجاح فقط
+            
+            successAlert.style.display = 'flex';
+            setTimeout(() => {
+                successAlert.style.display = 'none';
+                showView(driversView);
+                driverForm.reset();
+                resetFileNames();
+                loadDrivers();
+            }, 3000);
+        });
+        
+        // وظائف مساعدة
+        function showView(view) {
+            dashboardView.style.display = 'none';
+            driversView.style.display = 'none';
+            addDriverView.style.display = 'none';
+            view.style.display = 'block';
+        }
+        
+        function loadDrivers() {
+            driversList.innerHTML = '';
+            
+            driversData.forEach(driver => {
+                const driverCard = document.createElement('div');
+                driverCard.className = 'driver-card';
+                
+                driverCard.innerHTML = `
+                    <div class="driver-header">
+                        <div class="driver-avatar">
+                            <img src="${driver.profilePic}" alt="${driver.name}">
+                        </div>
+                        <h3 class="driver-name">${driver.name}</h3>
+                        <div class="driver-id">ID: #${driver.id.toString().padStart(3, '0')}</div>
+                    </div>
+                    <div class="driver-details">
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="detail-text">
+                                <h4>رقم الهاتف</h4>
+                                <p>${driver.phone}</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="detail-text">
+                                <h4>حالة السائق</h4>
+                                <p><span class="status-badge status-active">${driver.status === 'active' ? 'نشط' : 'في انتظار الموافقة'}</span></p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="detail-text">
+                                <h4>تاريخ التسجيل</h4>
+                                <p>${new Date().toLocaleDateString('ar-EG')}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                driversList.appendChild(driverCard);
+            });
+        }
+        
+        function resetFileNames() {
+            profileFileName.textContent = 'لم يتم رفع أي ملف';
+            idFileName.textContent = 'لم يتم رفع أي ملف';
+            licenseFileName.textContent = 'لم يتم رفع أي ملف';
+            bikeFileName.textContent = 'لم يتم رفع أي ملف';
+        }
+    </script>
+</body>
+</html>
