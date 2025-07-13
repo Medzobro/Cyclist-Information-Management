@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام إدارة سائقي الدراجات للتوصيل</title>
+    <title data-lang-key="pageTitle">نظام إدارة سائقي الدراجات للتوصيل</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -143,6 +143,46 @@
         .dropdown-menu button i {
             width: 20px;
             text-align: center;
+        }
+
+        /* Language Selector */
+        .language-selector {
+            position: relative;
+            margin-right: 20px; /* Adjust as needed */
+            z-index: 101;
+        }
+        .language-selector select {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            appearance: none; /* Remove default dropdown arrow */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            position: relative;
+            padding-right: 30px; /* Space for custom arrow */
+            transition: background 0.3s;
+        }
+        .language-selector select:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .language-selector select:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+        }
+        .language-selector::after {
+            content: '\f0d7'; /* FontAwesome caret-down icon */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            pointer-events: none;
         }
 
         /* Login Page */
@@ -858,9 +898,12 @@
                 text-align: center;
             }
 
-            .logo, .user-info {
+            .logo, .user-info, .language-selector {
                 width: 100%;
                 justify-content: center;
+            }
+            .language-selector {
+                margin-right: 0; /* Remove right margin on small screens */
             }
 
             .user-info {
@@ -956,11 +999,11 @@
     <div id="loginPage" class="login-container">
         <div class="login-box">
             <i class="fas fa-bicycle fa-3x" style="color: var(--primary); margin-bottom: 20px;"></i>
-            <h2>نظام إدارة سائقي الدراجات</h2>
+            <h2 data-lang-key="systemTitle">نظام إدارة سائقي الدراجات</h2>
 
             <div class="tabs">
-                <div class="tab active" data-tab="login">تسجيل الدخول</div>
-                <div class="tab" data-tab="signup">إنشاء حساب</div>
+                <div class="tab active" data-tab="login" data-lang-key="loginTab">تسجيل الدخول</div>
+                <div class="tab" data-tab="signup" data-lang-key="signupTab">إنشاء حساب</div>
             </div>
 
             <div class="error-message" id="errorMessage">
@@ -970,36 +1013,1274 @@
 
             <div class="tab-content active" id="loginTab">
                 <div class="input-group">
-                    <label for="username">اسم المستخدم أو البريد الإلكتروني</label>
-                    <input type="text" id="username" placeholder="أدخل اسم المستخدم أو البريد الإلكتروني">
+                    <label for="username" data-lang-key="usernameOrEmailLabel">اسم المستخدم أو البريد الإلكتروني</label>
+                    <input type="text" id="username" data-lang-key="usernameOrEmailPlaceholder" placeholder="أدخل اسم المستخدم أو البريد الإلكتروني">
                 </div>
 
                 <div class="input-group">
-                    <label for="password">كلمة المرور</label>
-                    <input type="password" id="password" placeholder="أدخل كلمة المرور">
+                    <label for="password" data-lang-key="passwordLabel">كلمة المرور</label>
+                    <input type="password" id="password" data-lang-key="passwordPlaceholder" placeholder="أدخل كلمة المرور">
                 </div>
 
-                <button id="loginBtn" class="btn">تسجيل الدخول</button>
+                <button id="loginBtn" class="btn" data-lang-key="loginButton">تسجيل الدخول</button>
 
-                <a href="#" class="forgot-link">نسيت كلمة المرور؟</a>
+                <a href="#" class="forgot-link" data-lang-key="forgotPasswordLink">نسيت كلمة المرور؟</a>
 
                 <div class="social-login">
-                    <p>أو تسجيل الدخول باستخدام</p>
+                    <p data-lang-key="orLoginWith">أو تسجيل الدخول باستخدام</p>
                     <div class="social-buttons">
                         <button class="social-btn google" id="googleLogin">
-                            <i class="fab fa-google"></i> Google
+                            <i class="fab fa-google"></i> <span data-lang-key="googleButton">Google</span>
                         </button>
                         <button class="social-btn facebook" id="facebookLogin">
-                            <i class="fab fa-facebook-f"></i> Facebook
+                            <i class="fab fa-facebook-f"></i> <span data-lang-key="facebookButton">Facebook</span>
                         </button>
                         <button class="social-btn phone" id="phoneLogin">
-                            <i class="fas fa-phone"></i> الهاتف
+                            <i class="fas fa-phone"></i> <span data-lang-key="phoneButton">الهاتف</span>
                         </button>
                     </div>
                 </div>
 
                 <div class="signup-link">
-                    ليس لديك حساب؟ <a href="#" id="goToSignup">إنشاء حساب جديد</a>
+                    <span data-lang-key="noAccountYet">ليس لديك حساب؟</span> <a href="#" id="goToSignup" data-lang-key="createAccountLink">إنشاء حساب جديد</a>
                 </div>
             </div>
 
+            <div class="tab-content" id="signupTab">
+                <div class="input-group">
+                    <label for="signupUsername" data-lang-key="usernameLabel">اسم المستخدم</label>
+                    <input type="text" id="signupUsername" data-lang-key="usernamePlaceholder" placeholder="أدخل اسم المستخدم">
+                </div>
+
+                <div class="input-group">
+                    <label for="signupEmail" data-lang-key="emailLabel">البريد الإلكتروني</label>
+                    <input type="email" id="signupEmail" data-lang-key="emailPlaceholder" placeholder="أدخل بريدك الإلكتروني">
+                </div>
+
+                <div class="input-group">
+                    <label for="signupPhone" data-lang-key="phoneLabel">رقم الهاتف</label>
+                    <input type="tel" id="signupPhone" data-lang-key="phonePlaceholder" placeholder="أدخل رقم الهاتف (اختياري)">
+                </div>
+
+                <div class="input-group">
+                    <label for="signupPassword" data-lang-key="passwordLabel">كلمة المرور</label>
+                    <input type="password" id="signupPassword" data-lang-key="passwordPlaceholder" placeholder="أدخل كلمة المرور">
+                </div>
+
+                <div class="input-group">
+                    <label for="confirmPassword" data-lang-key="confirmPasswordLabel">تأكيد كلمة المرور</label>
+                    <input type="password" id="confirmPassword" data-lang-key="confirmPasswordPlaceholder" placeholder="أعد إدخال كلمة المرور">
+                </div>
+
+                <div class="input-group">
+                    <label for="accountType" data-lang-key="accountTypeLabel">نوع الحساب</label>
+                    <select id="accountType">
+                        <option value="manager" data-lang-key="managerOption">مدير</option>
+                        <option value="driver" data-lang-key="driverOption">سائق</option>
+                    </select>
+                </div>
+
+                <button id="signupBtn" class="btn btn-secondary" data-lang-key="signupButton">إنشاء حساب</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="verificationPage" class="login-container" style="display: none;">
+        <div class="verification-container">
+            <i class="fas fa-shield-alt fa-3x" style="color: var(--primary); margin-bottom: 20px;"></i>
+            <h3 data-lang-key="verificationTitle">تأكيد الحساب</h3>
+            <p id="verificationMessage"></p>
+            <div class="input-group">
+                <label for="verificationCode" data-lang-key="verificationCodeLabel">رمز التحقق</label>
+                <input type="text" id="verificationCode" data-lang-key="verificationCodePlaceholder" placeholder="أدخل الرمز المكون من 6 أرقام">
+            </div>
+            <button id="verifyCodeBtn" class="btn" data-lang-key="verifyButton">تأكيد</button>
+            <button id="resendCodeBtn" class="btn btn-secondary" data-lang-key="resendCodeButton">إعادة إرسال الرمز</button>
+            <div class="error-message" id="verificationErrorMessage" style="margin-top: 15px;">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="verificationErrorMessageText"></span>
+            </div>
+        </div>
+    </div>
+
+    <header id="mainHeader" style="display: none;">
+        <div class="header-content container">
+            <div class="logo">
+                <i class="fas fa-bicycle"></i>
+                <h1 data-lang-key="systemTitleHeader">نظام إدارة سائقي الدراجات</h1>
+            </div>
+            <div class="language-selector">
+                <select id="languageSelect">
+                    <option value="ar">العربية</option>
+                    <option value="fr">Français</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+            <div class="user-info" id="userInfo">
+                <img src="https://via.placeholder.com/36/3499db/FFFFFF?text=A" alt="User Avatar">
+                <span id="loggedInUsername" data-lang-key="adminUser">المسؤول</span>
+                <i class="fas fa-angle-down"></i>
+                <div class="dropdown-menu" id="userDropdown">
+                    <button id="profileSettingsBtn" data-lang-key="profileSettingsButton"><i class="fas fa-user-cog"></i> إعدادات الملف الشخصي</button>
+                    <button id="logoutBtn" data-lang-key="logoutButton"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="dashboardPage" class="container" style="display: none;">
+        <div class="dashboard">
+            <aside class="sidebar">
+                <h3 data-lang-key="dashboardNavigation">لوحة القيادة</h3>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="nav-item active" data-section="overview" data-lang-key="overviewNav"><i class="fas fa-tachometer-alt"></i> نظرة عامة</a></li>
+                        <li><a href="#" class="nav-item" data-section="drivers" data-lang-key="driversNav"><i class="fas fa-motorcycle"></i> إدارة السائقين</a></li>
+                        <li><a href="#" class="nav-item" data-section="orders" data-lang-key="ordersNav"><i class="fas fa-box"></i> إدارة الطلبات</a></li>
+                        <li><a href="#" class="nav-item" data-section="reports" data-lang-key="reportsNav"><i class="fas fa-chart-line"></i> التقارير</a></li>
+                        <li><a href="#" class="nav-item" data-section="settings" data-lang-key="settingsNav"><i class="fas fa-cogs"></i> الإعدادات</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <main class="main-content">
+                <section id="overviewSection" class="active">
+                    <div class="welcome-message">
+                        <i class="fas fa-smile-beam"></i>
+                        <h2 data-lang-key="welcomeTitle">مرحباً بك!</h2>
+                        <p data-lang-key="welcomeMessage">مرحباً بك في لوحة تحكم إدارة السائقين الخاصة بك. يمكنك هنا إدارة السائقين والطلبات والوصول إلى التقارير الشاملة لتحسين عمليات التوصيل.</p>
+                        <button class="btn btn-secondary" id="overviewAddDriverBtn" data-lang-key="addDriverNow">ابدأ بإضافة سائق جديد</button>
+                    </div>
+                </section>
+
+                <section id="driversSection" style="display:none;">
+                    <div class="section-header">
+                        <h2 data-lang-key="driversListTitle"><i class="fas fa-motorcycle"></i> قائمة السائقين</h2>
+                        <button class="add-driver-btn" id="showAddDriverFormBtn" data-lang-key="addNewDriverButton">
+                            <i class="fas fa-plus-circle"></i> إضافة سائق جديد
+                        </button>
+                    </div>
+                    <div class="drivers-grid" id="driversGrid">
+                        </div>
+                </section>
+
+                <section id="addDriverSection" style="display:none;">
+                    <div class="form-container">
+                        <h2 class="form-title" data-lang-key="addDriverTitle">إضافة سائق جديد</h2>
+                        <form id="addDriverForm">
+                            <div class="alert alert-error" id="addDriverError" style="display:none;"><i class="fas fa-exclamation-circle"></i> <span id="addDriverErrorText"></span></div>
+                            <div class="alert alert-success" id="addDriverSuccess" style="display:none;"><i class="fas fa-check-circle"></i> <span id="addDriverSuccessText"></span></div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="driverName" data-lang-key="fullNameLabel">الاسم الكامل</label>
+                                    <input type="text" id="driverName" placeholder="" required data-lang-key="fullNamePlaceholder">
+                                </div>
+                                <div class="form-group">
+                                    <label for="driverEmail" data-lang-key="emailLabel">البريد الإلكتروني</label>
+                                    <input type="email" id="driverEmail" placeholder="" required data-lang-key="emailPlaceholder">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="driverPhone" data-lang-key="phoneLabel">رقم الهاتف</label>
+                                    <input type="tel" id="driverPhone" placeholder="" required data-lang-key="phonePlaceholder">
+                                </div>
+                                <div class="form-group">
+                                    <label for="driverAddress" data-lang-key="addressLabel">عنوان السكن</label>
+                                    <input type="text" id="driverAddress" placeholder="" required data-lang-key="addressPlaceholder">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label data-lang-key="profilePictureLabel">صورة الملف الشخصي</label>
+                                <input type="file" id="driverAvatarUpload" accept="image/*" style="display:none;">
+                                <div class="file-upload" id="driverAvatarDropArea">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p data-lang-key="dragAndDrop">اسحب وأفلت صورة هنا أو</p>
+                                    <span class="file-name" id="driverAvatarFileName" data-lang-key="browseText">تصفح</span>
+                                </div>
+                                <input type="hidden" id="driverAvatarBase64">
+                            </div>
+
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-danger" id="cancelAddDriverBtn" data-lang-key="cancelButton">إلغاء</button>
+                                <button type="submit" class="btn" data-lang-key="saveButton">حفظ</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <section id="ordersSection" style="display:none;">
+                    <h2 data-lang-key="ordersTitle"><i class="fas fa-box"></i> إدارة الطلبات</h2>
+                    <p data-lang-key="ordersContent">هذه الصفحة لإدارة الطلبات.</p>
+                </section>
+
+                <section id="reportsSection" style="display:none;">
+                    <h2 data-lang-key="reportsTitle"><i class="fas fa-chart-line"></i> التقارير</h2>
+                    <p data-lang-key="reportsContent">هذه الصفحة لعرض التقارير.</p>
+                </section>
+
+                <section id="settingsSection" style="display:none;">
+                    <div class="form-container">
+                        <h2 class="form-title" data-lang-key="profileSettingsTitle">إعدادات الملف الشخصي</h2>
+                        <form id="profileSettingsForm">
+                            <div class="alert alert-error" id="profileError" style="display:none;"><i class="fas fa-exclamation-circle"></i> <span id="profileErrorText"></span></div>
+                            <div class="alert alert-success" id="profileSuccess" style="display:none;"><i class="fas fa-check-circle"></i> <span id="profileSuccessText"></span></div>
+
+                            <div class="profile-settings-avatar-upload">
+                                <img src="https://via.placeholder.com/110/3499db/FFFFFF?text=A" alt="User Avatar" class="profile-settings-avatar" id="settingsAvatarPreview">
+                                <input type="file" id="settingsAvatarUpload" accept="image/*" style="display:none;">
+                                <span class="profile-settings-avatar-text" id="changeAvatarText" data-lang-key="changeProfilePicture">تغيير صورة الملف الشخصي</span>
+                                <input type="hidden" id="settingsAvatarBase64">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="settingsUsername" data-lang-key="usernameLabel">اسم المستخدم</label>
+                                <input type="text" id="settingsUsername" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="settingsEmail" data-lang-key="emailLabel">البريد الإلكتروني</label>
+                                <input type="email" id="settingsEmail" required>
+                            </div>
+
+                            <div class="btn-group">
+                                <button type="submit" class="btn" data-lang-key="saveChangesButton">حفظ التغييرات</button>
+                            </div>
+                        </form>
+
+                        <h3 class="form-title" style="margin-top: 40px;" data-lang-key="changePasswordTitle">تغيير كلمة المرور</h3>
+                        <form id="changePasswordForm">
+                            <div class="alert alert-error" id="passwordError" style="display:none;"><i class="fas fa-exclamation-circle"></i> <span id="passwordErrorText"></span></div>
+                            <div class="alert alert-success" id="passwordSuccess" style="display:none;"><i class="fas fa-check-circle"></i> <span id="passwordSuccessText"></span></div>
+
+                            <div class="form-group">
+                                <label for="currentPassword" data-lang-key="currentPasswordLabel">كلمة المرور الحالية</label>
+                                <input type="password" id="currentPassword" placeholder="" required data-lang-key="currentPasswordPlaceholder">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="newPassword" data-lang-key="newPasswordLabel">كلمة المرور الجديدة</label>
+                                <input type="password" id="newPassword" placeholder="" required data-lang-key="newPasswordPlaceholder">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="confirmNewPassword" data-lang-key="confirmNewPasswordLabel">تأكيد كلمة المرور الجديدة</label>
+                                <input type="password" id="confirmNewPassword" placeholder="" required data-lang-key="confirmNewPasswordPlaceholder">
+                            </div>
+
+                            <div class="btn-group">
+                                <button type="submit" class="btn" data-lang-key="updatePasswordButton">تحديث كلمة المرور</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // --- Language Translations ---
+        const translations = {
+            ar: {
+                pageTitle: "نظام إدارة سائقي الدراجات للتوصيل",
+                systemTitle: "نظام إدارة سائقي الدراجات",
+                systemTitleHeader: "نظام إدارة سائقي الدراجات",
+                loginTab: "تسجيل الدخول",
+                signupTab: "إنشاء حساب",
+                usernameOrEmailLabel: "اسم المستخدم أو البريد الإلكتروني",
+                usernameOrEmailPlaceholder: "أدخل اسم المستخدم أو البريد الإلكتروني",
+                passwordLabel: "كلمة المرور",
+                passwordPlaceholder: "أدخل كلمة المرور",
+                loginButton: "تسجيل الدخول",
+                forgotPasswordLink: "نسيت كلمة المرور؟",
+                orLoginWith: "أو تسجيل الدخول باستخدام",
+                googleButton: "Google",
+                facebookButton: "Facebook",
+                phoneButton: "الهاتف",
+                noAccountYet: "ليس لديك حساب؟",
+                createAccountLink: "إنشاء حساب جديد",
+                usernameLabel: "اسم المستخدم",
+                usernamePlaceholder: "أدخل اسم المستخدم",
+                emailLabel: "البريد الإلكتروني",
+                emailPlaceholder: "أدخل بريدك الإلكتروني",
+                phoneLabel: "رقم الهاتف",
+                phonePlaceholder: "أدخل رقم الهاتف (اختياري)",
+                confirmPasswordLabel: "تأكيد كلمة المرور",
+                confirmPasswordPlaceholder: "أعد إدخال كلمة المرور",
+                accountTypeLabel: "نوع الحساب",
+                managerOption: "مدير",
+                driverOption: "سائق",
+                signupButton: "إنشاء حساب",
+                verificationTitle: "تأكيد الحساب",
+                emailVerificationMessage: "لقد أرسلنا رمز تحقق إلى {contact}. الرجاء إدخال الرمز أدناه للتأكيد.",
+                phoneVerificationMessage: "لقد أرسلنا رمز تحقق إلى رقم هاتفك {contact}. الرجاء إدخال الرمز أدناه للتأكيد.",
+                verificationCodeLabel: "رمز التحقق",
+                verificationCodePlaceholder: "أدخل الرمز المكون من 6 أرقام",
+                verifyButton: "تأكيد",
+                resendCodeButton: "إعادة إرسال الرمز",
+                loggedInUsername: "المسؤول", // Default
+                adminUser: "المسؤول",
+                profileSettingsButton: "إعدادات الملف الشخصي",
+                logoutButton: "تسجيل الخروج",
+                dashboardNavigation: "لوحة القيادة",
+                overviewNav: "نظرة عامة",
+                driversNav: "إدارة السائقين",
+                ordersNav: "إدارة الطلبات",
+                reportsNav: "التقارير",
+                settingsNav: "الإعدادات",
+                welcomeTitle: "مرحباً بك!",
+                welcomeMessage: "مرحباً بك في لوحة تحكم إدارة السائقين الخاصة بك. يمكنك هنا إدارة السائقين والطلبات والوصول إلى التقارير الشاملة لتحسين عمليات التوصيل.",
+                addDriverNow: "ابدأ بإضافة سائق جديد",
+                driversListTitle: "قائمة السائقين",
+                addNewDriverButton: "إضافة سائق جديد",
+                emailDetail: "البريد الإلكتروني",
+                phoneDetail: "رقم الهاتف",
+                statusDetail: "الحالة",
+                statusActive: "نشط",
+                statusPending: "معلق",
+                deleteDriverButton: "حذف السائق",
+                addDriverTitle: "إضافة سائق جديد",
+                fullNameLabel: "الاسم الكامل",
+                fullNamePlaceholder: "أدخل الاسم الكامل للسائق",
+                addressLabel: "عنوان السكن",
+                addressPlaceholder: "أدخل عنوان سكن السائق",
+                profilePictureLabel: "صورة الملف الشخصي",
+                dragAndDrop: "اسحب وأفلت صورة هنا أو",
+                browseText: "تصفح",
+                cancelButton: "إلغاء",
+                saveButton: "حفظ",
+                ordersTitle: "إدارة الطلبات",
+                ordersContent: "هذه الصفحة لإدارة الطلبات.",
+                reportsTitle: "التقارير",
+                reportsContent: "هذه الصفحة لعرض التقارير.",
+                profileSettingsTitle: "إعدادات الملف الشخصي",
+                changeProfilePicture: "تغيير صورة الملف الشخصي",
+                saveChangesButton: "حفظ التغييرات",
+                changePasswordTitle: "تغيير كلمة المرور",
+                currentPasswordLabel: "كلمة المرور الحالية",
+                currentPasswordPlaceholder: "أدخل كلمة المرور الحالية",
+                newPasswordLabel: "كلمة المرور الجديدة",
+                newPasswordPlaceholder: "أدخل كلمة المرور الجديدة",
+                confirmNewPasswordLabel: "تأكيد كلمة المرور الجديدة",
+                confirmNewPasswordPlaceholder: "أعد إدخال كلمة المرور الجديدة",
+                updatePasswordButton: "تحديث كلمة المرور",
+
+                // Messages
+                loginSuccess: "تم تسجيل الدخول بنجاح!",
+                loginFailed: "فشل تسجيل الدخول: اسم المستخدم أو كلمة المرور غير صحيحة.",
+                allFieldsRequired: "جميع الحقول مطلوبة.",
+                passwordsDoNotMatch: "كلمتا المرور غير متطابقتين.",
+                accountCreated: "تم إنشاء الحساب بنجاح! يرجى التحقق من بريدك الإلكتروني/هاتفك.",
+                signupFailed: "فشل إنشاء الحساب.",
+                verificationCodeSentEmail: "تم إرسال رمز التحقق إلى بريدك الإلكتروني.",
+                verificationCodeSentPhone: "تم إرسال رمز التحقق إلى رقم هاتفك.",
+                invalidVerificationCode: "رمز التحقق غير صحيح.",
+                emailPhoneVerified: "تم تأكيد البريد الإلكتروني/رقم الهاتف بنجاح!",
+                addDriverSuccess: "تم إضافة السائق بنجاح.",
+                addDriverError: "فشل إضافة السائق.",
+                deleteDriverSuccess: "تم حذف السائق بنجاح.",
+                deleteDriverError: "فشل حذف السائق.",
+                profileUpdateSuccess: "تم تحديث إعدادات الملف الشخصي بنجاح.",
+                profileUpdateError: "فشل تحديث إعدادات الملف الشخصي.",
+                passwordUpdateSuccess: "تم تحديث كلمة المرور بنجاح.",
+                passwordUpdateError: "فشل تحديث كلمة المرور."
+            },
+            fr: {
+                pageTitle: "Système de Gestion des Chauffeurs-Livreurs",
+                systemTitle: "Système de Gestion des Chauffeurs",
+                systemTitleHeader: "Système de Gestion des Chauffeurs",
+                loginTab: "Se connecter",
+                signupTab: "S'inscrire",
+                usernameOrEmailLabel: "Nom d'utilisateur ou Email",
+                usernameOrEmailPlaceholder: "Entrez le nom d'utilisateur ou l'email",
+                passwordLabel: "Mot de passe",
+                passwordPlaceholder: "Entrez le mot de passe",
+                loginButton: "Se connecter",
+                forgotPasswordLink: "Mot de passe oublié?",
+                orLoginWith: "Ou connectez-vous avec",
+                googleButton: "Google",
+                facebookButton: "Facebook",
+                phoneButton: "Téléphone",
+                noAccountYet: "Pas encore de compte ?",
+                createAccountLink: "Créer un nouveau compte",
+                usernameLabel: "Nom d'utilisateur",
+                usernamePlaceholder: "Entrez le nom d'utilisateur",
+                emailLabel: "Email",
+                emailPlaceholder: "Entrez votre email",
+                phoneLabel: "Numéro de téléphone",
+                phonePlaceholder: "Entrez le numéro de téléphone (optionnel)",
+                confirmPasswordLabel: "Confirmer le mot de passe",
+                confirmPasswordPlaceholder: "Confirmez le mot de passe",
+                accountTypeLabel: "Type de compte",
+                managerOption: "Manager",
+                driverOption: "Chauffeur",
+                signupButton: "S'inscrire",
+                verificationTitle: "Vérification du Compte",
+                emailVerificationMessage: "Nous avons envoyé un code de vérification à {contact}. Veuillez entrer le code ci-dessous pour confirmer.",
+                phoneVerificationMessage: "Nous avons envoyé un code de vérification à votre numéro de téléphone {contact}. Veuillez entrer le code ci-dessous pour confirmer.",
+                verificationCodeLabel: "Code de vérification",
+                verificationCodePlaceholder: "Entrez le code à 6 chiffres",
+                verifyButton: "Vérifier",
+                resendCodeButton: "Renvoyer le code",
+                loggedInUsername: "Administrateur", // Default
+                adminUser: "Administrateur",
+                profileSettingsButton: "Paramètres du profil",
+                logoutButton: "Se déconnecter",
+                dashboardNavigation: "Tableau de Bord",
+                overviewNav: "Aperçu",
+                driversNav: "Gestion des Chauffeurs",
+                ordersNav: "Gestion des Commandes",
+                reportsNav: "Rapports",
+                settingsNav: "Paramètres",
+                welcomeTitle: "Bienvenue !",
+                welcomeMessage: "Bienvenue sur votre tableau de bord de gestion des chauffeurs. Ici, vous pouvez gérer les chauffeurs, les commandes et accéder à des rapports complets pour optimiser vos opérations de livraison.",
+                addDriverNow: "Commencer par ajouter un nouveau chauffeur",
+                driversListTitle: "Liste des Chauffeurs",
+                addNewDriverButton: "Ajouter un nouveau chauffeur",
+                emailDetail: "Email",
+                phoneDetail: "Téléphone",
+                statusDetail: "Statut",
+                statusActive: "Actif",
+                statusPending: "En attente",
+                deleteDriverButton: "Supprimer le chauffeur",
+                addDriverTitle: "Ajouter un nouveau chauffeur",
+                fullNameLabel: "Nom complet",
+                fullNamePlaceholder: "Entrez le nom complet du chauffeur",
+                addressLabel: "Adresse de résidence",
+                addressPlaceholder: "Entrez l'adresse du chauffeur",
+                profilePictureLabel: "Photo de profil",
+                dragAndDrop: "Glissez et déposez une image ici ou",
+                browseText: "Parcourir",
+                cancelButton: "Annuler",
+                saveButton: "Enregistrer",
+                ordersTitle: "Gestion des Commandes",
+                ordersContent: "Cette page est dédiée à la gestion des commandes.",
+                reportsTitle: "Rapports",
+                reportsContent: "Cette page est dédiée à l'affichage des rapports.",
+                profileSettingsTitle: "Paramètres du Profil",
+                changeProfilePicture: "Changer la photo de profil",
+                saveChangesButton: "Enregistrer les modifications",
+                changePasswordTitle: "Changer le mot de passe",
+                currentPasswordLabel: "Mot de passe actuel",
+                currentPasswordPlaceholder: "Entrez le mot de passe actuel",
+                newPasswordLabel: "Nouveau mot de passe",
+                newPasswordPlaceholder: "Entrez le nouveau mot de passe",
+                confirmNewPasswordLabel: "Confirmer le nouveau mot de passe",
+                confirmNewPasswordPlaceholder: "Confirmez le nouveau mot de passe",
+                updatePasswordButton: "Mettre à jour le mot de passe",
+
+                // Messages
+                loginSuccess: "Connexion réussie!",
+                loginFailed: "Échec de la connexion : Nom d'utilisateur ou mot de passe incorrect.",
+                allFieldsRequired: "Tous les champs sont requis.",
+                passwordsDoNotMatch: "Les mots de passe ne correspondent pas.",
+                accountCreated: "Compte créé avec succès ! Veuillez vérifier votre email/téléphone.",
+                signupFailed: "Échec de la création du compte.",
+                verificationCodeSentEmail: "Le code de vérification a été envoyé à votre email.",
+                verificationCodeSentPhone: "Le code de vérification a été envoyé à votre numéro de téléphone.",
+                invalidVerificationCode: "Code de vérification invalide.",
+                emailPhoneVerified: "Email/Téléphone vérifié avec succès !",
+                addDriverSuccess: "Chauffeur ajouté avec succès.",
+                addDriverError: "Échec de l'ajout du chauffeur.",
+                deleteDriverSuccess: "Chauffeur supprimé avec succès.",
+                deleteDriverError: "Échec de la suppression du chauffeur.",
+                profileUpdateSuccess: "Paramètres du profil mis à jour avec succès.",
+                profileUpdateError: "Échec de la mise à jour des paramètres du profil.",
+                passwordUpdateSuccess: "Mot de passe mis à jour avec succès.",
+                passwordUpdateError: "Échec de la mise à jour du mot de passe."
+            },
+            en: {
+                pageTitle: "Delivery Riders Management System",
+                systemTitle: "Rider Management System",
+                systemTitleHeader: "Rider Management System",
+                loginTab: "Login",
+                signupTab: "Sign Up",
+                usernameOrEmailLabel: "Username or Email",
+                usernameOrEmailPlaceholder: "Enter username or email",
+                passwordLabel: "Password",
+                passwordPlaceholder: "Enter password",
+                loginButton: "Login",
+                forgotPasswordLink: "Forgot Password?",
+                orLoginWith: "Or login with",
+                googleButton: "Google",
+                facebookButton: "Facebook",
+                phoneButton: "Phone",
+                noAccountYet: "Don't have an account?",
+                createAccountLink: "Create a new account",
+                usernameLabel: "Username",
+                usernamePlaceholder: "Enter username",
+                emailLabel: "Email",
+                emailPlaceholder: "Enter your email",
+                phoneLabel: "Phone Number",
+                phonePlaceholder: "Enter phone number (optional)",
+                confirmPasswordLabel: "Confirm Password",
+                confirmPasswordPlaceholder: "Re-enter password",
+                accountTypeLabel: "Account Type",
+                managerOption: "Manager",
+                driverOption: "Driver",
+                signupButton: "Sign Up",
+                verificationTitle: "Account Verification",
+                emailVerificationMessage: "We have sent a verification code to {contact}. Please enter the code below to confirm.",
+                phoneVerificationMessage: "We have sent a verification code to your phone number {contact}. Please enter the code below to confirm.",
+                verificationCodeLabel: "Verification Code",
+                verificationCodePlaceholder: "Enter 6-digit code",
+                verifyButton: "Verify",
+                resendCodeButton: "Resend Code",
+                loggedInUsername: "Admin", // Default
+                adminUser: "Admin",
+                profileSettingsButton: "Profile Settings",
+                logoutButton: "Logout",
+                dashboardNavigation: "Dashboard",
+                overviewNav: "Overview",
+                driversNav: "Manage Drivers",
+                ordersNav: "Manage Orders",
+                reportsNav: "Reports",
+                settingsNav: "Settings",
+                welcomeTitle: "Welcome!",
+                welcomeMessage: "Welcome to your Rider Management Dashboard. Here you can manage riders, orders, and access comprehensive reports to optimize your delivery operations.",
+                addDriverNow: "Start by adding a new driver",
+                driversListTitle: "Driver List",
+                addNewDriverButton: "Add New Driver",
+                emailDetail: "Email",
+                phoneDetail: "Phone",
+                statusDetail: "Status",
+                statusActive: "Active",
+                statusPending: "Pending",
+                deleteDriverButton: "Delete Driver",
+                addDriverTitle: "Add New Driver",
+                fullNameLabel: "Full Name",
+                fullNamePlaceholder: "Enter full name of the driver",
+                addressLabel: "Residential Address",
+                addressPlaceholder: "Enter driver's residential address",
+                profilePictureLabel: "Profile Picture",
+                dragAndDrop: "Drag and drop an image here or",
+                browseText: "Browse",
+                cancelButton: "Cancel",
+                saveButton: "Save",
+                ordersTitle: "Manage Orders",
+                ordersContent: "This page is for managing orders.",
+                reportsTitle: "Reports",
+                reportsContent: "This page is for viewing reports.",
+                profileSettingsTitle: "Profile Settings",
+                changeProfilePicture: "Change Profile Picture",
+                saveChangesButton: "Save Changes",
+                changePasswordTitle: "Change Password",
+                currentPasswordLabel: "Current Password",
+                currentPasswordPlaceholder: "Enter current password",
+                newPasswordLabel: "New Password",
+                newPasswordPlaceholder: "Enter new password",
+                confirmNewPasswordLabel: "Confirm New Password",
+                confirmNewPasswordPlaceholder: "Re-enter new password",
+                updatePasswordButton: "Update Password",
+
+                // Messages
+                loginSuccess: "Login successful!",
+                loginFailed: "Login failed: Invalid username or password.",
+                allFieldsRequired: "All fields are required.",
+                passwordsDoNotMatch: "Passwords do not match.",
+                accountCreated: "Account created successfully! Please verify your email/phone.",
+                signupFailed: "Account creation failed.",
+                verificationCodeSentEmail: "Verification code sent to your email.",
+                verificationCodeSentPhone: "Verification code sent to your phone number.",
+                invalidVerificationCode: "Invalid verification code.",
+                emailPhoneVerified: "Email/Phone verified successfully!",
+                addDriverSuccess: "Driver added successfully.",
+                addDriverError: "Failed to add driver.",
+                deleteDriverSuccess: "Driver deleted successfully.",
+                deleteDriverError: "Failed to delete driver.",
+                profileUpdateSuccess: "Profile settings updated successfully.",
+                profileUpdateError: "Failed to update profile settings.",
+                passwordUpdateSuccess: "Password updated successfully.",
+                passwordUpdateError: "Failed to update password."
+            }
+        };
+
+        let currentLanguage = localStorage.getItem('lang') || 'ar'; // Default to Arabic
+
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            localStorage.setItem('lang', lang);
+
+            // Set HTML lang and body direction
+            document.documentElement.setAttribute('lang', lang);
+            document.body.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+
+            // Apply translations to all elements with data-lang-key
+            document.querySelectorAll('[data-lang-key]').forEach(element => {
+                const key = element.getAttribute('data-lang-key');
+                let translatedText = translations[lang][key];
+
+                if (element.tagName === 'INPUT' && element.hasAttribute('placeholder')) {
+                    element.setAttribute('placeholder', translatedText || '');
+                } else if (element.tagName === 'OPTION') {
+                   // For options, update text content directly
+                   element.textContent = translatedText || '';
+                }
+                else {
+                    element.textContent = translatedText || '';
+                }
+            });
+
+            // Update specific placeholders that don't directly map to data-lang-key for simplicity
+            // (These are already handled by the above loop if data-lang-key is present)
+            // document.getElementById('username').placeholder = translations[lang].usernameOrEmailPlaceholder;
+            // document.getElementById('password').placeholder = translations[lang].passwordPlaceholder;
+            // ... and so on for all input placeholders
+
+            // Update verification message dynamically if verification page is active
+            if (document.getElementById('verificationPage').style.display !== 'none') {
+                const email = localStorage.getItem('verificationContactEmail');
+                const phone = localStorage.getItem('verificationContactPhone');
+                let messageKey = '';
+                let contactToDisplay = '';
+
+                if (email) {
+                    messageKey = 'emailVerificationMessage';
+                    contactToDisplay = email;
+                } else if (phone) {
+                    messageKey = 'phoneVerificationMessage';
+                    contactToDisplay = phone;
+                }
+                if (messageKey) {
+                    let message = translations[lang][messageKey];
+                    message = message.replace('{contact}', contactToDisplay);
+                    document.getElementById('verificationMessage').textContent = message;
+                }
+            }
+
+            // Update the selected option in the language dropdown
+            const langSelect = document.getElementById('languageSelect');
+            if (langSelect) {
+                langSelect.value = lang;
+            }
+        }
+
+        // --- Helper Functions ---
+        function showMessage(elementId, messageKey, isError = true, contact = null) {
+            const messageElement = document.getElementById(elementId);
+            const messageTextElement = messageElement.querySelector('span');
+
+            let message = translations[currentLanguage][messageKey];
+            if (contact) {
+                message = message.replace('{contact}', contact);
+            }
+            messageTextElement.textContent = message;
+            messageElement.style.display = 'flex';
+            if (isError) {
+                messageElement.classList.remove('alert-success');
+                messageElement.classList.add('alert-error');
+                messageElement.style.animation = 'shake 0.5s';
+                setTimeout(() => messageElement.style.animation = '', 500);
+            } else {
+                messageElement.classList.remove('alert-error');
+                messageElement.classList.add('alert-success');
+            }
+            // Hide after 5 seconds
+            setTimeout(() => {
+                messageElement.style.display = 'none';
+                messageTextElement.textContent = '';
+            }, 5000);
+        }
+
+        function hideMessage(elementId) {
+            document.getElementById(elementId).style.display = 'none';
+            document.getElementById(elementId).querySelector('span').textContent = '';
+        }
+
+        function showPage(pageId) {
+            const pages = ['loginPage', 'verificationPage', 'dashboardPage'];
+            pages.forEach(id => {
+                document.getElementById(id).style.display = (id === pageId) ? 'flex' : 'none';
+            });
+
+            // Adjust header visibility based on page
+            if (pageId === 'dashboardPage') {
+                document.getElementById('mainHeader').style.display = 'block';
+            } else {
+                document.getElementById('mainHeader').style.display = 'none';
+            }
+        }
+
+        function showDashboardSection(sectionId) {
+            document.querySelectorAll('#dashboardPage main section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+
+            document.querySelectorAll('.sidebar .nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector(`.sidebar .nav-item[data-section="${sectionId.replace('Section', '')}"]`).classList.add('active');
+        }
+
+        // --- User Data Simulation (localStorage) ---
+        let users = JSON.parse(localStorage.getItem('users')) || {};
+        let verificationCode = null; // Simulated verification code
+        let verificationTarget = null; // Email or phone being verified
+        let verificationUser = null; // User object for verification
+
+        // --- Event Listeners ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set initial language
+            setLanguage(currentLanguage);
+
+            // Language selector change
+            const languageSelect = document.getElementById('languageSelect');
+            if (languageSelect) {
+                languageSelect.value = currentLanguage; // Ensure initial selection matches
+                languageSelect.addEventListener('change', (event) => {
+                    setLanguage(event.target.value);
+                });
+            }
+
+            // Tab Switching
+            document.querySelectorAll('.tabs .tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.tabs .tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+                    tab.classList.add('active');
+                    document.getElementById(tab.getAttribute('data-tab') + 'Tab').classList.add('active');
+                    hideMessage('errorMessage'); // Clear error on tab switch
+                });
+            });
+
+            // Go to Signup from Login page link
+            document.getElementById('goToSignup').addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelector('.tab[data-tab="signup"]').click();
+            });
+
+            // Login Logic
+            document.getElementById('loginBtn').addEventListener('click', () => {
+                hideMessage('errorMessage');
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+
+                if (!username || !password) {
+                    showMessage('errorMessage', 'allFieldsRequired');
+                    return;
+                }
+
+                const user = users[username] || Object.values(users).find(u => u.email === username || u.phone === username);
+
+                if (user && user.password === password) {
+                    if (user.isVerified) {
+                        localStorage.setItem('loggedInUser', JSON.stringify(user));
+                        showMessage('errorMessage', 'loginSuccess', false);
+                        setTimeout(() => {
+                            showPage('dashboardPage');
+                            updateLoggedInUserInfo();
+                            showDashboardSection('overviewSection'); // Show overview by default
+                        }, 1000);
+                    } else {
+                        // Initiate verification process for unverified user
+                        verificationUser = user;
+                        if (user.email && user.email !== '') {
+                           verificationTarget = user.email;
+                           localStorage.setItem('verificationContactEmail', user.email);
+                           localStorage.removeItem('verificationContactPhone'); // Clear phone if email is used
+                           sendVerificationCode(user.email, 'email');
+                           showMessage('errorMessage', 'verificationCodeSentEmail');
+                        } else if (user.phone && user.phone !== '') {
+                           verificationTarget = user.phone;
+                           localStorage.setItem('verificationContactPhone', user.phone);
+                           localStorage.removeItem('verificationContactEmail'); // Clear email if phone is used
+                           sendVerificationCode(user.phone, 'phone');
+                           showMessage('errorMessage', 'verificationCodeSentPhone');
+                        } else {
+                           showMessage('errorMessage', 'signupFailed'); // Should not happen if one contact is required
+                           return;
+                        }
+                        showPage('verificationPage');
+                    }
+                } else {
+                    showMessage('errorMessage', 'loginFailed');
+                }
+            });
+
+            // Signup Logic
+            document.getElementById('signupBtn').addEventListener('click', () => {
+                hideMessage('errorMessage');
+                const signupUsername = document.getElementById('signupUsername').value;
+                const signupEmail = document.getElementById('signupEmail').value;
+                const signupPhone = document.getElementById('signupPhone').value; // Optional
+                const signupPassword = document.getElementById('signupPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                const accountType = document.getElementById('accountType').value;
+
+                if (!signupUsername || !signupEmail || !signupPassword || !confirmPassword) {
+                    showMessage('errorMessage', 'allFieldsRequired');
+                    return;
+                }
+                if (signupPassword !== confirmPassword) {
+                    showMessage('errorMessage', 'passwordsDoNotMatch');
+                    return;
+                }
+
+                if (users[signupUsername] || Object.values(users).some(u => u.email === signupEmail)) {
+                    showMessage('errorMessage', 'signupFailed', true, null, 'User with this username or email already exists.');
+                    return;
+                }
+
+                const newUser = {
+                    username: signupUsername,
+                    email: signupEmail,
+                    phone: signupPhone, // Store phone
+                    password: signupPassword,
+                    accountType: accountType,
+                    isVerified: false, // Account is unverified until code is entered
+                    id: `user_${Date.now()}`
+                };
+
+                users[signupUsername] = newUser;
+                localStorage.setItem('users', JSON.stringify(users));
+
+                // Initiate verification
+                verificationUser = newUser;
+                if (signupEmail) {
+                   verificationTarget = signupEmail;
+                   localStorage.setItem('verificationContactEmail', signupEmail);
+                   localStorage.removeItem('verificationContactPhone'); // Clear phone if email is used
+                   sendVerificationCode(signupEmail, 'email');
+                   showMessage('errorMessage', 'accountCreated', false);
+                } else if (signupPhone) {
+                   verificationTarget = signupPhone;
+                   localStorage.setItem('verificationContactPhone', signupPhone);
+                   localStorage.removeItem('verificationContactEmail'); // Clear email if phone is used
+                   sendVerificationCode(signupPhone, 'phone');
+                   showMessage('errorMessage', 'accountCreated', false);
+                } else {
+                   showMessage('errorMessage', 'signupFailed'); // Should not happen if one contact is required
+                   return;
+                }
+
+                showPage('verificationPage');
+            });
+
+            // --- Verification Logic ---
+            function generateVerificationCode() {
+                return Math.floor(100000 + Math.random() * 900000).toString(); // 6-digit code
+            }
+
+            function sendVerificationCode(contact, type) {
+                verificationCode = generateVerificationCode();
+                console.log(`Simulating sending code ${verificationCode} to ${type}: ${contact}`);
+                // In a real app, you'd integrate with an email/SMS service here
+                // e.g., Axios.post('/api/send-email-code', { email: contact, code: verificationCode });
+                // or Axios.post('/api/send-sms-code', { phone: contact, code: verificationCode });
+
+                // Set message based on type
+                const message = type === 'email' ? translations[currentLanguage].emailVerificationMessage : translations[currentLanguage].phoneVerificationMessage;
+                document.getElementById('verificationMessage').textContent = message.replace('{contact}', contact);
+            }
+
+            document.getElementById('verifyCodeBtn').addEventListener('click', () => {
+                hideMessage('verificationErrorMessage');
+                const enteredCode = document.getElementById('verificationCode').value;
+
+                if (enteredCode === verificationCode) {
+                    if (verificationUser) {
+                        verificationUser.isVerified = true;
+                        users[verificationUser.username] = verificationUser; // Update the user object in our 'database'
+                        localStorage.setItem('users', JSON.stringify(users));
+                        localStorage.setItem('loggedInUser', JSON.stringify(verificationUser)); // Log them in automatically after verification
+                        showMessage('verificationErrorMessage', 'emailPhoneVerified', false);
+                        localStorage.removeItem('verificationContactEmail'); // Clear stored contact info
+                        localStorage.removeItem('verificationContactPhone');
+                        setTimeout(() => {
+                            showPage('dashboardPage');
+                            updateLoggedInUserInfo();
+                            showDashboardSection('overviewSection');
+                        }, 1000);
+                    }
+                } else {
+                    showMessage('verificationErrorMessage', 'invalidVerificationCode');
+                }
+            });
+
+            document.getElementById('resendCodeBtn').addEventListener('click', () => {
+                hideMessage('verificationErrorMessage');
+                if (verificationTarget) {
+                    const type = localStorage.getItem('verificationContactEmail') ? 'email' : 'phone';
+                    sendVerificationCode(verificationTarget, type);
+                    showMessage('verificationErrorMessage', type === 'email' ? 'verificationCodeSentEmail' : 'verificationCodeSentPhone', false);
+                } else {
+                    showMessage('verificationErrorMessage', 'signupFailed', true, null, 'No contact for resending code.'); // Should not happen
+                }
+            });
+
+            // Check if user is already logged in or needs verification on page load
+            const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+            if (loggedInUser && loggedInUser.isVerified) {
+                showPage('dashboardPage');
+                updateLoggedInUserInfo();
+                showDashboardSection('overviewSection');
+            } else if (localStorage.getItem('verificationContactEmail') || localStorage.getItem('verificationContactPhone')) {
+                // If there's a pending verification
+                const storedEmail = localStorage.getItem('verificationContactEmail');
+                const storedPhone = localStorage.getItem('verificationContactPhone');
+                const contact = storedEmail || storedPhone;
+                const type = storedEmail ? 'email' : 'phone';
+
+                verificationUser = Object.values(users).find(u => u.email === storedEmail || u.phone === storedPhone);
+                verificationTarget = contact;
+
+                if (verificationUser && !verificationUser.isVerified) {
+                    showPage('verificationPage');
+                    // Resend code to ensure there's an active one if page was refreshed
+                    sendVerificationCode(contact, type);
+                    showMessage('verificationErrorMessage', type === 'email' ? 'verificationCodeSentEmail' : 'verificationCodeSentPhone', false);
+                } else if (loggedInUser && !loggedInUser.isVerified) { // In case the stored loggedInUser is the one that needs verification
+                   verificationUser = loggedInUser;
+                   const contactForLoggedInUser = loggedInUser.email || loggedInUser.phone;
+                   const typeForLoggedInUser = loggedInUser.email ? 'email' : 'phone';
+                   verificationTarget = contactForLoggedInUser;
+                   showPage('verificationPage');
+                   sendVerificationCode(contactForLoggedInUser, typeForLoggedInUser);
+                   showMessage('verificationErrorMessage', typeForLoggedInUser === 'email' ? 'verificationCodeSentEmail' : 'verificationCodeSentPhone', false);
+                } else {
+                   showPage('loginPage'); // No pending verification or user already verified
+                   localStorage.removeItem('verificationContactEmail');
+                   localStorage.removeItem('verificationContactPhone');
+                }
+            } else {
+                showPage('loginPage');
+            }
+
+            // --- User Dropdown ---
+            document.getElementById('userInfo').addEventListener('click', () => {
+                document.getElementById('userDropdown').classList.toggle('show');
+            });
+
+            // Close dropdown if clicked outside
+            window.addEventListener('click', (e) => {
+                if (!document.getElementById('userInfo').contains(e.target) && !document.getElementById('userDropdown').contains(e.target)) {
+                    document.getElementById('userDropdown').classList.remove('show');
+                }
+            });
+
+            // Logout Logic
+            document.getElementById('logoutBtn').addEventListener('click', () => {
+                localStorage.removeItem('loggedInUser');
+                showPage('loginPage');
+            });
+
+            // Update logged-in user info in header
+            function updateLoggedInUserInfo() {
+                const user = JSON.parse(localStorage.getItem('loggedInUser'));
+                if (user) {
+                    document.getElementById('loggedInUsername').textContent = user.username;
+                    // You could update avatar here too if paths are stored
+                }
+            }
+
+            // --- Dashboard Navigation ---
+            document.querySelectorAll('.sidebar .nav-item').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const section = item.getAttribute('data-section');
+                    showDashboardSection(section + 'Section');
+                });
+            });
+
+            // Handle "Add new driver" button from overview
+            document.getElementById('overviewAddDriverBtn').addEventListener('click', () => {
+                showDashboardSection('addDriverSection');
+            });
+
+            // Show Add Driver Form Button
+            document.getElementById('showAddDriverFormBtn').addEventListener('click', () => {
+                showDashboardSection('addDriverSection');
+                document.getElementById('addDriverForm').reset();
+                document.getElementById('driverAvatarFileName').textContent = translations[currentLanguage].browseText;
+                document.getElementById('driverAvatarBase64').value = '';
+                hideMessage('addDriverError');
+                hideMessage('addDriverSuccess');
+            });
+
+            // Cancel Add Driver Button
+            document.getElementById('cancelAddDriverBtn').addEventListener('click', () => {
+                showDashboardSection('driversSection'); // Go back to drivers list
+            });
+
+            // Simulate Drivers Data (in a real app, this would come from an API)
+            let drivers = JSON.parse(localStorage.getItem('drivers')) || [];
+
+            function renderDrivers() {
+                const driversGrid = document.getElementById('driversGrid');
+                driversGrid.innerHTML = ''; // Clear existing cards
+
+                if (drivers.length === 0) {
+                    driversGrid.innerHTML = `<p style="text-align: center; color: #777;" data-lang-key="noDriversMessage">لا يوجد سائقون مضافون بعد. ابدأ بإضافة واحد!</p>`;
+                    setLanguage(currentLanguage); // Re-apply language after updating innerHTML
+                    return;
+                }
+
+                drivers.forEach(driver => {
+                    const driverCard = document.createElement('div');
+                    driverCard.className = 'driver-card';
+                    driverCard.innerHTML = `
+                        <div class="driver-header">
+                            <span class="status-badge ${driver.status === 'active' ? 'status-active' : 'status-pending'}">${translations[currentLanguage][`status${driver.status.charAt(0).toUpperCase() + driver.status.slice(1)}`]}</span>
+                            <div class="driver-avatar">
+                                ${driver.avatar ? `<img src="${driver.avatar}" alt="Driver Avatar">` : `<i class="fas fa-user-circle"></i>`}
+                            </div>
+                            <h3 class="driver-name">${driver.name}</h3>
+                            <p class="driver-id">ID: ${driver.id}</p>
+                        </div>
+                        <div class="driver-details">
+                            <div class="detail-item">
+                                <div class="detail-icon"><i class="fas fa-envelope"></i></div>
+                                <div class="detail-text">
+                                    <h4 data-lang-key="emailDetail">${translations[currentLanguage].emailDetail}</h4>
+                                    <p>${driver.email}</p>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon"><i class="fas fa-phone"></i></div>
+                                <div class="detail-text">
+                                    <h4 data-lang-key="phoneDetail">${translations[currentLanguage].phoneDetail}</h4>
+                                    <p>${driver.phone}</p>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div>
+                                <div class="detail-text">
+                                    <h4 data-lang-key="addressLabel">${translations[currentLanguage].addressLabel}</h4>
+                                    <p>${driver.address}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="delete-driver-btn" data-driver-id="${driver.id}" data-lang-key="deleteDriverButton">
+                            <i class="fas fa-trash-alt"></i> ${translations[currentLanguage].deleteDriverButton}
+                        </button>
+                    `;
+                    driversGrid.appendChild(driverCard);
+                });
+
+                // Attach delete event listeners after rendering
+                document.querySelectorAll('.delete-driver-btn').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const driverId = e.target.closest('.delete-driver-btn').getAttribute('data-driver-id');
+                        deleteDriver(driverId);
+                    });
+                });
+            }
+
+            // Function to add a driver
+            document.getElementById('addDriverForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                hideMessage('addDriverError');
+                hideMessage('addDriverSuccess');
+
+                const name = document.getElementById('driverName').value;
+                const email = document.getElementById('driverEmail').value;
+                const phone = document.getElementById('driverPhone').value;
+                const address = document.getElementById('driverAddress').value;
+                const avatar = document.getElementById('driverAvatarBase64').value;
+
+                if (!name || !email || !phone || !address) {
+                    showMessage('addDriverError', 'allFieldsRequired');
+                    return;
+                }
+
+                const newDriver = {
+                    id: `DRV-${Date.now()}`,
+                    name,
+                    email,
+                    phone,
+                    address,
+                    avatar,
+                    status: 'active' // Default status
+                };
+
+                drivers.push(newDriver);
+                localStorage.setItem('drivers', JSON.stringify(drivers));
+                renderDrivers();
+                showMessage('addDriverSuccess', 'addDriverSuccess', false);
+                document.getElementById('addDriverForm').reset();
+                document.getElementById('driverAvatarFileName').textContent = translations[currentLanguage].browseText;
+                document.getElementById('driverAvatarBase64').value = '';
+
+                // Optionally switch back to drivers list after a short delay
+                setTimeout(() => showDashboardSection('driversSection'), 1500);
+            });
+
+            // Function to delete a driver
+            function deleteDriver(id) {
+                if (confirm(translations[currentLanguage].confirmDeleteDriver || 'هل أنت متأكد أنك تريد حذف هذا السائق؟')) {
+                    drivers = drivers.filter(driver => driver.id !== id);
+                    localStorage.setItem('drivers', JSON.stringify(drivers));
+                    renderDrivers();
+                    showMessage('addDriverSuccess', 'deleteDriverSuccess', false); // Using addDriverSuccess for general success messages
+                }
+            }
+
+            // Initial render of drivers when drivers section is first shown
+            if (document.getElementById('driversSection').style.display === 'block') {
+                renderDrivers();
+            }
+
+            // File Upload for Add Driver
+            const driverAvatarDropArea = document.getElementById('driverAvatarDropArea');
+            const driverAvatarUpload = document.getElementById('driverAvatarUpload');
+            const driverAvatarFileName = document.getElementById('driverAvatarFileName');
+            const driverAvatarBase64 = document.getElementById('driverAvatarBase64');
+
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                driverAvatarDropArea.addEventListener(eventName, preventDefaults, false);
+            });
+
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            ['dragenter', 'dragover'].forEach(eventName => {
+                driverAvatarDropArea.addEventListener(eventName, () => driverAvatarDropArea.classList.add('highlight'), false);
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+                driverAvatarDropArea.addEventListener(eventName, () => driverAvatarDropArea.classList.remove('highlight'), false);
+            });
+
+            driverAvatarDropArea.addEventListener('drop', handleDrop, false);
+            driverAvatarDropArea.addEventListener('click', () => driverAvatarUpload.click(), false);
+            driverAvatarUpload.addEventListener('change', handleFiles, false);
+
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+                handleFiles({ target: { files: files } });
+            }
+
+            function handleFiles(e) {
+                const files = e.target.files;
+                if (files.length > 0) {
+                    const file = files[0];
+                    driverAvatarFileName.textContent = file.name;
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        driverAvatarBase64.value = reader.result;
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    driverAvatarFileName.textContent = translations[currentLanguage].browseText;
+                    driverAvatarBase64.value = '';
+                }
+            }
+
+            // Profile Settings Logic
+            const settingsUsername = document.getElementById('settingsUsername');
+            const settingsEmail = document.getElementById('settingsEmail');
+            const settingsAvatarPreview = document.getElementById('settingsAvatarPreview');
+            const settingsAvatarUpload = document.getElementById('settingsAvatarUpload');
+            const settingsAvatarBase64 = document.getElementById('settingsAvatarBase64');
+            const changeAvatarText = document.getElementById('changeAvatarText');
+
+            document.getElementById('profileSettingsBtn').addEventListener('click', (e) => {
+                e.preventDefault();
+                showDashboardSection('settingsSection');
+                const user = JSON.parse(localStorage.getItem('loggedInUser'));
+                if (user) {
+                    settingsUsername.value = user.username;
+                    settingsEmail.value = user.email;
+                    settingsAvatarPreview.src = user.avatar || "https://via.placeholder.com/110/3499db/FFFFFF?text=A";
+                    settingsAvatarBase64.value = user.avatar || "";
+                    hideMessage('profileError');
+                    hideMessage('profileSuccess');
+                }
+            });
+
+            settingsAvatarPreview.addEventListener('click', () => settingsAvatarUpload.click());
+            changeAvatarText.addEventListener('click', () => settingsAvatarUpload.click());
+
+            settingsAvatarUpload.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        settingsAvatarPreview.src = event.target.result;
+                        settingsAvatarBase64.value = event.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            document.getElementById('profileSettingsForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                hideMessage('profileError');
+                hideMessage('profileSuccess');
+
+                const user = JSON.parse(localStorage.getItem('loggedInUser'));
+                if (user) {
+                    user.username = settingsUsername.value;
+                    user.email = settingsEmail.value;
+                    user.avatar = settingsAvatarBase64.value;
+
+                    users[user.username] = user; // Update in global users object
+                    localStorage.setItem('users', JSON.stringify(users));
+                    localStorage.setItem('loggedInUser', JSON.stringify(user)); // Update logged in user
+                    updateLoggedInUserInfo();
+                    showMessage('profileSuccess', 'profileUpdateSuccess', false);
+                } else {
+                    showMessage('profileError', 'profileUpdateError');
+                }
+            });
+
+            document.getElementById('changePasswordForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                hideMessage('passwordError');
+                hideMessage('passwordSuccess');
+
+                const currentPassword = document.getElementById('currentPassword').value;
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+
+                const user = JSON.parse(localStorage.getItem('loggedInUser'));
+
+                if (!currentPassword || !newPassword || !confirmNewPassword) {
+                    showMessage('passwordError', 'allFieldsRequired');
+                    return;
+                }
+                if (user.password !== currentPassword) {
+                    showMessage('passwordError', 'passwordUpdateError', true, null, 'Current password is incorrect.');
+                    return;
+                }
+                if (newPassword !== confirmNewPassword) {
+                    showMessage('passwordError', 'passwordsDoNotMatch');
+                    return;
+                }
+                if (newPassword === currentPassword) {
+                   showMessage('passwordError', 'passwordUpdateError', true, null, 'New password cannot be the same as the current password.');
+                   return;
+                }
+
+                user.password = newPassword;
+                users[user.username] = user; // Update in global users object
+                localStorage.setItem('users', JSON.stringify(users));
+                localStorage.setItem('loggedInUser', JSON.stringify(user)); // Update logged in user
+                showMessage('passwordSuccess', 'passwordUpdateSuccess', false);
+                document.getElementById('changePasswordForm').reset();
+            });
+
+            // Ensure drivers are rendered when the drivers section is activated
+            const observer = new MutationObserver((mutationsList) => {
+                for (const mutation of mutationsList) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                        if (document.getElementById('driversSection').style.display === 'block') {
+                            renderDrivers();
+                        }
+                    }
+                }
+            });
+            observer.observe(document.getElementById('driversSection'), { attributes: true });
+
+        });
+    </script>
+</body>
+</html>
