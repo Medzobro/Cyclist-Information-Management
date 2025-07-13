@@ -494,6 +494,11 @@
             background: #d4f8e8;
             color: #27ae60;
         }
+
+        .status-pending {
+            background: #fff3e0;
+            color: #f39c12;
+        }
         
         /* نموذج إضافة سائق */
         .form-container {
@@ -617,6 +622,12 @@
             color: #27ae60;
             border: 1px solid #a3e6c5;
         }
+
+        .alert-error {
+            background: #fce4e4;
+            color: var(--danger);
+            border: 1px solid #f0a0a0;
+        }
         
         /* تصميم متجاوب */
         @media (max-width: 768px) {
@@ -645,25 +656,21 @@
     </style>
 </head>
 <body>
-    <!-- صفحة تسجيل الدخول -->
     <div id="loginPage" class="login-container">
         <div class="login-box">
             <i class="fas fa-bicycle fa-3x" style="color: #3498db; margin-bottom: 20px;"></i>
             <h2>نظام إدارة سائقي الدراجات</h2>
             
-            <!-- علامات التبويب -->
             <div class="tabs">
                 <div class="tab active" data-tab="login">تسجيل الدخول</div>
                 <div class="tab" data-tab="signup">إنشاء حساب</div>
             </div>
             
-            <!-- رسالة الخطأ -->
             <div class="error-message" id="errorMessage">
                 <i class="fas fa-exclamation-circle"></i>
-                <span>اسم المستخدم أو كلمة المرور غير صحيحة. الرجاء المحاولة مرة أخرى.</span>
+                <span id="errorMessageText">اسم المستخدم أو كلمة المرور غير صحيحة. الرجاء المحاولة مرة أخرى.</span>
             </div>
             
-            <!-- تسجيل الدخول -->
             <div class="tab-content active" id="loginTab">
                 <div class="input-group">
                     <label for="username">اسم المستخدم أو البريد الإلكتروني</label>
@@ -699,7 +706,6 @@
                 </div>
             </div>
             
-            <!-- إنشاء حساب -->
             <div class="tab-content" id="signupTab">
                 <div class="input-group">
                     <label for="fullName">الاسم الكامل</label>
@@ -713,7 +719,7 @@
                 
                 <div class="input-group">
                     <label for="phoneNumber">رقم الهاتف</label>
-                    <input type="tel" id="phoneNumber" placeholder="أدخل رقم الهاتف">
+                    <input type="tel" id="phoneNumber" placeholder="أدخل رقم الهاتف (مثال: +22212345678)">
                 </div>
                 
                 <div class="input-group">
@@ -735,7 +741,6 @@
         </div>
     </div>
     
-    <!-- لوحة التحكم -->
     <div id="dashboard" style="display: none;">
         <header>
             <div class="header-content">
@@ -746,7 +751,7 @@
                 
                 <div class="user-info" id="userInfo">
                     <img src="https://ui-avatars.com/api/?name=المدير&background=0D8ABC&color=fff" alt="صورة المستخدم">
-                    <span>مدير النظام</span>
+                    <span id="loggedInUserName">مدير النظام</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
             </div>
@@ -754,7 +759,6 @@
         
         <div class="container">
             <div class="dashboard">
-                <!-- القائمة الجانبية -->
                 <div class="sidebar">
                     <h3>القائمة الرئيسية</h3>
                     <div class="nav-item active" id="navDashboard">
@@ -783,9 +787,7 @@
                     </div>
                 </div>
                 
-                <!-- المحتوى الرئيسي -->
                 <div class="main-content">
-                    <!-- لوحة التحكم الرئيسية -->
                     <div id="dashboardView">
                         <div class="welcome-message">
                             <i class="fas fa-bicycle"></i>
@@ -795,7 +797,6 @@
                         </div>
                     </div>
                     
-                    <!-- قائمة السائقين -->
                     <div id="driversView" style="display: none;">
                         <div class="section-header">
                             <h2><i class="fas fa-users"></i> قائمة السائقين</h2>
@@ -806,11 +807,10 @@
                         </div>
                         
                         <div class="drivers-grid" id="driversList">
-                            <!-- سيتم ملء هذا القسم بالبيانات -->
+                            <p id="noDriversMessage" style="text-align: center; color: var(--gray); display: none;">لا يوجد سائقون مضافون بعد. الرجاء إضافة سائق جديد.</p>
                         </div>
                     </div>
                     
-                    <!-- نموذج إضافة سائق -->
                     <div id="addDriverView" style="display: none;">
                         <div class="section-header">
                             <h2><i class="fas fa-plus-circle"></i> إضافة سائق جديد</h2>
@@ -823,6 +823,11 @@
                                     <h3>تمت العملية بنجاح!</h3>
                                     <p>تم إضافة السائق بنجاح إلى قاعدة البيانات.</p>
                                 </div>
+                            </div>
+
+                            <div class="alert alert-error" id="driverFormError" style="display: none;">
+                                <i class="fas fa-times-circle"></i>
+                                <span id="driverFormErrorMessage"></span>
                             </div>
                             
                             <form id="driverForm">
@@ -899,32 +904,7 @@
     </div>
     
     <script>
-        // بيانات تجريبية للسائقين
-        const driversData = [
-            {
-                id: 1,
-                name: "أحمد محمد",
-                phone: "0551234567",
-                profilePic: "https://randomuser.me/api/portraits/men/32.jpg",
-                status: "active"
-            },
-            {
-                id: 2,
-                name: "سامي عبدالله",
-                phone: "0557654321",
-                profilePic: "https://randomuser.me/api/portraits/men/22.jpg",
-                status: "active"
-            },
-            {
-                id: 3,
-                name: "يوسف خالد",
-                phone: "0551122334",
-                profilePic: "https://randomuser.me/api/portraits/men/41.jpg",
-                status: "pending"
-            }
-        ];
-        
-        // عناصر DOM
+        // DOM Elements
         const loginPage = document.getElementById('loginPage');
         const dashboard = document.getElementById('dashboard');
         const loginBtn = document.getElementById('loginBtn');
@@ -932,6 +912,7 @@
         const usernameInput = document.getElementById('username');
         const passwordInput = document.getElementById('password');
         const errorMessage = document.getElementById('errorMessage');
+        const errorMessageText = document.getElementById('errorMessageText');
         
         const tabs = document.querySelectorAll('.tab');
         const loginTab = document.getElementById('loginTab');
@@ -955,10 +936,13 @@
         const driversView = document.getElementById('driversView');
         const addDriverView = document.getElementById('addDriverView');
         const driversList = document.getElementById('driversList');
+        const noDriversMessage = document.getElementById('noDriversMessage');
         const driverForm = document.getElementById('driverForm');
         const successAlert = document.getElementById('successAlert');
-        
-        // عناصر رفع الملفات
+        const driverFormError = document.getElementById('driverFormError');
+        const driverFormErrorMessage = document.getElementById('driverFormErrorMessage');
+
+        // File upload elements
         const profileUpload = document.getElementById('profileUpload');
         const profileInput = document.getElementById('profileInput');
         const profileFileName = document.getElementById('profileFileName');
@@ -974,8 +958,145 @@
         const bikeUpload = document.getElementById('bikeUpload');
         const bikeInput = document.getElementById('bikeInput');
         const bikeFileName = document.getElementById('bikeFileName');
+
+        const loggedInUserName = document.getElementById('loggedInUserName');
+
+        // --- Data Storage (using localStorage to simulate a backend) ---
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        let driversData = JSON.parse(localStorage.getItem('drivers')) || [];
+
+        // Function to save users to localStorage
+        function saveUsers() {
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+
+        // Function to save drivers to localStorage
+        function saveDrivers() {
+            localStorage.setItem('drivers', JSON.stringify(driversData));
+        }
+
+        // --- Utility Functions ---
+        function showMessage(element, message, type = 'error') {
+            element.querySelector('span').textContent = message;
+            element.className = `alert alert-${type}`; // Update class for styling
+            element.style.display = 'flex';
+        }
+
+        function hideMessage(element) {
+            element.style.display = 'none';
+        }
+
+        function shakeInput(inputElement) {
+            inputElement.style.animation = 'shake 0.5s';
+            setTimeout(() => {
+                inputElement.style.animation = '';
+            }, 500);
+        }
+
+        // Add shake animation CSS if not already present
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes shake {
+                0% { transform: translateX(0); }
+                25% { transform: translateX(10px); }
+                50% { transform: translateX(-10px); }
+                75% { transform: translateX(10px); }
+                100% { transform: translateX(0); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Function to switch between dashboard views
+        function showView(view) {
+            dashboardView.style.display = 'none';
+            driversView.style.display = 'none';
+            addDriverView.style.display = 'none';
+            view.style.display = 'block';
+
+            // Update active state in sidebar
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            if (view === dashboardView) {
+                navDashboard.classList.add('active');
+            } else if (view === driversView) {
+                navDrivers.classList.add('active');
+            } else if (view === addDriverView) {
+                navAddDriver.classList.add('active');
+            }
+        }
         
-        // أحداث التبويبات
+        // Function to load and display drivers
+        function loadDrivers() {
+            driversList.innerHTML = ''; // Clear existing drivers
+            if (driversData.length === 0) {
+                noDriversMessage.style.display = 'block';
+            } else {
+                noDriversMessage.style.display = 'none';
+                driversData.forEach(driver => {
+                    const driverCard = document.createElement('div');
+                    driverCard.className = 'driver-card';
+                    
+                    const statusClass = driver.status === 'active' ? 'status-active' : 'status-pending';
+                    const statusText = driver.status === 'active' ? 'نشط' : 'في انتظار الموافقة';
+                    const avatarSrc = driver.profilePic || `https://ui-avatars.com/api/?name=${encodeURIComponent(driver.name)}&background=0D8ABC&color=fff`;
+
+                    driverCard.innerHTML = `
+                        <div class="driver-header">
+                            <div class="driver-avatar">
+                                <img src="${avatarSrc}" alt="${driver.name}">
+                            </div>
+                            <h3 class="driver-name">${driver.name}</h3>
+                            <div class="driver-id">ID: #${driver.id.toString().padStart(3, '0')}</div>
+                        </div>
+                        <div class="driver-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="detail-text">
+                                    <h4>رقم الهاتف</h4>
+                                    <p>${driver.phone}</p>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="detail-text">
+                                    <h4>حالة السائق</h4>
+                                    <p><span class="status-badge ${statusClass}">${statusText}</span></p>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <div class="detail-text">
+                                    <h4>تاريخ التسجيل</h4>
+                                    <p>${new Date(driver.registrationDate).toLocaleDateString('ar-EG')}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    driversList.appendChild(driverCard);
+                });
+            }
+        }
+        
+        function resetFileNames() {
+            profileFileName.textContent = 'لم يتم رفع أي ملف';
+            idFileName.textContent = 'لم يتم رفع أي ملف';
+            licenseFileName.textContent = 'لم يتم رفع أي ملف';
+            bikeFileName.textContent = 'لم يتم رفع أي ملف';
+            // Clear file inputs
+            profileInput.value = '';
+            idInput.value = '';
+            licenseInput.value = '';
+            bikeInput.value = '';
+        }
+
+        // --- Event Listeners ---
+
+        // Tab switching logic
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
                 tabs.forEach(t => t.classList.remove('active'));
@@ -989,168 +1110,167 @@
                 } else {
                     signupTab.classList.add('active');
                 }
-                
-                // إخفاء رسالة الخطأ عند تغيير التبويب
-                errorMessage.style.display = 'none';
+                hideMessage(errorMessage); // Hide error on tab change
             });
         });
         
         goToSignup.addEventListener('click', (e) => {
             e.preventDefault();
-            tabs.forEach(t => t.classList.remove('active'));
-            document.querySelector('.tab[data-tab="signup"]').classList.add('active');
-            loginTab.classList.remove('active');
-            signupTab.classList.add('active');
-            errorMessage.style.display = 'none';
+            document.querySelector('.tab[data-tab="signup"]').click(); // Simulate click on signup tab
         });
         
         goToLogin.addEventListener('click', (e) => {
             e.preventDefault();
-            tabs.forEach(t => t.classList.remove('active'));
-            document.querySelector('.tab[data-tab="login"]').classList.add('active');
-            signupTab.classList.remove('active');
-            loginTab.classList.add('active');
-            errorMessage.style.display = 'none';
+            document.querySelector('.tab[data-tab="login"]').click(); // Simulate click on login tab
         });
         
-        // أحداث تسجيل الدخول
+        // Login event
         loginBtn.addEventListener('click', () => {
             const username = usernameInput.value.trim();
             const password = passwordInput.value.trim();
             
-            if (username === 'admin' && password === 'admin') {
+            // Check if user exists in localStorage (simulated backend)
+            const user = users.find(u => u.email === username && u.password === password);
+
+            if (user) {
                 loginPage.style.display = 'none';
                 dashboard.style.display = 'block';
-                loadDrivers();
+                loggedInUserName.textContent = user.fullName; // Display logged in user's name
+                showView(dashboardView); // Show dashboard by default
+                loadDrivers(); // Load drivers when logging in
             } else {
-                // إظهار رسالة الخطأ بشكل واضح
-                errorMessage.style.display = 'flex';
-                // هزة للمدخلات لإظهار الخطأ
-                usernameInput.style.animation = 'shake 0.5s';
-                passwordInput.style.animation = 'shake 0.5s';
-                
-                setTimeout(() => {
-                    usernameInput.style.animation = '';
-                    passwordInput.style.animation = '';
-                }, 500);
+                showMessage(errorMessage, 'اسم المستخدم أو كلمة المرور غير صحيحة. الرجاء المحاولة مرة أخرى.');
+                shakeInput(usernameInput);
+                shakeInput(passwordInput);
             }
         });
         
-        // إضافة هزة للمدخلات عند الخطأ
-        const style = document.createElement('style');
-        style.innerHTML = `
-            @keyframes shake {
-                0% { transform: translateX(0); }
-                25% { transform: translateX(10px); }
-                50% { transform: translateX(-10px); }
-                75% { transform: translateX(10px); }
-                100% { transform: translateX(0); }
-            }
-        `;
-        document.head.appendChild(style);
-        
-        // أحداث التسجيل
+        // Signup event
         signupBtn.addEventListener('click', () => {
             const fullName = document.getElementById('fullName').value.trim();
             const email = document.getElementById('email').value.trim();
             const phone = document.getElementById('phoneNumber').value.trim();
-            const password = document.getElementById('newPassword').value.trim();
+            const newPassword = document.getElementById('newPassword').value.trim();
             const confirmPassword = document.getElementById('confirmPassword').value.trim();
             
-            if (!fullName || !email || !phone || !password || !confirmPassword) {
-                errorMessage.querySelector('span').textContent = 'الرجاء ملء جميع الحقول المطلوبة';
-                errorMessage.style.display = 'flex';
+            // Client-side validation
+            if (!fullName || !email || !phone || !newPassword || !confirmPassword) {
+                showMessage(errorMessage, 'الرجاء ملء جميع الحقول المطلوبة.');
+                return;
+            }
+
+            if (!/\S+@\S+\.\S+/.test(email)) {
+                showMessage(errorMessage, 'الرجاء إدخال بريد إلكتروني صحيح.');
+                shakeInput(document.getElementById('email'));
+                return;
+            }
+
+            if (newPassword.length < 6) {
+                showMessage(errorMessage, 'يجب أن لا تقل كلمة المرور عن 6 أحرف.');
+                shakeInput(document.getElementById('newPassword'));
                 return;
             }
             
-            if (password !== confirmPassword) {
-                errorMessage.querySelector('span').textContent = 'كلمتا المرور غير متطابقتين';
-                errorMessage.style.display = 'flex';
+            if (newPassword !== confirmPassword) {
+                showMessage(errorMessage, 'كلمتا المرور غير متطابقتين.');
+                shakeInput(document.getElementById('newPassword'));
+                shakeInput(document.getElementById('confirmPassword'));
+                return;
+            }
+
+            // Check if user already exists
+            if (users.some(u => u.email === email)) {
+                showMessage(errorMessage, 'هذا البريد الإلكتروني مسجل بالفعل. الرجاء تسجيل الدخول أو استخدام بريد إلكتروني آخر.');
+                shakeInput(document.getElementById('email'));
                 return;
             }
             
-            // في الواقع الفعلي، سيتم إرسال البيانات للخادم
-            // هنا سنحاكي نجاح التسجيل
-            alert(`تم إنشاء حساب بنجاح!\nاسم المستخدم: ${email}\nكلمة المرور: ${password}`);
+            // Add new user to simulated storage
+            users.push({
+                fullName,
+                email,
+                phone,
+                password: newPassword // In a real app, hash this password!
+            });
+            saveUsers();
             
-            // الانتقال إلى تسجيل الدخول
-            tabs.forEach(t => t.classList.remove('active'));
-            document.querySelector('.tab[data-tab="login"]').classList.add('active');
-            signupTab.classList.remove('active');
-            loginTab.classList.add('active');
-            errorMessage.style.display = 'none';
+            alert(`تم إنشاء حساب بنجاح!\nيمكنك الآن تسجيل الدخول.`);
             
-            // تعبئة بيانات تسجيل الدخول تلقائياً
+            // Go to login tab and pre-fill credentials
+            document.querySelector('.tab[data-tab="login"]').click();
             usernameInput.value = email;
-            passwordInput.value = password;
+            passwordInput.value = newPassword;
         });
         
-        // أحداث تسجيل الدخول عبر وسائل التواصل
+        // Social login (mock)
         googleLogin.addEventListener('click', () => {
-            alert('سيتم تسجيل الدخول باستخدام حساب Google');
-            // في الواقع الفعلي، سيتم استخدام واجهة Google API
-            // هنا سنحاكي تسجيل الدخول الناجح
+            alert('سيتم محاكاة تسجيل الدخول باستخدام Google. لن يتم تسجيل حساب جديد فعليًا.');
+            // Simulate a successful login with a default user
             loginPage.style.display = 'none';
             dashboard.style.display = 'block';
+            loggedInUserName.textContent = 'مستخدم جوجل';
+            showView(dashboardView);
             loadDrivers();
         });
         
         facebookLogin.addEventListener('click', () => {
-            alert('سيتم تسجيل الدخول باستخدام حساب Facebook');
-            // في الواقع الفعلي، سيتم استخدام واجهة Facebook API
-            // هنا سنحاكي تسجيل الدخول الناجح
+            alert('سيتم محاكاة تسجيل الدخول باستخدام Facebook. لن يتم تسجيل حساب جديد فعليًا.');
+            // Simulate a successful login with a default user
             loginPage.style.display = 'none';
             dashboard.style.display = 'block';
+            loggedInUserName.textContent = 'مستخدم فيسبوك';
+            showView(dashboardView);
             loadDrivers();
         });
         
         phoneLogin.addEventListener('click', () => {
             const phoneNumber = prompt('الرجاء إدخال رقم الهاتف الموريتاني (مثال: +22212345678):');
             if (phoneNumber) {
-                if (phoneNumber.startsWith('+222') && phoneNumber.length === 12) {
+                // Simple validation for Mauritanian phone number format
+                if (/^\+222\d{8}$/.test(phoneNumber)) {
                     alert(`تم إرسال رمز التحقق إلى ${phoneNumber}`);
-                    const code = prompt('الرجاء إدخال رمز التحقق الذي تم إرساله:');
-                    if (code === '1234') { // كود ثابت للعرض
+                    const code = prompt('الرجاء إدخال رمز التحقق الذي تم إرساله (الكود التجريبي: 1234):');
+                    if (code === '1234') { // Fixed code for demo purposes
                         loginPage.style.display = 'none';
                         dashboard.style.display = 'block';
+                        loggedInUserName.textContent = `مستخدم هاتف (${phoneNumber})`;
+                        showView(dashboardView);
                         loadDrivers();
                     } else {
                         alert('رمز التحقق غير صحيح');
                     }
                 } else {
-                    alert('رقم الهاتف غير صالح. الرجاء استخدام تنسيق موريتاني صحيح (+222xxxxxxxx)');
+                    alert('رقم الهاتف غير صالح. الرجاء استخدام تنسيق موريتاني صحيح (+222xxxxxxxx).');
                 }
             }
         });
         
-        // أحداث التنقل
-        navDashboard.addEventListener('click', () => {
-            showView(dashboardView);
-        });
-        
+        // Navigation events
+        navDashboard.addEventListener('click', () => showView(dashboardView));
         navDrivers.addEventListener('click', () => {
             showView(driversView);
             loadDrivers();
         });
-        
         navAddDriver.addEventListener('click', () => {
             showView(addDriverView);
+            hideMessage(successAlert); // Hide previous success message
+            hideMessage(driverFormError); // Hide previous error message
         });
-        
         addDriverBtn.addEventListener('click', () => {
             showView(addDriverView);
+            hideMessage(successAlert);
+            hideMessage(driverFormError);
         });
-        
         startBtn.addEventListener('click', () => {
             showView(driversView);
             loadDrivers();
         });
-        
         cancelBtn.addEventListener('click', () => {
             showView(driversView);
             driverForm.reset();
             resetFileNames();
-            successAlert.style.display = 'none';
+            hideMessage(successAlert);
+            hideMessage(driverFormError);
         });
         
         logoutBtn.addEventListener('click', () => {
@@ -1159,142 +1279,123 @@
                 loginPage.style.display = 'flex';
                 usernameInput.value = '';
                 passwordInput.value = '';
-                showView(dashboardView);
-                // إخفاء رسالة الخطأ عند الخروج
-                errorMessage.style.display = 'none';
+                hideMessage(errorMessage); // Clear any login errors
+                showView(dashboardView); // Reset dashboard view state
             }
         });
         
-        // أحداث رفع الملفات
-        profileUpload.addEventListener('click', () => {
-            profileInput.click();
-        });
-        
+        // File upload event listeners
+        profileUpload.addEventListener('click', () => profileInput.click());
         profileInput.addEventListener('change', () => {
-            if (profileInput.files.length > 0) {
-                profileFileName.textContent = profileInput.files[0].name;
-            } else {
-                profileFileName.textContent = 'لم يتم رفع أي ملف';
-            }
+            profileFileName.textContent = profileInput.files.length > 0 ? profileInput.files[0].name : 'لم يتم رفع أي ملف';
         });
         
-        idUpload.addEventListener('click', () => {
-            idInput.click();
-        });
-        
+        idUpload.addEventListener('click', () => idInput.click());
         idInput.addEventListener('change', () => {
-            if (idInput.files.length > 0) {
-                idFileName.textContent = idInput.files[0].name;
-            } else {
-                idFileName.textContent = 'لم يتم رفع أي ملف';
-            }
+            idFileName.textContent = idInput.files.length > 0 ? idInput.files[0].name : 'لم يتم رفع أي ملف';
         });
         
-        licenseUpload.addEventListener('click', () => {
-            licenseInput.click();
-        });
-        
+        licenseUpload.addEventListener('click', () => licenseInput.click());
         licenseInput.addEventListener('change', () => {
-            if (licenseInput.files.length > 0) {
-                licenseFileName.textContent = licenseInput.files[0].name;
-            } else {
-                licenseFileName.textContent = 'لم يتم رفع أي ملف';
-            }
+            licenseFileName.textContent = licenseInput.files.length > 0 ? licenseInput.files[0].name : 'لم يتم رفع أي ملف';
         });
         
-        bikeUpload.addEventListener('click', () => {
-            bikeInput.click();
-        });
-        
+        bikeUpload.addEventListener('click', () => bikeInput.click());
         bikeInput.addEventListener('change', () => {
-            if (bikeInput.files.length > 0) {
-                bikeFileName.textContent = bikeInput.files[0].name;
-            } else {
-                bikeFileName.textContent = 'لم يتم رفع أي ملف';
-            }
+            bikeFileName.textContent = bikeInput.files.length > 0 ? bikeInput.files[0].name : 'لم يتم رفع أي ملف';
         });
         
-        // حدث إرسال النموذج
+        // Driver form submission
         driverForm.addEventListener('submit', (e) => {
             e.preventDefault();
+            hideMessage(driverFormError); // Hide previous errors
+
+            const driverName = document.getElementById('driverName').value.trim();
+            const driverPhone = document.getElementById('driverPhone').value.trim();
+            const profilePicFile = profileInput.files[0];
+            const idPicFile = idInput.files[0];
+            const licensePicFile = licenseInput.files[0];
+            const bikePicFile = bikeInput.files[0];
+
+            if (!driverName || !driverPhone) {
+                showMessage(driverFormError, 'الرجاء ملء اسم السائق ورقم الهاتف.', 'error');
+                return;
+            }
+
+            // Simple validation for phone number (can be enhanced)
+            if (!/^\+?\d{8,15}$/.test(driverPhone)) { // Basic check for 8-15 digits, optional +
+                showMessage(driverFormError, 'الرجاء إدخال رقم هاتف صالح.', 'error');
+                return;
+            }
+
+            // You might want to enforce file uploads for certain documents
+            if (!profilePicFile) {
+                showMessage(driverFormError, 'الرجاء رفع صورة شخصية للسائق.', 'error');
+                return;
+            }
+            // Add similar checks for ID, License, Bike pics if they are mandatory
+
+            // Simulate file upload by getting a URL for the image
+            const getFileURL = (file) => file ? URL.createObjectURL(file) : '';
+
+            const newDriver = {
+                id: driversData.length > 0 ? Math.max(...driversData.map(d => d.id)) + 1 : 1,
+                name: driverName,
+                phone: driverPhone,
+                profilePic: getFileURL(profilePicFile),
+                idPic: getFileURL(idPicFile),
+                licensePic: getFileURL(licensePicFile),
+                bikePic: getFileURL(bikePicFile),
+                status: "pending", // New drivers start as pending
+                registrationDate: new Date().toISOString()
+            };
             
-            // هنا يتم إرسال البيانات إلى الخادم أو حفظها محلياً
-            // في هذا المثال، سنظهر رسالة نجاح فقط
+            driversData.push(newDriver);
+            saveDrivers(); // Save updated drivers array to localStorage
+
+            showMessage(successAlert, 'تم إضافة السائق بنجاح إلى قاعدة البيانات.', 'success');
+            successAlert.style.display = 'flex'; // Ensure it's shown
             
-            successAlert.style.display = 'flex';
             setTimeout(() => {
-                successAlert.style.display = 'none';
-                showView(driversView);
-                driverForm.reset();
-                resetFileNames();
-                loadDrivers();
-            }, 3000);
+                hideMessage(successAlert);
+                showView(driversView); // Go back to drivers list
+                driverForm.reset(); // Clear the form
+                resetFileNames(); // Clear file names
+                loadDrivers(); // Reload drivers list to show the new one
+            }, 3000); // Hide after 3 seconds and navigate
         });
-        
-        // وظائف مساعدة
-        function showView(view) {
-            dashboardView.style.display = 'none';
-            driversView.style.display = 'none';
-            addDriverView.style.display = 'none';
-            view.style.display = 'block';
-        }
-        
-        function loadDrivers() {
-            driversList.innerHTML = '';
-            
-            driversData.forEach(driver => {
-                const driverCard = document.createElement('div');
-                driverCard.className = 'driver-card';
-                
-                driverCard.innerHTML = `
-                    <div class="driver-header">
-                        <div class="driver-avatar">
-                            <img src="${driver.profilePic}" alt="${driver.name}">
-                        </div>
-                        <h3 class="driver-name">${driver.name}</h3>
-                        <div class="driver-id">ID: #${driver.id.toString().padStart(3, '0')}</div>
-                    </div>
-                    <div class="driver-details">
-                        <div class="detail-item">
-                            <div class="detail-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div class="detail-text">
-                                <h4>رقم الهاتف</h4>
-                                <p>${driver.phone}</p>
-                            </div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-icon">
-                                <i class="fas fa-check-circle"></i>
-                            </div>
-                            <div class="detail-text">
-                                <h4>حالة السائق</h4>
-                                <p><span class="status-badge status-active">${driver.status === 'active' ? 'نشط' : 'في انتظار الموافقة'}</span></p>
-                            </div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-icon">
-                                <i class="fas fa-calendar-alt"></i>
-                            </div>
-                            <div class="detail-text">
-                                <h4>تاريخ التسجيل</h4>
-                                <p>${new Date().toLocaleDateString('ar-EG')}</p>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                
-                driversList.appendChild(driverCard);
-            });
-        }
-        
-        function resetFileNames() {
-            profileFileName.textContent = 'لم يتم رفع أي ملف';
-            idFileName.textContent = 'لم يتم رفع أي ملف';
-            licenseFileName.textContent = 'لم يتم رفع أي ملف';
-            bikeFileName.textContent = 'لم يتم رفع أي ملف';
-        }
+
+        // Initial load (if logged in, which we can simulate after refresh if needed)
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if there's a logged-in user simulation
+            const currentUser = localStorage.getItem('currentUser');
+            if (currentUser) {
+                loginPage.style.display = 'none';
+                dashboard.style.display = 'block';
+                loggedInUserName.textContent = currentUser;
+                showView(dashboardView);
+                loadDrivers();
+            } else {
+                loginPage.style.display = 'flex';
+                dashboard.style.display = 'none';
+            }
+        });
+
+        // Store current user on successful login (for refresh persistence)
+        loginBtn.addEventListener('click', () => {
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+            const user = users.find(u => u.email === username && u.password === password);
+            if (user) {
+                localStorage.setItem('currentUser', user.fullName);
+            }
+            // ... rest of login logic
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('currentUser'); // Clear logged-in user
+            // ... rest of logout logic
+        });
     </script>
 </body>
 </html>
