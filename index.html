@@ -3,85 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-lang-key="pageTitle">نظام إدارة سائقي الدراجات للتوصيل</title>
+    <title>نظام إدارة سائقي الدراجات للتوصيل</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #3499db; /* Adjusted primary color */
-            --secondary: #27ae60; /* Adjusted secondary color */
+            --primary: #3499db; /* Slightly adjusted primary color for better contrast */
+            --secondary: #27ae60; /* Adjusted secondary for better green */
             --danger: #e74c3c;
             --warning: #f39c12;
             --dark: #2c3e50;
             --light: #ecf0f1;
             --gray: #95a5a6;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
             --google: #DB4437;
             --facebook: #4267B2;
             --phone: #25D366;
-            --border-radius: 8px;
+            --border-radius: 8px; /* Consistent border-radius variable */
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
         body {
             background-color: #f5f7fa;
             color: #333;
             line-height: 1.6;
-            overflow-x: hidden;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
-
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
-
+        
         /* Header */
         header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 15px 0;
+            padding: 15px 0; /* Slightly less padding */
             box-shadow: var(--shadow);
             position: sticky;
             top: 0;
             z-index: 100;
         }
-
+        
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 20px;
-            flex-wrap: wrap;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
         }
-
+        
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 12px; /* Slightly less gap */
         }
-
+        
         .logo i {
-            font-size: 2rem;
+            font-size: 2rem; /* Slightly smaller icon */
         }
-
+        
         .logo h1 {
-            font-size: 1.6rem;
+            font-size: 1.6rem; /* Slightly smaller heading */
             margin: 0;
         }
-
+        
         .user-info {
             position: relative;
             display: flex;
             align-items: center;
             gap: 10px;
             background: rgba(255, 255, 255, 0.2);
-            padding: 6px 12px;
+            padding: 6px 12px; /* Slightly less padding */
             border-radius: 30px;
             cursor: pointer;
             transition: background 0.3s;
@@ -90,9 +90,9 @@
         .user-info:hover {
             background: rgba(255, 255, 255, 0.3);
         }
-
+        
         .user-info img {
-            width: 36px;
+            width: 36px; /* Slightly smaller avatar */
             height: 36px;
             border-radius: 50%;
             object-fit: cover;
@@ -101,7 +101,7 @@
 
         .dropdown-menu {
             position: absolute;
-            top: calc(100% + 10px);
+            top: calc(100% + 10px); /* Position below the user-info with a gap */
             right: 0;
             background: white;
             border-radius: var(--border-radius);
@@ -125,12 +125,12 @@
             align-items: center;
             gap: 10px;
             width: 100%;
-            padding: 10px 18px;
+            padding: 10px 18px; /* Slightly less padding */
             background: none;
             border: none;
             text-align: right;
             cursor: pointer;
-            font-size: 0.95rem;
+            font-size: 0.95rem; /* Slightly smaller font */
             color: var(--dark);
             transition: background 0.2s, color 0.2s;
         }
@@ -144,47 +144,7 @@
             width: 20px;
             text-align: center;
         }
-
-        /* Language Selector */
-        .language-selector {
-            position: relative;
-            margin-right: 20px; /* Adjust as needed */
-            z-index: 101;
-        }
-        .language-selector select {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            padding: 8px 12px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            appearance: none; /* Remove default dropdown arrow */
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            position: relative;
-            padding-right: 30px; /* Space for custom arrow */
-            transition: background 0.3s;
-        }
-        .language-selector select:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-        .language-selector select:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
-        }
-        .language-selector::after {
-            content: '\f0d7'; /* FontAwesome caret-down icon */
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: white;
-            pointer-events: none;
-        }
-
+        
         /* Login Page */
         .login-container {
             display: flex;
@@ -193,9 +153,9 @@
             min-height: 100vh;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             padding: 20px;
-            animation: backgroundFadeIn 1s ease-out;
+            animation: backgroundFadeIn 1s ease-out; /* Added animation */
         }
-
+        
         @keyframes backgroundFadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -206,121 +166,118 @@
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
             width: 100%;
-            max-width: 400px; /* Adjusted max-width to match images */
-            padding: 35px;
+            max-width: 480px; /* Slightly narrower */
+            padding: 35px; /* Slightly less padding */
             text-align: center;
         }
-
+        
         .login-box h2 {
-            margin-bottom: 25px;
+            margin-bottom: 25px; /* Slightly less margin */
             color: var(--dark);
-            font-size: 1.7rem;
+            font-size: 1.7rem; /* Slightly smaller heading */
         }
-
+        
         .tabs {
             display: flex;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #eee; /* Thicker border to match images */
+            margin-bottom: 20px; /* Slightly less margin */
+            border-bottom: 1px solid #eee;
         }
-
+        
         .tab {
             flex: 1;
-            padding: 12px 0; /* Adjusted padding */
+            padding: 10px 0; /* Slightly less padding */
             text-align: center;
             cursor: pointer;
             font-weight: 500;
             color: #777;
             transition: all 0.3s;
             position: relative;
-            font-size: 1rem; /* Adjusted font size */
         }
-
+        
         .tab.active {
             color: var(--primary);
             font-weight: 600;
         }
-
+        
         .tab.active::after {
             content: '';
             position: absolute;
-            bottom: -2px; /* Adjusted bottom position */
+            bottom: -1px;
             left: 0;
             width: 100%;
             height: 3px;
             background: var(--primary);
             border-radius: 3px;
         }
-
+        
         .tab-content {
             display: none;
-            padding-top: 20px; /* Added padding above content */
-            animation: fadeIn 0.5s ease-out;
+            animation: fadeIn 0.5s ease-out; /* Added animation */
         }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
+        
         .tab-content.active {
             display: block;
         }
-
+        
         .input-group {
-            margin-bottom: 20px; /* Adjusted margin */
+            margin-bottom: 18px; /* Slightly less margin */
             text-align: right;
         }
-
+        
         .input-group label {
             display: block;
-            margin-bottom: 7px;
+            margin-bottom: 7px; /* Slightly less margin */
             font-weight: 500;
             color: var(--dark);
-            font-size: 1rem; /* Adjusted font size */
+            font-size: 0.95rem;
         }
-
+        
         .input-group input, .input-group select {
             width: 100%;
-            padding: 12px 16px; /* Adjusted padding */
-            border: 1px solid #ccc; /* Darker border */
-            border-radius: 5px; /* Adjusted border-radius */
-            font-size: 1rem;
-            transition: border-color 0.3s, box-shadow 0.3s;
+            padding: 11px 14px; /* Slightly less padding */
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 0.95rem;
+            transition: border-color 0.3s, box-shadow 0.3s; /* Added box-shadow transition */
         }
-
+        
         .input-group input:focus, .input-group select:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(52, 153, 219, 0.2);
+            box-shadow: 0 0 0 3px rgba(52, 153, 219, 0.2); /* Added subtle focus shadow */
         }
-
+        
         .btn {
-            display: block; /* Make buttons full width */
+            display: inline-block;
             background: var(--primary);
             color: white;
-            padding: 12px 28px; /* Adjusted padding */
+            padding: 11px 28px; /* Slightly less padding */
             border: none;
-            border-radius: 5px; /* Adjusted border-radius */
+            border-radius: var(--border-radius);
             cursor: pointer;
-            font-size: 1.1rem; /* Adjusted font size */
+            font-size: 1rem;
             font-weight: 600;
             transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
-            margin-top: 20px; /* Adjusted margin */
+            margin-top: 8px; /* Slightly less margin */
             width: 100%;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            text-align: center; /* Ensure text is centered */
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Added subtle button shadow */
         }
-
+        
         .btn:hover {
             background: #2980b9;
-            transform: translateY(-1px);
-            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
         }
-
+        
         .btn-secondary {
             background: var(--secondary);
         }
-
+        
         .btn-secondary:hover {
             background: #27ae60;
         }
@@ -332,47 +289,45 @@
         .btn-danger:hover {
             background: #c0392b;
         }
-
+        
         .social-login {
-            margin-top: 25px; /* Adjusted margin */
+            margin-top: 20px; /* Slightly less margin */
         }
-
+        
         .social-login p {
             position: relative;
-            margin: 20px 0; /* Adjusted margin */
+            margin: 18px 0; /* Slightly less margin */
             color: #777;
-            font-size: 1rem; /* Adjusted font size */
         }
-
+        
         .social-login p::before,
         .social-login p::after {
             content: '';
             position: absolute;
             top: 50%;
-            width: 35%; /* Adjusted width */
+            width: 30%;
             height: 1px;
             background: #ddd;
         }
-
+        
         .social-login p::before {
             left: 0;
         }
-
+        
         .social-login p::after {
             right: 0;
         }
-
+        
         .social-buttons {
             display: flex;
-            flex-direction: column; /* Stack buttons vertically */
-            gap: 10px; /* Adjusted gap */
-            margin-top: 20px; /* Adjusted margin */
+            gap: 12px; /* Slightly less gap */
+            margin-top: 18px; /* Slightly less margin */
         }
-
+        
         .social-btn {
-            flex-direction: row; /* Align icon and text in a row */
-            padding: 12px; /* Adjusted padding */
-            border-radius: 5px; /* Adjusted border-radius */
+            flex: 1;
+            padding: 10px; /* Slightly less padding */
+            border-radius: var(--border-radius);
             border: none;
             color: white;
             font-weight: 500;
@@ -381,56 +336,52 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px; /* Adjusted gap */
-            font-size: 1rem; /* Adjusted font size */
+            gap: 8px;
+            font-size: 0.95rem;
         }
-
-        .social-btn i {
-            font-size: 1.2rem; /* Adjusted icon size */
-        }
-
+        
         .social-btn.google {
             background: var(--google);
         }
-
+        
         .social-btn.facebook {
             background: var(--facebook);
         }
-
+        
         .social-btn.phone {
             background: var(--phone);
         }
-
+        
         .social-btn:hover {
             opacity: 0.9;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
         }
-
+        
         .error-message {
             background: #fce4e4;
             color: var(--danger);
-            padding: 12px;
+            padding: 10px; /* Slightly less padding */
             border-radius: var(--border-radius);
-            margin-bottom: 20px; /* Adjusted margin */
+            margin-bottom: 18px; /* Slightly less margin */
             display: flex;
             align-items: center;
             gap: 10px;
             font-size: 0.95rem;
             display: none;
-            animation: shake 0.5s;
+            animation: shake 0.5s; /* Add shake animation to error message itself */
         }
-
+        
         .error-message i {
-            font-size: 1.1rem;
+            font-size: 1.1rem; /* Slightly smaller icon */
         }
-
+        
         .forgot-link {
             display: block;
             text-align: center;
-            margin-top: 20px; /* Adjusted margin */
+            margin-top: 15px;
             color: var(--primary);
             text-decoration: none;
-            font-size: 1rem; /* Adjusted font size */
+            font-size: 0.95rem;
             transition: color 0.3s;
         }
 
@@ -438,14 +389,14 @@
             color: #2980b9;
             text-decoration: underline;
         }
-
+        
         .signup-link {
-            margin-top: 25px; /* Adjusted margin */
+            margin-top: 18px; /* Slightly less margin */
             text-align: center;
             color: #777;
-            font-size: 1rem; /* Adjusted font size */
+            font-size: 0.95rem;
         }
-
+        
         .signup-link a {
             color: var(--primary);
             text-decoration: none;
@@ -457,15 +408,15 @@
             color: #2980b9;
             text-decoration: underline;
         }
-
+        
         /* Dashboard */
         .dashboard {
             display: grid;
             grid-template-columns: 250px 1fr;
             gap: 20px;
-            margin-top: 25px;
+            margin-top: 25px; /* Slightly less margin */
         }
-
+        
         /* Sidebar */
         .sidebar {
             background: white;
@@ -474,37 +425,37 @@
             padding: 20px;
             height: fit-content;
         }
-
+        
         .sidebar h3 {
-            margin-bottom: 18px;
+            margin-bottom: 18px; /* Slightly less margin */
             color: var(--dark);
             padding-bottom: 10px;
             border-bottom: 1px solid #eee;
             font-size: 1.2rem;
         }
-
+        
         .nav-item {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 10px 15px;
+            padding: 10px 15px; /* Slightly less padding */
             border-radius: var(--border-radius);
             margin-bottom: 5px;
             cursor: pointer;
             transition: background 0.3s, color 0.3s;
             color: #555;
-            text-decoration: none;
+            text-decoration: none; /* For the support link */
         }
-
+        
         .nav-item:hover, .nav-item.active {
             background: #f0f7ff;
             color: var(--primary);
         }
-
+        
         .nav-item i {
-            font-size: 1.1rem;
+            font-size: 1.1rem; /* Slightly smaller icon */
         }
-
+        
         /* Main Content */
         .main-content {
             background: white;
@@ -512,17 +463,17 @@
             box-shadow: var(--shadow);
             padding: 25px;
         }
-
+        
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 20px; /* Slightly less margin */
             padding-bottom: 15px;
             border-bottom: 1px solid #eee;
-            flex-wrap: wrap;
+            flex-wrap: wrap; /* Allow wrapping */
         }
-
+        
         .section-header h2 {
             color: var(--dark);
             font-size: 1.5rem;
@@ -530,32 +481,32 @@
             align-items: center;
             gap: 10px;
         }
-
+        
         .add-driver-btn {
             display: flex;
             align-items: center;
             gap: 8px;
             background: var(--secondary);
             color: white;
-            padding: 9px 18px;
+            padding: 9px 18px; /* Slightly less padding */
             border-radius: var(--border-radius);
             cursor: pointer;
             transition: background 0.3s, transform 0.2s;
             font-size: 0.95rem;
         }
-
+        
         .add-driver-btn:hover {
             background: #27ae60;
             transform: translateY(-2px);
         }
-
+        
         /* Driver Cards */
         .drivers-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); /* Slightly smaller cards */
+            gap: 18px; /* Slightly less gap */
         }
-
+        
         .driver-card {
             background: white;
             border-radius: var(--border-radius);
@@ -567,32 +518,32 @@
             flex-direction: column;
             justify-content: space-between;
         }
-
+        
         .driver-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
         }
-
+        
         .driver-header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            padding: 18px;
+            padding: 18px; /* Slightly less padding */
             text-align: center;
             color: white;
-            position: relative;
+            position: relative; /* For the status badge */
         }
-
+        
         .driver-avatar {
-            width: 90px;
+            width: 90px; /* Slightly smaller avatar */
             height: 90px;
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid white;
-            margin: 0 auto 12px;
+            margin: 0 auto 12px; /* Slightly less margin */
             background: #f0f0f0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.2rem;
+            font-size: 2.2rem; /* Adjusted font size */
             color: var(--gray);
             overflow: hidden;
         }
@@ -602,32 +553,32 @@
             height: 100%;
             object-fit: cover;
         }
-
+        
         .driver-name {
-            font-size: 1.3rem;
+            font-size: 1.3rem; /* Slightly smaller name */
             font-weight: 600;
             margin-bottom: 5px;
         }
-
+        
         .driver-id {
-            font-size: 0.85rem;
+            font-size: 0.85rem; /* Slightly smaller ID */
             opacity: 0.9;
         }
-
+        
         .driver-details {
-            padding: 18px;
+            padding: 18px; /* Slightly less padding */
             flex-grow: 1;
         }
-
+        
         .detail-item {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 12px;
+            margin-bottom: 12px; /* Slightly less margin */
             padding-bottom: 12px;
             border-bottom: 1px solid #f0f0f0;
         }
-
+        
         .detail-item:last-child {
             margin-bottom: 0;
             padding-bottom: 0;
@@ -635,41 +586,41 @@
         }
 
         .detail-icon {
-            width: 36px;
+            width: 36px; /* Slightly smaller icon */
             height: 36px;
             border-radius: 50%;
-            background: #e6f2ff;
+            background: #e6f2ff; /* Lighter background for icons */
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--primary);
             font-size: 0.9rem;
         }
-
+        
         .detail-text h4 {
-            font-size: 0.85rem;
+            font-size: 0.85rem; /* Slightly smaller label */
             color: #777;
             margin-bottom: 2px;
         }
-
+        
         .detail-text p {
             font-weight: 500;
             color: var(--dark);
             font-size: 0.9rem;
         }
-
+        
         .status-badge {
             display: inline-block;
-            padding: 4px 9px;
+            padding: 4px 9px; /* Slightly less padding */
             border-radius: 20px;
-            font-size: 0.75rem;
+            font-size: 0.75rem; /* Slightly smaller font */
             font-weight: 500;
-            position: absolute;
+            position: absolute; /* Position badge in header */
             top: 10px;
             left: 10px;
             z-index: 10;
         }
-
+        
         .status-active {
             background: #d4f8e8;
             color: #27ae60;
@@ -682,15 +633,15 @@
 
         .driver-card .delete-driver-btn {
             display: block;
-            width: calc(100% - 30px);
-            margin: 15px;
-            padding: 9px 15px;
+            width: calc(100% - 30px); /* Adjusted width */
+            margin: 15px; /* Adjusted margin */
+            padding: 9px 15px; /* Adjusted padding */
             background: var(--danger);
             color: white;
             border: none;
             border-radius: var(--border-radius);
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.9rem; /* Slightly smaller font */
             font-weight: 600;
             transition: background 0.3s, transform 0.2s;
             text-align: center;
@@ -700,30 +651,30 @@
             background: #c0392b;
             transform: translateY(-2px);
         }
-
+        
         /* Add Driver / Settings Form */
         .form-container {
-            max-width: 650px;
+            max-width: 650px; /* Slightly narrower */
             margin: 0 auto;
         }
-
+        
         .form-title {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 25px; /* Slightly less margin */
             color: var(--dark);
         }
-
+        
         .form-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 18px;
-            margin-bottom: 18px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Slightly smaller min-width */
+            gap: 18px; /* Slightly less gap */
+            margin-bottom: 18px; /* Slightly less margin */
         }
-
+        
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 18px; /* Consistent margin */
         }
-
+        
         .form-group label {
             display: block;
             margin-bottom: 7px;
@@ -731,7 +682,7 @@
             color: var(--dark);
             font-size: 0.95rem;
         }
-
+        
         .form-group input, .form-group select {
             width: 100%;
             padding: 11px 14px;
@@ -740,46 +691,46 @@
             font-size: 0.95rem;
             transition: border-color 0.3s, box-shadow 0.3s;
         }
-
+        
         .form-group input:focus, .form-group select:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(52, 153, 219, 0.2);
         }
-
+        
         .file-upload {
             border: 2px dashed #ddd;
             border-radius: var(--border-radius);
-            padding: 20px;
+            padding: 20px; /* Slightly less padding */
             text-align: center;
             cursor: pointer;
             transition: border-color 0.3s, background 0.3s;
             background: #fafafa;
         }
-
+        
         .file-upload:hover {
             border-color: var(--primary);
             background: #f0f7ff;
         }
-
+        
         .file-upload i {
-            font-size: 2.8rem;
+            font-size: 2.8rem; /* Slightly smaller icon */
             color: var(--gray);
-            margin-bottom: 12px;
+            margin-bottom: 12px; /* Slightly less margin */
         }
-
+        
         .file-upload p {
             color: #777;
-            margin-bottom: 8px;
+            margin-bottom: 8px; /* Slightly less margin */
             font-size: 0.9rem;
         }
-
+        
         .file-name {
             color: var(--primary);
             font-weight: 500;
             font-size: 0.85rem;
-            display: block;
-            word-wrap: break-word;
+            display: block; /* Ensure it takes its own line */
+            word-wrap: break-word; /* Prevents long file names from overflowing */
         }
 
         /* Profile settings specific styles */
@@ -787,16 +738,16 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 25px; /* Slightly less margin */
         }
 
         #profileSettingsForm .profile-settings-avatar {
-            width: 110px;
+            width: 110px; /* Slightly smaller avatar */
             height: 110px;
             border-radius: 50%;
             object-fit: cover;
             border: 4px solid var(--primary);
-            margin-bottom: 12px;
+            margin-bottom: 12px; /* Slightly less margin */
             cursor: pointer;
             transition: border-color 0.3s, transform 0.2s;
         }
@@ -817,59 +768,59 @@
         #profileSettingsForm .profile-settings-avatar-text:hover {
             color: #2980b9;
         }
-
+        
         .btn-group {
             display: flex;
             gap: 15px;
-            margin-top: 25px;
-            justify-content: flex-end;
+            margin-top: 25px; /* Slightly less margin */
+            justify-content: flex-end; /* Align buttons to the right */
         }
 
         .btn-group .btn {
-            width: auto;
-            min-width: 120px;
+            width: auto; /* Allow buttons to size based on content */
+            min-width: 120px; /* Ensure a minimum width for buttons */
         }
-
+        
         /* Welcome message */
         .welcome-message {
             text-align: center;
-            padding: 40px 20px;
+            padding: 40px 20px; /* Slightly less padding */
             background: white;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
         }
-
+        
         .welcome-message i {
-            font-size: 3.5rem;
+            font-size: 3.5rem; /* Slightly smaller icon */
             color: var(--primary);
-            margin-bottom: 18px;
+            margin-bottom: 18px; /* Slightly less margin */
         }
-
+        
         .welcome-message h2 {
-            font-size: 1.8rem;
-            margin-bottom: 12px;
+            font-size: 1.8rem; /* Slightly smaller heading */
+            margin-bottom: 12px; /* Slightly less margin */
             color: var(--dark);
         }
-
+        
         .welcome-message p {
             color: #666;
-            max-width: 550px;
-            margin: 0 auto 25px;
+            max-width: 550px; /* Slightly narrower */
+            margin: 0 auto 25px; /* Slightly less margin */
             line-height: 1.7;
             font-size: 0.95rem;
         }
-
+        
         /* Alert messages */
         .alert {
-            padding: 12px;
+            padding: 12px; /* Slightly less padding */
             border-radius: var(--border-radius);
-            margin-bottom: 18px;
+            margin-bottom: 18px; /* Slightly less margin */
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 12px; /* Slightly less gap */
             font-size: 0.95rem;
         }
-
+        
         .alert-success {
             background: #d4f8e8;
             color: #27ae60;
@@ -881,39 +832,36 @@
             color: var(--danger);
             border: 1px solid #f0a0a0;
         }
-
+        
         /* Responsive design */
         @media (max-width: 768px) {
             .dashboard {
                 grid-template-columns: 1fr;
             }
-
+            
             .form-row {
                 grid-template-columns: 1fr;
             }
-
+            
             .header-content {
                 flex-direction: column;
                 gap: 15px;
                 text-align: center;
             }
 
-            .logo, .user-info, .language-selector {
+            .logo, .user-info {
                 width: 100%;
                 justify-content: center;
-            }
-            .language-selector {
-                margin-right: 0; /* Remove right margin on small screens */
             }
 
             .user-info {
                 margin-top: 10px;
             }
-
+            
             .social-buttons {
                 flex-direction: column;
             }
-
+            
             .login-box {
                 padding: 30px 20px;
             }
@@ -958,1175 +906,1004 @@
             75% { transform: translateX(5px); }
             100% { transform: translateX(0); }
         }
-
-        /* Verification Styles (Hidden by default now) */
-        .verification-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            padding: 30px;
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .verification-container h3 {
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .verification-container p {
-            color: #777;
-            margin-bottom: 20px;
-        }
-
-        .verification-container .input-group {
-            width: 80%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .verification-container .btn {
-            margin-top: 10px;
-        }
     </style>
 </head>
 <body>
     <div id="loginPage" class="login-container">
         <div class="login-box">
             <i class="fas fa-bicycle fa-3x" style="color: var(--primary); margin-bottom: 20px;"></i>
-            <h2 data-lang-key="systemTitle">نظام إدارة سائقي الدراجات</h2>
-
+            <h2>نظام إدارة سائقي الدراجات</h2>
+            
             <div class="tabs">
-                <div class="tab active" data-tab="login" data-lang-key="loginTab">تسجيل الدخول</div>
-                <div class="tab" data-tab="signup" data-lang-key="signupTab">إنشاء حساب</div>
+                <div class="tab active" data-tab="login">تسجيل الدخول</div>
+                <div class="tab" data-tab="signup">إنشاء حساب</div>
             </div>
-
+            
             <div class="error-message" id="errorMessage">
                 <i class="fas fa-exclamation-circle"></i>
                 <span id="errorMessageText"></span>
             </div>
-
+            
             <div class="tab-content active" id="loginTab">
                 <div class="input-group">
-                    <label for="username" data-lang-key="usernameOrEmailLabel">اسم المستخدم أو البريد الإلكتروني</label>
-                    <input type="text" id="username" data-lang-key="usernameOrEmailPlaceholder" placeholder="أدخل اسم المستخدم أو البريد الإلكتروني">
+                    <label for="username">اسم المستخدم أو البريد الإلكتروني</label>
+                    <input type="text" id="username" placeholder="أدخل اسم المستخدم أو البريد الإلكتروني">
                 </div>
-
+                
                 <div class="input-group">
-                    <label for="password" data-lang-key="passwordLabel">كلمة المرور</label>
-                    <input type="password" id="password" data-lang-key="passwordPlaceholder" placeholder="أدخل كلمة المرور">
+                    <label for="password">كلمة المرور</label>
+                    <input type="password" id="password" placeholder="أدخل كلمة المرور">
                 </div>
-
-                <button id="loginBtn" class="btn" data-lang-key="loginButton">تسجيل الدخول</button>
-
-                <a href="#" class="forgot-link" data-lang-key="forgotPasswordLink">نسيت كلمة المرور؟</a>
-
+                
+                <button id="loginBtn" class="btn">تسجيل الدخول</button>
+                
+                <a href="#" class="forgot-link">نسيت كلمة المرور؟</a>
+                
                 <div class="social-login">
-                    <p data-lang-key="orLoginWith">أو تسجيل الدخول باستخدام</p>
+                    <p>أو تسجيل الدخول باستخدام</p>
                     <div class="social-buttons">
                         <button class="social-btn google" id="googleLogin">
-                            <i class="fab fa-google"></i> <span data-lang-key="googleButton">Google</span>
+                            <i class="fab fa-google"></i> Google
                         </button>
                         <button class="social-btn facebook" id="facebookLogin">
-                            <i class="fab fa-facebook-f"></i> <span data-lang-key="facebookButton">Facebook</span>
+                            <i class="fab fa-facebook-f"></i> Facebook
                         </button>
                         <button class="social-btn phone" id="phoneLogin">
-                            <i class="fas fa-phone"></i> <span data-lang-key="phoneButton">الهاتف</span>
+                            <i class="fas fa-phone"></i> الهاتف
                         </button>
                     </div>
                 </div>
-
+                
                 <div class="signup-link">
-                    <span data-lang-key="noAccountYet">ليس لديك حساب؟</span> <a href="#" id="goToSignup" data-lang-key="createAccountLink">إنشاء حساب جديد</a>
+                    ليس لديك حساب؟ <a href="#" id="goToSignup">إنشاء حساب جديد</a>
                 </div>
             </div>
-
+            
             <div class="tab-content" id="signupTab">
                 <div class="input-group">
-                    <label for="signupUsername" data-lang-key="usernameLabel">اسم المستخدم</label>
-                    <input type="text" id="signupUsername" data-lang-key="usernamePlaceholder" placeholder="أدخل اسم المستخدم">
+                    <label for="fullName">الاسم الكامل</label>
+                    <input type="text" id="fullName" placeholder="أدخل الاسم الكامل">
                 </div>
-
-                <div class="input-group">
-                    <label for="signupEmail" data-lang-key="emailLabel">البريد الإلكتروني</label>
-                    <input type="email" id="signupEmail" data-lang-key="emailPlaceholder" placeholder="أدخل بريدك الإلكتروني">
-                </div>
-
-                <div class="input-group">
-                    <label for="signupPhone" data-lang-key="phoneLabel">رقم الهاتف</label>
-                    <input type="tel" id="signupPhone" data-lang-key="phonePlaceholder" placeholder="أدخل رقم الهاتف (اختياري)">
-                </div>
-
-                <div class="input-group">
-                    <label for="signupPassword" data-lang-key="passwordLabel">كلمة المرور</label>
-                    <input type="password" id="signupPassword" data-lang-key="passwordPlaceholder" placeholder="أدخل كلمة المرور">
-                </div>
-
-                <div class="input-group">
-                    <label for="confirmPassword" data-lang-key="confirmPasswordLabel">تأكيد كلمة المرور</label>
-                    <input type="password" id="confirmPassword" data-lang-key="confirmPasswordPlaceholder" placeholder="أعد إدخال كلمة المرور">
-                </div>
-
-                <div class="input-group">
-                    <label for="accountType" data-lang-key="accountTypeLabel">نوع الحساب</label>
-                    <select id="accountType">
-                        <option value="manager" data-lang-key="managerOption">مدير</option>
-                        <option value="driver" data-lang-key="driverOption">سائق</option>
-                    </select>
-                </div>
-
-                <button id="signupBtn" class="btn btn-secondary" data-lang-key="signupButton">إنشاء حساب</button>
-            </div>
-        </div>
-    </div>
-
-    <header id="mainHeader" style="display: none;">
-        <div class="header-content container">
-            <div class="logo">
-                <i class="fas fa-bicycle"></i>
-                <h1 data-lang-key="systemTitleHeader">نظام إدارة سائقي الدراجات</h1>
-            </div>
-            <div class="language-selector">
-                <select id="languageSelect">
-                    <option value="ar">العربية</option>
-                    <option value="fr">Français</option>
-                    <option value="en">English</option>
-                </select>
-            </div>
-            <div class="user-info" id="userInfo">
-                <img src="https://via.placeholder.com/36/3499db/FFFFFF?text=A" alt="User Avatar">
-                <span id="loggedInUsername" data-lang-key="adminUser">المسؤول</span>
-                <i class="fas fa-angle-down"></i>
-                <div class="dropdown-menu" id="userDropdown">
-                    <button id="profileSettingsBtn" data-lang-key="profileSettingsButton"><i class="fas fa-user-cog"></i> إعدادات الملف الشخصي</button>
-                    <button id="logoutBtn" data-lang-key="logoutButton"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</button>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <div id="dashboardPage" class="container" style="display: none;">
-        <div class="dashboard">
-            <aside class="sidebar">
-                <h3 data-lang-key="dashboardNavigation">لوحة القيادة</h3>
-                <nav>
-                    <ul>
-                        <li><a href="#" class="nav-item active" data-section="overview" data-lang-key="overviewNav"><i class="fas fa-tachometer-alt"></i> نظرة عامة</a></li>
-                        <li><a href="#" class="nav-item" data-section="drivers" data-lang-key="driversNav"><i class="fas fa-motorcycle"></i> إدارة السائقين</a></li>
-                        <li><a href="#" class="nav-item" data-section="orders" data-lang-key="ordersNav"><i class="fas fa-box"></i> إدارة الطلبات</a></li>
-                        <li><a href="#" class="nav-item" data-section="reports" data-lang-key="reportsNav"><i class="fas fa-chart-line"></i> التقارير</a></li>
-                        <li><a href="#" class="nav-item" data-section="settings" data-lang-key="settingsNav"><i class="fas fa-cogs"></i> الإعدادات</a></li>
-                    </ul>
-                </nav>
-            </aside>
-
-            <main class="main-content">
-                <section id="overviewSection" class="active">
-                    <div class="welcome-message">
-                        <i class="fas fa-smile-beam"></i>
-                        <h2 data-lang-key="welcomeTitle">مرحباً بك!</h2>
-                        <p data-lang-key="welcomeMessage">مرحباً بك في لوحة تحكم إدارة السائقين الخاصة بك. يمكنك هنا إدارة السائقين والطلبات والوصول إلى التقارير الشاملة لتحسين عمليات التوصيل.</p>
-                        <button class="btn btn-secondary" id="overviewAddDriverBtn" data-lang-key="addDriverNow">ابدأ بإضافة سائق جديد</button>
-                    </div>
-                </section>
-
-                <section id="driversSection" style="display:none;">
-                    <div class="section-header">
-                        <h2 data-lang-key="driversListTitle"><i class="fas fa-motorcycle"></i> قائمة السائقين</h2>
-                        <button class="add-driver-btn" id="showAddDriverFormBtn" data-lang-key="addNewDriverButton">
-                            <i class="fas fa-plus-circle"></i> إضافة سائق جديد
-                        </button>
-                    </div>
-                    <div class="drivers-grid" id="driversGrid">
-                        </div>
-                </section>
-
-                <section id="addDriverSection" style="display:none;">
-                    <div class="form-container">
-                        <h2 class="form-title" data-lang-key="addDriverTitle">إضافة سائق جديد</h2>
-                        <form id="addDriverForm">
-                            <div class="alert alert-error" id="addDriverError" style="display:none;"><i class="fas fa-exclamation-circle"></i> <span id="addDriverErrorText"></span></div>
-                            <div class="alert alert-success" id="addDriverSuccess" style="display:none;"><i class="fas fa-check-circle"></i> <span id="addDriverSuccessText"></span></div>
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="driverName" data-lang-key="fullNameLabel">الاسم الكامل</label>
-                                    <input type="text" id="driverName" placeholder="" required data-lang-key="fullNamePlaceholder">
-                                </div>
-                                <div class="form-group">
-                                    <label for="driverEmail" data-lang-key="emailLabel">البريد الإلكتروني</label>
-                                    <input type="email" id="driverEmail" placeholder="" required data-lang-key="emailPlaceholder">
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="driverPhone" data-lang-key="phoneLabel">رقم الهاتف</label>
-                                    <input type="tel" id="driverPhone" placeholder="" required data-lang-key="phonePlaceholder">
-                                </div>
-                                <div class="form-group">
-                                    <label for="driverAddress" data-lang-key="addressLabel">عنوان السكن</label>
-                                    <input type="text" id="driverAddress" placeholder="" required data-lang-key="addressPlaceholder">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label data-lang-key="profilePictureLabel">صورة الملف الشخصي</label>
-                                <input type="file" id="driverAvatarUpload" accept="image/*" style="display:none;">
-                                <div class="file-upload" id="driverAvatarDropArea">
-                                    <i class="fas fa-cloud-upload-alt"></i>
-                                    <p data-lang-key="dragAndDrop">اسحب وأفلت صورة هنا أو</p>
-                                    <span class="file-name" id="driverAvatarFileName" data-lang-key="browseText">تصفح</span>
-                                </div>
-                                <input type="hidden" id="driverAvatarBase64">
-                            </div>
-
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-danger" id="cancelAddDriverBtn" data-lang-key="cancelButton">إلغاء</button>
-                                <button type="submit" class="btn" data-lang-key="saveButton">حفظ</button>
-                            </div>
-                        </form>
-                    </div>
-                </section>
-
-                <section id="ordersSection" style="display:none;">
-                    <h2 data-lang-key="ordersTitle"><i class="fas fa-box"></i> إدارة الطلبات</h2>
-                    <p data-lang-key="ordersContent">هذه الصفحة لإدارة الطلبات.</p>
-                </section>
-
-                <section id="reportsSection" style="display:none;">
-                    <h2 data-lang-key="reportsTitle"><i class="fas fa-chart-line"></i> التقارير</h2>
-                    <p data-lang-key="reportsContent">هذه الصفحة لعرض التقارير.</p>
-                </section>
-
-                <section id="settingsSection" style="display:none;">
-                    <div class="form-container">
-                        <h2 class="form-title" data-lang-key="profileSettingsTitle">إعدادات الملف الشخصي</h2>
-                        <form id="profileSettingsForm">
-                            <div class="alert alert-error" id="profileError" style="display:none;"><i class="fas fa-exclamation-circle"></i> <span id="profileErrorText"></span></div>
-                            <div class="alert alert-success" id="profileSuccess" style="display:none;"><i class="fas fa-check-circle"></i> <span id="profileSuccessText"></span></div>
-
-                            <div class="profile-settings-avatar-upload">
-                                <img src="https://via.placeholder.com/110/3499db/FFFFFF?text=A" alt="User Avatar" class="profile-settings-avatar" id="settingsAvatarPreview">
-                                <input type="file" id="settingsAvatarUpload" accept="image/*" style="display:none;">
-                                <span class="profile-settings-avatar-text" id="changeAvatarText" data-lang-key="changeProfilePicture">تغيير صورة الملف الشخصي</span>
-                                <input type="hidden" id="settingsAvatarBase64">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="settingsUsername" data-lang-key="usernameLabel">اسم المستخدم</label>
-                                <input type="text" id="settingsUsername" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="settingsEmail" data-lang-key="emailLabel">البريد الإلكتروني</label>
-                                <input type="email" id="settingsEmail" required>
-                            </div>
-
-                            <div class="btn-group">
-                                <button type="submit" class="btn" data-lang-key="saveChangesButton">حفظ التغييرات</button>
-                            </div>
-                        </form>
-
-                        <h3 class="form-title" style="margin-top: 40px;" data-lang-key="changePasswordTitle">تغيير كلمة المرور</h3>
-                        <form id="changePasswordForm">
-                            <div class="alert alert-error" id="passwordError" style="display:none;"><i class="fas fa-exclamation-circle"></i> <span id="passwordErrorText"></span></div>
-                            <div class="alert alert-success" id="passwordSuccess" style="display:none;"><i class="fas fa-check-circle"></i> <span id="passwordSuccessText"></span></div>
-
-                            <div class="form-group">
-                                <label for="currentPassword" data-lang-key="currentPasswordLabel">كلمة المرور الحالية</label>
-                                <input type="password" id="currentPassword" placeholder="" required data-lang-key="currentPasswordPlaceholder">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="newPassword" data-lang-key="newPasswordLabel">كلمة المرور الجديدة</label>
-                                <input type="password" id="newPassword" placeholder="" required data-lang-key="newPasswordPlaceholder">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="confirmNewPassword" data-lang-key="confirmNewPasswordLabel">تأكيد كلمة المرور الجديدة</label>
-                                <input type="password" id="confirmNewPassword" placeholder="" required data-lang-key="confirmNewPasswordPlaceholder">
-                            </div>
-
-                            <div class="btn-group">
-                                <button type="submit" class="btn" data-lang-key="updatePasswordButton">تحديث كلمة المرور</button>
-                            </div>
-                        </form>
-                    </div>
-                </section>
-            </main>
-        </div>
-    </div>
-
-    <script>
-        // --- Language Translations ---
-        const translations = {
-            ar: {
-                pageTitle: "نظام إدارة سائقي الدراجات للتوصيل",
-                systemTitle: "نظام إدارة سائقي الدراجات",
-                systemTitleHeader: "نظام إدارة سائقي الدراجات",
-                loginTab: "تسجيل الدخول",
-                signupTab: "إنشاء حساب",
-                usernameOrEmailLabel: "اسم المستخدم أو البريد الإلكتروني",
-                usernameOrEmailPlaceholder: "أدخل اسم المستخدم أو البريد الإلكتروني",
-                passwordLabel: "كلمة المرور",
-                passwordPlaceholder: "أدخل كلمة المرور",
-                loginButton: "تسجيل الدخول",
-                forgotPasswordLink: "نسيت كلمة المرور؟",
-                orLoginWith: "أو تسجيل الدخول باستخدام",
-                googleButton: "Google",
-                facebookButton: "Facebook",
-                phoneButton: "الهاتف",
-                noAccountYet: "ليس لديك حساب؟",
-                createAccountLink: "إنشاء حساب جديد",
-                usernameLabel: "اسم المستخدم",
-                usernamePlaceholder: "أدخل اسم المستخدم",
-                emailLabel: "البريد الإلكتروني",
-                emailPlaceholder: "أدخل بريدك الإلكتروني",
-                phoneLabel: "رقم الهاتف",
-                phonePlaceholder: "أدخل رقم الهاتف (اختياري)",
-                confirmPasswordLabel: "تأكيد كلمة المرور",
-                confirmPasswordPlaceholder: "أعد إدخال كلمة المرور",
-                accountTypeLabel: "نوع الحساب",
-                managerOption: "مدير",
-                driverOption: "سائق",
-                signupButton: "إنشاء حساب",
-                verificationTitle: "تأكيد الحساب",
-                emailVerificationMessage: "لقد أرسلنا رمز تحقق إلى {contact}. الرجاء إدخال الرمز أدناه للتأكيد.",
-                phoneVerificationMessage: "لقد أرسلنا رمز تحقق إلى رقم هاتفك {contact}. الرجاء إدخال الرمز أدناه للتأكيد.",
-                verificationCodeLabel: "رمز التحقق",
-                verificationCodePlaceholder: "أدخل الرمز المكون من 6 أرقام",
-                verifyButton: "تأكيد",
-                resendCodeButton: "إعادة إرسال الرمز",
-                loggedInUsername: "المسؤول", // Default
-                adminUser: "المسؤول",
-                profileSettingsButton: "إعدادات الملف الشخصي",
-                logoutButton: "تسجيل الخروج",
-                dashboardNavigation: "لوحة القيادة",
-                overviewNav: "نظرة عامة",
-                driversNav: "إدارة السائقين",
-                ordersNav: "إدارة الطلبات",
-                reportsNav: "التقارير",
-                settingsNav: "الإعدادات",
-                welcomeTitle: "مرحباً بك!",
-                welcomeMessage: "مرحباً بك في لوحة تحكم إدارة السائقين الخاصة بك. يمكنك هنا إدارة السائقين والطلبات والوصول إلى التقارير الشاملة لتحسين عمليات التوصيل.",
-                addDriverNow: "ابدأ بإضافة سائق جديد",
-                driversListTitle: "قائمة السائقين",
-                addNewDriverButton: "إضافة سائق جديد",
-                emailDetail: "البريد الإلكتروني",
-                phoneDetail: "رقم الهاتف",
-                statusDetail: "الحالة",
-                statusActive: "نشط",
-                statusPending: "معلق",
-                deleteDriverButton: "حذف السائق",
-                addDriverTitle: "إضافة سائق جديد",
-                fullNameLabel: "الاسم الكامل",
-                fullNamePlaceholder: "أدخل الاسم الكامل للسائق",
-                addressLabel: "عنوان السكن",
-                addressPlaceholder: "أدخل عنوان سكن السائق",
-                profilePictureLabel: "صورة الملف الشخصي",
-                dragAndDrop: "اسحب وأفلت صورة هنا أو",
-                browseText: "تصفح",
-                cancelButton: "إلغاء",
-                saveButton: "حفظ",
-                ordersTitle: "إدارة الطلبات",
-                ordersContent: "هذه الصفحة لإدارة الطلبات.",
-                reportsTitle: "التقارير",
-                reportsContent: "هذه الصفحة لعرض التقارير.",
-                profileSettingsTitle: "إعدادات الملف الشخصي",
-                changeProfilePicture: "تغيير صورة الملف الشخصي",
-                saveChangesButton: "حفظ التغييرات",
-                changePasswordTitle: "تغيير كلمة المرور",
-                currentPasswordLabel: "كلمة المرور الحالية",
-                currentPasswordPlaceholder: "أدخل كلمة المرور الحالية",
-                newPasswordLabel: "كلمة المرور الجديدة",
-                newPasswordPlaceholder: "أدخل كلمة المرور الجديدة",
-                confirmNewPasswordLabel: "تأكيد كلمة المرور الجديدة",
-                confirmNewPasswordPlaceholder: "أعد إدخال كلمة المرور الجديدة",
-                updatePasswordButton: "تحديث كلمة المرور",
-
-                // Messages
-                loginSuccess: "تم تسجيل الدخول بنجاح!",
-                loginFailed: "فشل تسجيل الدخول: اسم المستخدم أو كلمة المرور غير صحيحة.",
-                allFieldsRequired: "جميع الحقول مطلوبة.",
-                passwordsDoNotMatch: "كلمتا المرور غير متطابقتين.",
-                accountCreated: "تم إنشاء الحساب بنجاح!",
-                signupFailed: "فشل إنشاء الحساب.",
-                verificationCodeSentEmail: "تم إرسال رمز التحقق إلى بريدك الإلكتروني.",
-                verificationCodeSentPhone: "تم إرسال رمز التحقق إلى رقم هاتفك.",
-                invalidVerificationCode: "رمز التحقق غير صحيح.",
-                emailPhoneVerified: "تم تأكيد البريد الإلكتروني/رقم الهاتف بنجاح!",
-                addDriverSuccess: "تم إضافة السائق بنجاح.",
-                addDriverError: "فشل إضافة السائق.",
-                deleteDriverSuccess: "تم حذف السائق بنجاح.",
-                deleteDriverError: "فشل حذف السائق.",
-                profileUpdateSuccess: "تم تحديث إعدادات الملف الشخصي بنجاح.",
-                profileUpdateError: "فشل تحديث إعدادات الملف الشخصي.",
-                passwordUpdateSuccess: "تم تحديث كلمة المرور بنجاح.",
-                passwordUpdateError: "فشل تحديث كلمة المرور.",
-                confirmDeleteDriver: "هل أنت متأكد أنك تريد حذف هذا السائق؟",
-                noDriversMessage: "لا يوجد سائقون مضافون بعد. ابدأ بإضافة واحد!"
-            },
-            fr: {
-                pageTitle: "Système de Gestion des Chauffeurs-Livreurs",
-                systemTitle: "Système de Gestion des Chauffeurs",
-                systemTitleHeader: "Système de Gestion des Chauffeurs",
-                loginTab: "Se connecter",
-                signupTab: "S'inscrire",
-                usernameOrEmailLabel: "Nom d'utilisateur ou Email",
-                usernameOrEmailPlaceholder: "Entrez le nom d'utilisateur ou l'email",
-                passwordLabel: "Mot de passe",
-                passwordPlaceholder: "Entrez le mot de passe",
-                loginButton: "Se connecter",
-                forgotPasswordLink: "Mot de passe oublié?",
-                orLoginWith: "Ou connectez-vous avec",
-                googleButton: "Google",
-                facebookButton: "Facebook",
-                phoneButton: "Téléphone",
-                noAccountYet: "Pas encore de compte ?",
-                createAccountLink: "Créer un nouveau compte",
-                usernameLabel: "Nom d'utilisateur",
-                usernamePlaceholder: "Entrez le nom d'utilisateur",
-                emailLabel: "Email",
-                emailPlaceholder: "Entrez votre email",
-                phoneLabel: "Numéro de téléphone",
-                phonePlaceholder: "Entrez le numéro de téléphone (optionnel)",
-                confirmPasswordLabel: "Confirmer le mot de passe",
-                confirmPasswordPlaceholder: "Confirmez le mot de passe",
-                accountTypeLabel: "Type de compte",
-                managerOption: "Manager",
-                driverOption: "Chauffeur",
-                signupButton: "S'inscrire",
-                verificationTitle: "Vérification du Compte",
-                emailVerificationMessage: "Nous avons envoyé un code de vérification à {contact}. Veuillez entrer le code ci-dessous pour confirmer.",
-                phoneVerificationMessage: "Nous avons envoyé un code de vérification à votre numéro de téléphone {contact}. Veuillez entrer le code ci-dessous pour confirmer.",
-                verificationCodeLabel: "Code de vérification",
-                verificationCodePlaceholder: "Entrez le code à 6 chiffres",
-                verifyButton: "Vérifier",
-                resendCodeButton: "Renvoyer le code",
-                loggedInUsername: "Administrateur", // Default
-                adminUser: "Administrateur",
-                profileSettingsButton: "Paramètres du profil",
-                logoutButton: "Se déconnecter",
-                dashboardNavigation: "Tableau de Bord",
-                overviewNav: "Aperçu",
-                driversNav: "Gestion des Chauffeurs",
-                ordersNav: "Gestion des Commandes",
-                reportsNav: "Rapports",
-                settingsNav: "Paramètres",
-                welcomeTitle: "Bienvenue !",
-                welcomeMessage: "Bienvenue sur votre tableau de bord de gestion des chauffeurs. Ici, vous pouvez gérer les chauffeurs, les commandes et accéder à des rapports complets pour optimiser vos opérations de livraison.",
-                addDriverNow: "Commencer par ajouter un nouveau chauffeur",
-                driversListTitle: "Liste des Chauffeurs",
-                addNewDriverButton: "Ajouter un nouveau chauffeur",
-                emailDetail: "Email",
-                phoneDetail: "Téléphone",
-                statusDetail: "Statut",
-                statusActive: "Actif",
-                statusPending: "En attente",
-                deleteDriverButton: "Supprimer le chauffeur",
-                addDriverTitle: "Ajouter un nouveau chauffeur",
-                fullNameLabel: "Nom complet",
-                fullNamePlaceholder: "Entrez le nom complet du chauffeur",
-                addressLabel: "Adresse de résidence",
-                addressPlaceholder: "Entrez l'adresse du chauffeur",
-                profilePictureLabel: "Photo de profil",
-                dragAndDrop: "Glissez et déposez une image ici ou",
-                browseText: "Parcourir",
-                cancelButton: "Annuler",
-                saveButton: "Enregistrer",
-                ordersTitle: "Gestion des Commandes",
-                ordersContent: "Cette page est dédiée à la gestion des commandes.",
-                reportsTitle: "Rapports",
-                reportsContent: "Cette page est dédiée à l'affichage des rapports.",
-                profileSettingsTitle: "Paramètres du Profil",
-                changeProfilePicture: "Changer la photo de profil",
-                saveChangesButton: "Enregistrer les modifications",
-                changePasswordTitle: "Changer le mot de passe",
-                currentPasswordLabel: "Mot de passe actuel",
-                currentPasswordPlaceholder: "Entrez le mot de passe actuel",
-                newPasswordLabel: "Nouveau mot de passe",
-                newPasswordPlaceholder: "Entrez le nouveau mot de passe",
-                confirmNewPasswordLabel: "Confirmer le nouveau mot de passe",
-                confirmNewPasswordPlaceholder: "Confirmez le nouveau mot de passe",
-                updatePasswordButton: "Mettre à jour le mot de passe",
-
-                // Messages
-                loginSuccess: "Connexion réussie!",
-                loginFailed: "Échec de la connexion : Nom d'utilisateur ou mot de passe incorrect.",
-                allFieldsRequired: "Tous les champs sont requis.",
-                passwordsDoNotMatch: "Les mots de passe ne correspondent pas.",
-                accountCreated: "Compte créé avec succès !",
-                signupFailed: "Échec de la création du compte.",
-                verificationCodeSentEmail: "Le code de vérification a été envoyé à votre email.",
-                verificationCodeSentPhone: "Le code de vérification a été envoyé à votre numéro de téléphone.",
-                invalidVerificationCode: "Code de vérification invalide.",
-                emailPhoneVerified: "Email/Téléphone vérifié avec succès !",
-                addDriverSuccess: "Chauffeur ajouté avec succès.",
-                addDriverError: "Échec de l'ajout du chauffeur.",
-                deleteDriverSuccess: "Chauffeur supprimé avec succès.",
-                deleteDriverError: "Échec de la suppression du chauffeur.",
-                profileUpdateSuccess: "Paramètres du profil mis à jour avec succès.",
-                profileUpdateError: "Échec de la mise à jour des paramètres du profil.",
-                passwordUpdateSuccess: "Mot de passe mis à jour avec succès.",
-                passwordUpdateError: "Échec de la mise à jour du mot de passe.",
-                confirmDeleteDriver: "Êtes-vous sûr de vouloir supprimer ce chauffeur?",
-                noDriversMessage: "Aucun chauffeur ajouté pour le moment. Commencez par en ajouter un !"
-            },
-            en: {
-                pageTitle: "Delivery Riders Management System",
-                systemTitle: "Rider Management System",
-                systemTitleHeader: "Rider Management System",
-                loginTab: "Login",
-                signupTab: "Sign Up",
-                usernameOrEmailLabel: "Username or Email",
-                usernameOrEmailPlaceholder: "Enter username or email",
-                passwordLabel: "Password",
-                passwordPlaceholder: "Enter password",
-                loginButton: "Login",
-                forgotPasswordLink: "Forgot Password?",
-                orLoginWith: "Or login with",
-                googleButton: "Google",
-                facebookButton: "Facebook",
-                phoneButton: "Phone",
-                noAccountYet: "Don't have an account?",
-                createAccountLink: "Create a new account",
-                usernameLabel: "Username",
-                usernamePlaceholder: "Enter username",
-                emailLabel: "Email",
-                emailPlaceholder: "Enter your email",
-                phoneLabel: "Phone Number",
-                phonePlaceholder: "Enter phone number (optional)",
-                confirmPasswordLabel: "Confirm Password",
-                confirmPasswordPlaceholder: "Re-enter password",
-                accountTypeLabel: "Account Type",
-                managerOption: "Manager",
-                driverOption: "Driver",
-                signupButton: "Sign Up",
-                verificationTitle: "Account Verification",
-                emailVerificationMessage: "We have sent a verification code to {contact}. Please enter the code below to confirm.",
-                phoneVerificationMessage: "We have sent a verification code to your phone number {contact}. Please enter the code below to confirm.",
-                verificationCodeLabel: "Verification Code",
-                verificationCodePlaceholder: "Enter 6-digit code",
-                verifyButton: "Verify",
-                resendCodeButton: "Resend Code",
-                loggedInUsername: "Admin", // Default
-                adminUser: "Admin",
-                profileSettingsButton: "Profile Settings",
-                logoutButton: "Logout",
-                dashboardNavigation: "Dashboard",
-                overviewNav: "Overview",
-                driversNav: "Manage Drivers",
-                ordersNav: "Manage Orders",
-                reportsNav: "Reports",
-                settingsNav: "Settings",
-                welcomeTitle: "Welcome!",
-                welcomeMessage: "Welcome to your Rider Management Dashboard. Here you can manage riders, orders, and access comprehensive reports to optimize your delivery operations.",
-                addDriverNow: "Start by adding a new driver",
-                driversListTitle: "Driver List",
-                addNewDriverButton: "Add New Driver",
-                emailDetail: "Email",
-                phoneDetail: "Phone",
-                statusDetail: "Status",
-                statusActive: "Active",
-                statusPending: "Pending",
-                deleteDriverButton: "Delete Driver",
-                addDriverTitle: "Add New Driver",
-                fullNameLabel: "Full Name",
-                fullNamePlaceholder: "Enter full name of the driver",
-                addressLabel: "Residential Address",
-                addressPlaceholder: "Enter driver's residential address",
-                profilePictureLabel: "Profile Picture",
-                dragAndDrop: "Drag and drop an image here or",
-                browseText: "Browse",
-                cancelButton: "Cancel",
-                saveButton: "Save",
-                ordersTitle: "Manage Orders",
-                ordersContent: "This page is for managing orders.",
-                reportsTitle: "Reports",
-                reportsContent: "This page is for viewing reports.",
-                profileSettingsTitle: "Profile Settings",
-                changeProfilePicture: "Change Profile Picture",
-                saveChangesButton: "Save Changes",
-                changePasswordTitle: "Change Password",
-                currentPasswordLabel: "Current Password",
-                currentPasswordPlaceholder: "Enter current password",
-                newPasswordLabel: "New Password",
-                newPasswordPlaceholder: "Enter new password",
-                confirmNewPasswordLabel: "Confirm New Password",
-                confirmNewPasswordPlaceholder: "Re-enter new password",
-                updatePasswordButton: "Update Password",
-
-                // Messages
-                loginSuccess: "Login successful!",
-                loginFailed: "Login failed: Invalid username or password.",
-                allFieldsRequired: "All fields are required.",
-                passwordsDoNotMatch: "Passwords do not match.",
-                accountCreated: "Account created successfully!",
-                signupFailed: "Account creation failed.",
-                verificationCodeSentEmail: "Verification code sent to your email.",
-                verificationCodeSentPhone: "Verification code sent to your phone number.",
-                invalidVerificationCode: "Invalid verification code.",
-                emailPhoneVerified: "Email/Phone verified successfully!",
-                addDriverSuccess: "Driver added successfully.",
-                addDriverError: "Failed to add driver.",
-                deleteDriverSuccess: "Driver deleted successfully.",
-                deleteDriverError: "Failed to delete driver.",
-                profileUpdateSuccess: "Profile settings updated successfully.",
-                profileUpdateError: "Failed to update profile settings.",
-                passwordUpdateSuccess: "Password updated successfully.",
-                passwordUpdateError: "Failed to update password.",
-                confirmDeleteDriver: "Are you sure you want to delete this driver?",
-                noDriversMessage: "No drivers added yet. Start by adding one!"
-            }
-        };
-
-        let currentLanguage = localStorage.getItem('lang') || 'ar'; // Default to Arabic
-
-        function setLanguage(lang) {
-            currentLanguage = lang;
-            localStorage.setItem('lang', lang);
-
-            // Set HTML lang and body direction
-            document.documentElement.setAttribute('lang', lang);
-            document.body.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-
-            // Apply translations to all elements with data-lang-key
-            document.querySelectorAll('[data-lang-key]').forEach(element => {
-                const key = element.getAttribute('data-lang-key');
-                let translatedText = translations[lang][key];
-
-                if (element.tagName === 'INPUT' && element.hasAttribute('placeholder')) {
-                    element.setAttribute('placeholder', translatedText || '');
-                } else if (element.tagName === 'OPTION') {
-                   // For options, update text content directly
-                   element.textContent = translatedText || '';
-                }
-                else {
-                    element.textContent = translatedText || '';
-                }
-            });
-
-            // Update the selected option in the language dropdown
-            const langSelect = document.getElementById('languageSelect');
-            if (langSelect) {
-                langSelect.value = lang;
-            }
-        }
-
-        // --- Helper Functions ---
-        function showMessage(elementId, messageKey, isError = true) { // Removed contact parameter
-            const messageElement = document.getElementById(elementId);
-            const messageTextElement = messageElement.querySelector('span');
-
-            let message = translations[currentLanguage][messageKey];
-            // Removed contact-specific message formatting
-            messageTextElement.textContent = message;
-            messageElement.style.display = 'flex';
-            if (isError) {
-                messageElement.classList.remove('alert-success');
-                messageElement.classList.add('alert-error');
-                messageElement.style.animation = 'shake 0.5s';
-                setTimeout(() => messageElement.style.animation = '', 500);
-            } else {
-                messageElement.classList.remove('alert-error');
-                messageElement.classList.add('alert-success');
-            }
-            // Hide after 5 seconds
-            setTimeout(() => {
-                messageElement.style.display = 'none';
-                messageTextElement.textContent = '';
-            }, 5000);
-        }
-
-        function hideMessage(elementId) {
-            document.getElementById(elementId).style.display = 'none';
-            document.getElementById(elementId).querySelector('span').textContent = '';
-        }
-
-        function showPage(pageId) {
-            // Removed 'verificationPage' from the list of pages
-            const pages = ['loginPage', 'dashboardPage'];
-            pages.forEach(id => {
-                document.getElementById(id).style.display = (id === pageId) ? 'flex' : 'none';
-            });
-
-            // Adjust header visibility based on page
-            if (pageId === 'dashboardPage') {
-                document.getElementById('mainHeader').style.display = 'block';
-            } else {
-                document.getElementById('mainHeader').style.display = 'none';
-            }
-        }
-
-        function showDashboardSection(sectionId) {
-            document.querySelectorAll('#dashboardPage main section').forEach(section => {
-                section.style.display = 'none';
-            });
-            document.getElementById(sectionId).style.display = 'block';
-
-            document.querySelectorAll('.sidebar .nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            document.querySelector(`.sidebar .nav-item[data-section="${sectionId.replace('Section', '')}"]`).classList.add('active');
-        }
-
-        // --- User Data Simulation (localStorage) ---
-        let users = JSON.parse(localStorage.getItem('users')) || {};
-        // Removed verificationCode, verificationTarget, verificationUser variables
-
-        // --- Event Listeners ---
-        document.addEventListener('DOMContentLoaded', () => {
-            // Set initial language
-            setLanguage(currentLanguage);
-
-            // Language selector change
-            const languageSelect = document.getElementById('languageSelect');
-            if (languageSelect) {
-                languageSelect.value = currentLanguage; // Ensure initial selection matches
-                languageSelect.addEventListener('change', (event) => {
-                    setLanguage(event.target.value);
-                });
-            }
-
-            // Tab Switching
-            document.querySelectorAll('.tabs .tab').forEach(tab => {
-                tab.addEventListener('click', () => {
-                    document.querySelectorAll('.tabs .tab').forEach(t => t.classList.remove('active'));
-                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-
-                    tab.classList.add('active');
-                    document.getElementById(tab.getAttribute('data-tab') + 'Tab').classList.add('active');
-                    hideMessage('errorMessage'); // Clear error on tab switch
-                });
-            });
-
-            // Go to Signup from Login page link
-            document.getElementById('goToSignup').addEventListener('click', (e) => {
-                e.preventDefault();
-                document.querySelector('.tab[data-tab="signup"]').click();
-            });
-
-            // Login Logic
-            document.getElementById('loginBtn').addEventListener('click', () => {
-                hideMessage('errorMessage');
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
-
-                if (!username || !password) {
-                    showMessage('errorMessage', 'allFieldsRequired');
-                    return;
-                }
-
-                const user = users[username] || Object.values(users).find(u => u.email === username || u.phone === username);
-
-                if (user && user.password === password) {
-                    // Directly log in, no verification check needed
-                    localStorage.setItem('loggedInUser', JSON.stringify(user));
-                    showMessage('errorMessage', 'loginSuccess', false);
-                    setTimeout(() => {
-                        showPage('dashboardPage');
-                        updateLoggedInUserInfo();
-                        showDashboardSection('overviewSection'); // Show overview by default
-                    }, 1000);
-                } else {
-                    showMessage('errorMessage', 'loginFailed');
-                }
-            });
-
-            // Signup Logic
-            document.getElementById('signupBtn').addEventListener('click', () => {
-                hideMessage('errorMessage');
-                const signupUsername = document.getElementById('signupUsername').value;
-                const signupEmail = document.getElementById('signupEmail').value;
-                const signupPhone = document.getElementById('signupPhone').value; // Optional
-                const signupPassword = document.getElementById('signupPassword').value;
-                const confirmPassword = document.getElementById('confirmPassword').value;
-                const accountType = document.getElementById('accountType').value;
-
-                if (!signupUsername || !signupEmail || !signupPassword || !confirmPassword) {
-                    showMessage('errorMessage', 'allFieldsRequired');
-                    return;
-                }
-                if (signupPassword !== confirmPassword) {
-                    showMessage('errorMessage', 'passwordsDoNotMatch');
-                    return;
-                }
-
-                if (users[signupUsername] || Object.values(users).some(u => u.email === signupEmail)) {
-                    showMessage('errorMessage', 'signupFailed', true); // Removed custom message string
-                    return;
-                }
-
-                const newUser = {
-                    username: signupUsername,
-                    email: signupEmail,
-                    phone: signupPhone, // Store phone
-                    password: signupPassword,
-                    accountType: accountType,
-                    isVerified: true, // Account is always verified now
-                    id: `user_${Date.now()}`
-                };
-
-                users[signupUsername] = newUser;
-                localStorage.setItem('users', JSON.stringify(users));
-
-                localStorage.setItem('loggedInUser', JSON.stringify(newUser)); // Log them in automatically after signup
-                showMessage('errorMessage', 'accountCreated', false);
                 
-                setTimeout(() => {
-                   showPage('dashboardPage');
-                   updateLoggedInUserInfo();
-                   showDashboardSection('overviewSection');
-                }, 1000);
-            });
+                <div class="input-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" placeholder="أدخل البريد الإلكتروني">
+                </div>
+                
+                <div class="input-group">
+                    <label for="phoneNumber">رقم الهاتف</label>
+                    <input type="tel" id="phoneNumber" placeholder="أدخل رقم الهاتف (مثال: +22212345678)">
+                </div>
+                
+                <div class="input-group">
+                    <label for="newPassword">كلمة المرور</label>
+                    <input type="password" id="newPassword" placeholder="أدخل كلمة المرور">
+                </div>
+                
+                <div class="input-group">
+                    <label for="confirmPassword">تأكيد كلمة المرور</label>
+                    <input type="password" id="confirmPassword" placeholder="أعد إدخال كلمة المرور">
+                </div>
+                
+                <button id="signupBtn" class="btn btn-secondary">إنشاء حساب</button>
+                
+                <div class="signup-link">
+                    لديك حساب بالفعل؟ <a href="#" id="goToLogin">تسجيل الدخول</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="dashboard" style="display: none;">
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-bicycle"></i>
+                    <h1>نظام إدارة سائقي الدراجات</h1>
+                </div>
+                
+                <div class="user-info" id="userInfo">
+                    <img id="headerUserAvatar" src="https://ui-avatars.com/api/?name=المدير&background=0D8ABC&color=fff" alt="صورة المستخدم">
+                    <span id="loggedInUserName">مدير النظام</span>
+                    <i class="fas fa-chevron-down"></i>
+                    <div class="dropdown-menu" id="userDropdownMenu">
+                        <button id="dropdownSettingsBtn"><i class="fas fa-cog"></i> الإعدادات</button>
+                        <button id="dropdownLogoutBtn"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="container">
+            <div class="dashboard">
+                <div class="sidebar">
+                    <h3>القائمة الرئيسية</h3>
+                    <div class="nav-item active" id="navDashboard">
+                        <i class="fas fa-home"></i>
+                        <span>لوحة التحكم</span>
+                    </div>
+                    <div class="nav-item" id="navDrivers">
+                        <i class="fas fa-users"></i>
+                        <span>إدارة السائقين</span>
+                    </div>
+                    <div class="nav-item" id="navAddDriver">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>إضافة سائق جديد</span>
+                    </div>
+                    <div class="nav-item" id="navReports">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>التقارير والإحصائيات</span>
+                    </div>
+                    <div class="nav-item" id="navSettings">
+                        <i class="fas fa-cog"></i>
+                        <span>الإعدادات</span>
+                    </div>
+                    <a href="https://t.me/isgjobro" target="_blank" class="nav-item" id="navSupport">
+                        <i class="fab fa-telegram-plane"></i> <span>الدعم الفني</span> </a>
+                </div>
+                
+                <div class="main-content">
+                    <div id="dashboardView">
+                        <div class="welcome-message">
+                            <i class="fas fa-bicycle"></i>
+                            <h2>مرحباً بك في نظام إدارة سائقي الدراجات</h2>
+                            <p>هذا النظام يسمح لك بإدارة سائقي الدراجات بسهولة وأمان. يمكنك إضافة سائقين جدد، مراجعة بياناتهم، وتنظيم عمليات التوصيل بشكل احترافي.</p>
+                            <button class="btn" id="startBtn">ابدأ إضافة السائقين</button>
+                        </div>
+                    </div>
+                    
+                    <div id="driversView" style="display: none;">
+                        <div class="section-header">
+                            <h2><i class="fas fa-users"></i> قائمة السائقين</h2>
+                            <div class="add-driver-btn" id="addDriverBtn">
+                                <i class="fas fa-plus"></i>
+                                <span>إضافة سائق جديد</span>
+                            </div>
+                        </div>
+                        
+                        <div class="drivers-grid" id="driversList">
+                            <p id="noDriversMessage" style="text-align: center; color: var(--gray); display: none;">لا يوجد سائقون مضافون بعد. الرجاء إضافة سائق جديد.</p>
+                        </div>
+                    </div>
+                    
+                    <div id="addDriverView" style="display: none;">
+                        <div class="section-header">
+                            <h2><i class="fas fa-plus-circle"></i> إضافة سائق جديد</h2>
+                        </div>
+                        
+                        <div class="form-container">
+                            <div class="alert alert-success" id="successAlert" style="display: none;">
+                                <i class="fas fa-check-circle"></i>
+                                <div>
+                                    <h3>تمت العملية بنجاح!</h3>
+                                    <p>تم إضافة السائق بنجاح إلى قاعدة البيانات.</p>
+                                </div>
+                            </div>
 
-            // --- Removed Verification Logic (sendVerificationCode, verifyCodeBtn, resendCodeBtn listeners) ---
+                            <div class="alert alert-error" id="driverFormError" style="display: none;">
+                                <i class="fas fa-times-circle"></i>
+                                <span id="driverFormErrorMessage"></span>
+                            </div>
+                            
+                            <form id="driverForm">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="driverName">اسم السائق</label>
+                                        <input type="text" id="driverName" placeholder="أدخل الاسم الكامل" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="driverPhone">رقم الهاتف</label>
+                                        <input type="tel" id="driverPhone" placeholder="أدخل رقم الهاتف (مثال: +222xxxxxxx)" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>صورة شخصية</label>
+                                        <div class="file-upload" id="profileUpload">
+                                            <i class="fas fa-user-circle"></i>
+                                            <p>انقر لرفع صورة شخصية</p>
+                                            <span class="file-name" id="profileFileName">لم يتم رفع أي ملف</span>
+                                        </div>
+                                        <input type="file" id="profileInput" accept="image/*" style="display: none;">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>صورة الهوية (البطاقة الوطنية)</label>
+                                        <div class="file-upload" id="idUpload">
+                                            <i class="fas fa-id-card"></i>
+                                            <p>انقر لرفع صورة الهوية</p>
+                                            <span class="file-name" id="idFileName">لم يتم رفع أي ملف</span>
+                                        </div>
+                                        <input type="file" id="idInput" accept="image/*" style="display: none;">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>صورة الرخصة (قيادة الدراجة)</label>
+                                        <div class="file-upload" id="licenseUpload">
+                                            <i class="fas fa-address-card"></i> <p>انقر لرفع صورة الرخصة</p>
+                                            <span class="file-name" id="licenseFileName">لم يتم رفع أي ملف</span>
+                                        </div>
+                                        <input type="file" id="licenseInput" accept="image/*" style="display: none;">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>صورة الدراجة</label>
+                                        <div class="file-upload" id="bikeUpload">
+                                            <i class="fas fa-motorcycle"></i> <p>انقر لرفع صورة الدراجة</p>
+                                            <span class="file-name" id="bikeFileName">لم يتم رفع أي ملف</span>
+                                        </div>
+                                        <input type="file" id="bikeInput" accept="image/*" style="display: none;">
+                                    </div>
+                                </div>
+                                
+                                <div class="btn-group">
+                                    <button type="submit" class="btn btn-secondary">
+                                        <i class="fas fa-save"></i> حفظ السائق
+                                    </button>
+                                    <button type="button" class="btn" style="background: var(--gray);" id="cancelBtn">
+                                        <i class="fas fa-times"></i> إلغاء
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
 
-            // Check if user is already logged in on page load
-            const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-            if (loggedInUser) { // No longer checking for isVerified
-                showPage('dashboardPage');
-                updateLoggedInUserInfo();
-                showDashboardSection('overviewSection');
+                    <div id="settingsView" style="display: none;">
+                        <div class="section-header">
+                            <h2><i class="fas fa-cog"></i> الإعدادات</h2>
+                        </div>
+                        <div class="form-container">
+                            <div class="alert alert-success" id="settingsSuccessAlert" style="display: none;">
+                                <i class="fas fa-check-circle"></i>
+                                <div>
+                                    <h3>تم الحفظ بنجاح!</h3>
+                                    <p>تم تحديث إعدادات ملفك الشخصي.</p>
+                                </div>
+                            </div>
+                            <div class="alert alert-error" id="settingsErrorAlert" style="display: none;">
+                                <i class="fas fa-times-circle"></i>
+                                <span id="settingsErrorMessage"></span>
+                            </div>
+                            <form id="profileSettingsForm">
+                                <div class="profile-settings-avatar-upload">
+                                    <img id="settingsUserAvatar" class="profile-settings-avatar" src="https://ui-avatars.com/api/?name=المدير&background=0D8ABC&color=fff" alt="صورة المستخدم">
+                                    <input type="file" id="settingsAvatarInput" accept="image/*" style="display: none;">
+                                    <span id="settingsAvatarText" class="profile-settings-avatar-text">تغيير الصورة الشخصية</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="settingsUserName">اسم المستخدم</label>
+                                    <input type="text" id="settingsUserName" placeholder="أدخل اسمك الجديد">
+                                </div>
+                                <div class="form-group">
+                                    <label for="settingsEmail">البريد الإلكتروني</label>
+                                    <input type="email" id="settingsEmail" placeholder="أدخل بريدك الإلكتروني الجديد" disabled style="background-color: #f0f0f0; cursor: not-allowed;">
+                                    <small style="color: #777; display: block; margin-top: 5px;">(لا يمكن تغيير البريد الإلكتروني لأسباب أمنية)</small>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="submit" class="btn btn-secondary">
+                                        <i class="fas fa-save"></i> حفظ التغييرات
+                                    </button>
+                                    <button type="button" class="btn btn-danger" id="settingsLogoutBtn">
+                                        <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // DOM Elements
+        const loginPage = document.getElementById('loginPage');
+        const dashboard = document.getElementById('dashboard');
+        const loginBtn = document.getElementById('loginBtn');
+        const signupBtn = document.getElementById('signupBtn');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const errorMessage = document.getElementById('errorMessage');
+        const errorMessageText = document.getElementById('errorMessageText');
+        
+        const tabs = document.querySelectorAll('.tab');
+        const loginTab = document.getElementById('loginTab');
+        const signupTab = document.getElementById('signupTab');
+        const goToSignup = document.getElementById('goToSignup');
+        const goToLogin = document.getElementById('goToLogin');
+        
+        const googleLogin = document.getElementById('googleLogin');
+        const facebookLogin = document.getElementById('facebookLogin');
+        const phoneLogin = document.getElementById('phoneLogin');
+        
+        const userInfo = document.getElementById('userInfo');
+        const userDropdownMenu = document.getElementById('userDropdownMenu');
+        const dropdownSettingsBtn = document.getElementById('dropdownSettingsBtn');
+        const dropdownLogoutBtn = document.getElementById('dropdownLogoutBtn');
+
+        const navDashboard = document.getElementById('navDashboard');
+        const navDrivers = document.getElementById('navDrivers');
+        const navAddDriver = document.getElementById('navAddDriver');
+        const navReports = document.getElementById('navReports');
+        const navSettings = document.getElementById('navSettings');
+        const navSupport = document.getElementById('navSupport');
+        const addDriverBtn = document.getElementById('addDriverBtn');
+        const startBtn = document.getElementById('startBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+        
+        const dashboardView = document.getElementById('dashboardView');
+        const driversView = document.getElementById('driversView');
+        const addDriverView = document.getElementById('addDriverView');
+        const settingsView = document.getElementById('settingsView');
+        const driversList = document.getElementById('driversList');
+        const noDriversMessage = document.getElementById('noDriversMessage');
+        const driverForm = document.getElementById('driverForm');
+        const successAlert = document.getElementById('successAlert');
+        const driverFormError = document.getElementById('driverFormError');
+        const driverFormErrorMessage = document.getElementById('driverFormErrorMessage');
+
+        // File upload elements (Add Driver Form)
+        const profileUpload = document.getElementById('profileUpload');
+        const profileInput = document.getElementById('profileInput');
+        const profileFileName = document.getElementById('profileFileName');
+        
+        const idUpload = document.getElementById('idUpload');
+        const idInput = document.getElementById('idInput');
+        const idFileName = document.getElementById('idFileName');
+        
+        const licenseUpload = document.getElementById('licenseUpload');
+        const licenseInput = document.getElementById('licenseInput');
+        const licenseFileName = document.getElementById('licenseFileName');
+        
+        const bikeUpload = document.getElementById('bikeUpload');
+        const bikeInput = document.getElementById('bikeInput');
+        const bikeFileName = document.getElementById('bikeFileName');
+
+        const loggedInUserName = document.getElementById('loggedInUserName');
+        const headerUserAvatar = document.getElementById('headerUserAvatar');
+
+        // Settings Page Elements
+        const profileSettingsForm = document.getElementById('profileSettingsForm');
+        const settingsUserAvatar = document.getElementById('settingsUserAvatar');
+        const settingsAvatarInput = document.getElementById('settingsAvatarInput');
+        const settingsAvatarText = document.getElementById('settingsAvatarText');
+        const settingsUserNameInput = document.getElementById('settingsUserName');
+        const settingsEmailInput = document.getElementById('settingsEmail');
+        const settingsLogoutBtn = document.getElementById('settingsLogoutBtn');
+        const settingsSuccessAlert = document.getElementById('settingsSuccessAlert');
+        const settingsErrorAlert = document.getElementById('settingsErrorAlert');
+        const settingsErrorMessage = document.getElementById('settingsErrorMessage');
+
+        // --- Data Storage (using localStorage to simulate a backend) ---
+        // Enhanced user data for better simulation
+        let users = JSON.parse(localStorage.getItem('users')) || [{
+            id: 1, // Added ID for unique identification
+            fullName: 'مدير النظام',
+            email: 'admin@example.com', // Changed to example.com for realism
+            password: 'password',
+            avatar: 'https://ui-avatars.com/api/?name=مدير+النظام&background=0D8ABC&color=fff'
+        }]; 
+        let driversData = JSON.parse(localStorage.getItem('drivers')) || [];
+
+        let currentLoggedInUser = null; // To store the currently logged-in user object
+
+        // --- Utility Functions ---
+
+        // Function to save users to localStorage
+        function saveUsers() {
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+
+        // Function to save drivers to localStorage
+        function saveDrivers() {
+            localStorage.setItem('drivers', JSON.stringify(driversData));
+        }
+
+        function saveLoggedInUser() {
+            localStorage.setItem('currentLoggedInUser', JSON.stringify(currentLoggedInUser));
+        }
+
+        function loadLoggedInUser() {
+            const storedUser = localStorage.getItem('currentLoggedInUser');
+            if (storedUser) {
+                currentLoggedInUser = JSON.parse(storedUser);
+                updateHeaderUserInfo();
+                return true;
+            }
+            return false;
+        }
+
+        function showMessage(element, message, type = 'error', inputElement = null) {
+            if (element.id === 'errorMessage') {
+                errorMessageText.textContent = message;
+            } else if (element.id === 'driverFormError') {
+                driverFormErrorMessage.textContent = message;
+            } else if (element.id === 'settingsErrorAlert') {
+                settingsErrorMessage.textContent = message;
+            }
+            element.classList.remove('alert-success', 'alert-error');
+            element.classList.add(`alert-${type}`);
+            element.style.display = 'flex';
+
+            if (inputElement) {
+                shakeInput(inputElement);
+            }
+        }
+
+        function hideMessage(element) {
+            element.style.display = 'none';
+        }
+
+        function shakeInput(inputElement) {
+            inputElement.style.animation = 'shake 0.5s';
+            setTimeout(() => {
+                inputElement.style.animation = '';
+            }, 500);
+        }
+
+        function updateHeaderUserInfo() {
+            if (currentLoggedInUser) {
+                loggedInUserName.textContent = currentLoggedInUser.fullName;
+                headerUserAvatar.src = currentLoggedInUser.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(currentLoggedInUser.fullName)}&background=0D8ABC&color=fff`;
             } else {
-                showPage('loginPage');
+                loggedInUserName.textContent = 'الزائر';
+                headerUserAvatar.src = `https://ui-avatars.com/api/?name=الزائر&background=0D8ABC&color=fff`;
             }
+        }
 
-            // --- User Dropdown ---
-            document.getElementById('userInfo').addEventListener('click', () => {
-                document.getElementById('userDropdown').classList.toggle('show');
-            });
+        function showView(view) {
+            dashboardView.style.display = 'none';
+            driversView.style.display = 'none';
+            addDriverView.style.display = 'none';
+            settingsView.style.display = 'none';
+            view.style.display = 'block';
 
-            // Close dropdown if clicked outside
-            window.addEventListener('click', (e) => {
-                if (!document.getElementById('userInfo').contains(e.target) && !document.getElementById('userDropdown').contains(e.target)) {
-                    document.getElementById('userDropdown').classList.remove('show');
-                }
-            });
-
-            // Logout Logic
-            document.getElementById('logoutBtn').addEventListener('click', () => {
-                localStorage.removeItem('loggedInUser');
-                showPage('loginPage');
-            });
-
-            // Update logged-in user info in header
-            function updateLoggedInUserInfo() {
-                const user = JSON.parse(localStorage.getItem('loggedInUser'));
-                if (user) {
-                    document.getElementById('loggedInUsername').textContent = user.username;
-                    // You could update avatar here too if paths are stored
-                }
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            if (view === dashboardView) {
+                navDashboard.classList.add('active');
+            } else if (view === driversView) {
+                navDrivers.classList.add('active');
+            } else if (view === addDriverView) {
+                navAddDriver.classList.add('active');
+            } else if (view === settingsView) {
+                navSettings.classList.add('active');
+                populateSettingsForm();
             }
-
-            // --- Dashboard Navigation ---
-            document.querySelectorAll('.sidebar .nav-item').forEach(item => {
-                item.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const section = item.getAttribute('data-section');
-                    showDashboardSection(section + 'Section');
-                });
-            });
-
-            // Handle "Add new driver" button from overview
-            document.getElementById('overviewAddDriverBtn').addEventListener('click', () => {
-                showDashboardSection('addDriverSection');
-            });
-
-            // Show Add Driver Form Button
-            document.getElementById('showAddDriverFormBtn').addEventListener('click', () => {
-                showDashboardSection('addDriverSection');
-                document.getElementById('addDriverForm').reset();
-                document.getElementById('driverAvatarFileName').textContent = translations[currentLanguage].browseText;
-                document.getElementById('driverAvatarBase64').value = '';
-                hideMessage('addDriverError');
-                hideMessage('addDriverSuccess');
-            });
-
-            // Cancel Add Driver Button
-            document.getElementById('cancelAddDriverBtn').addEventListener('click', () => {
-                showDashboardSection('driversSection'); // Go back to drivers list
-            });
-
-            // Simulate Drivers Data (in a real app, this would come from an API)
-            let drivers = JSON.parse(localStorage.getItem('drivers')) || [];
-
-            function renderDrivers() {
-                const driversGrid = document.getElementById('driversGrid');
-                driversGrid.innerHTML = ''; // Clear existing cards
-
-                if (drivers.length === 0) {
-                    driversGrid.innerHTML = `<p style="text-align: center; color: #777;" data-lang-key="noDriversMessage">${translations[currentLanguage].noDriversMessage}</p>`;
-                    setLanguage(currentLanguage); // Re-apply language after updating innerHTML
-                    return;
-                }
-
-                drivers.forEach(driver => {
+            userDropdownMenu.classList.remove('show');
+        }
+        
+        function loadDrivers() {
+            driversList.innerHTML = '';
+            if (driversData.length === 0) {
+                noDriversMessage.style.display = 'block';
+            } else {
+                noDriversMessage.style.display = 'none';
+                driversData.forEach(driver => {
                     const driverCard = document.createElement('div');
                     driverCard.className = 'driver-card';
+                    driverCard.dataset.driverId = driver.id;
+                    
+                    const statusClass = driver.status === 'active' ? 'status-active' : 'status-pending';
+                    const statusText = driver.status === 'active' ? 'نشط' : 'في انتظار الموافقة';
+                    const avatarSrc = driver.profilePic || `https://ui-avatars.com/api/?name=${encodeURIComponent(driver.name)}&background=0D8ABC&color=fff`;
+
                     driverCard.innerHTML = `
                         <div class="driver-header">
-                            <span class="status-badge ${driver.status === 'active' ? 'status-active' : 'status-pending'}">${translations[currentLanguage][`status${driver.status.charAt(0).toUpperCase() + driver.status.slice(1)}`]}</span>
+                            <span class="status-badge ${statusClass}">${statusText}</span>
                             <div class="driver-avatar">
-                                ${driver.avatar ? `<img src="${driver.avatar}" alt="Driver Avatar">` : `<i class="fas fa-user-circle"></i>`}
+                                <img src="${avatarSrc}" alt="${driver.name}">
                             </div>
                             <h3 class="driver-name">${driver.name}</h3>
-                            <p class="driver-id">ID: ${driver.id}</p>
+                            <div class="driver-id">ID: #${driver.id.toString().padStart(4, '0')}</div>
                         </div>
                         <div class="driver-details">
                             <div class="detail-item">
-                                <div class="detail-icon"><i class="fas fa-envelope"></i></div>
-                                <div class="detail-text">
-                                    <h4 data-lang-key="emailDetail">${translations[currentLanguage].emailDetail}</h4>
-                                    <p>${driver.email}</p>
+                                <div class="detail-icon">
+                                    <i class="fas fa-phone"></i>
                                 </div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-icon"><i class="fas fa-phone"></i></div>
                                 <div class="detail-text">
-                                    <h4 data-lang-key="phoneDetail">${translations[currentLanguage].phoneDetail}</h4>
+                                    <h4>رقم الهاتف</h4>
                                     <p>${driver.phone}</p>
                                 </div>
                             </div>
                             <div class="detail-item">
-                                <div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div>
+                                <div class="detail-icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
                                 <div class="detail-text">
-                                    <h4 data-lang-key="addressLabel">${translations[currentLanguage].addressLabel}</h4>
-                                    <p>${driver.address}</p>
+                                    <h4>تاريخ التسجيل</h4>
+                                    <p>${new Date(driver.registrationDate).toLocaleDateString('ar-EG')}</p>
                                 </div>
                             </div>
+                            ${driver.idPic ? `<div class="detail-item">
+                                <div class="detail-icon"><i class="fas fa-id-card"></i></div>
+                                <div class="detail-text"><h4>صورة الهوية</h4><p>مرفقة</p></div>
+                            </div>` : ''}
+                            ${driver.licensePic ? `<div class="detail-item">
+                                <div class="detail-icon"><i class="fas fa-address-card"></i></div>
+                                <div class="detail-text"><h4>صورة الرخصة</h4><p>مرفقة</p></div>
+                            </div>` : ''}
+                            ${driver.bikePic ? `<div class="detail-item">
+                                <div class="detail-icon"><i class="fas fa-motorcycle"></i></div>
+                                <div class="detail-text"><h4>صورة الدراجة</h4><p>مرفقة</p></div>
+                            </div>` : ''}
                         </div>
-                        <button class="delete-driver-btn" data-driver-id="${driver.id}" data-lang-key="deleteDriverButton">
-                            <i class="fas fa-trash-alt"></i> ${translations[currentLanguage].deleteDriverButton}
+                        <button class="delete-driver-btn" data-id="${driver.id}">
+                            <i class="fas fa-trash-alt"></i> حذف السائق
                         </button>
                     `;
-                    driversGrid.appendChild(driverCard);
+                    driversList.appendChild(driverCard);
                 });
 
-                // Attach delete event listeners after rendering
                 document.querySelectorAll('.delete-driver-btn').forEach(button => {
                     button.addEventListener('click', (e) => {
-                        const driverId = e.target.closest('.delete-driver-btn').getAttribute('data-driver-id');
-                        deleteDriver(driverId);
+                        const driverId = parseInt(e.target.dataset.id);
+                        if (confirm(`هل أنت متأكد من حذف السائق رقم #${driverId.toString().padStart(4, '0')} (${driversData.find(d => d.id === driverId)?.name})؟`)) {
+                            deleteDriver(driverId);
+                        }
                     });
                 });
             }
+        }
+        
+        function deleteDriver(id) {
+            driversData = driversData.filter(driver => driver.id !== id);
+            saveDrivers();
+            loadDrivers();
+            showMessage(successAlert, 'تم حذف السائق بنجاح.', 'success');
+            setTimeout(() => hideMessage(successAlert), 3000);
+        }
 
-            // Function to add a driver
-            document.getElementById('addDriverForm').addEventListener('submit', (e) => {
-                e.preventDefault();
-                hideMessage('addDriverError');
-                hideMessage('addDriverSuccess');
+        function resetFileNames() {
+            profileFileName.textContent = 'لم يتم رفع أي ملف';
+            idFileName.textContent = 'لم يتم رفع أي ملف';
+            licenseFileName.textContent = 'لم يتم رفع أي ملف';
+            bikeFileName.textContent = 'لم يتم رفع أي ملف';
+            
+            profileInput.value = '';
+            idInput.value = '';
+            licenseInput.value = '';
+            bikeInput.value = '';
+        }
 
-                const name = document.getElementById('driverName').value;
-                const email = document.getElementById('driverEmail').value;
-                const phone = document.getElementById('driverPhone').value;
-                const address = document.getElementById('driverAddress').value;
-                const avatar = document.getElementById('driverAvatarBase64').value;
-
-                if (!name || !email || !phone || !address) {
-                    showMessage('addDriverError', 'allFieldsRequired');
-                    return;
-                }
-
-                const newDriver = {
-                    id: `DRV-${Date.now()}`,
-                    name,
-                    email,
-                    phone,
-                    address,
-                    avatar,
-                    status: 'active' // Default status
-                };
-
-                drivers.push(newDriver);
-                localStorage.setItem('drivers', JSON.stringify(drivers));
-                renderDrivers();
-                showMessage('addDriverSuccess', 'addDriverSuccess', false);
-                document.getElementById('addDriverForm').reset();
-                document.getElementById('driverAvatarFileName').textContent = translations[currentLanguage].browseText;
-                document.getElementById('driverAvatarBase64').value = '';
-
-                // Optionally switch back to drivers list after a short delay
-                setTimeout(() => showDashboardSection('driversSection'), 1500);
-            });
-
-            // Function to delete a driver
-            function deleteDriver(id) {
-                if (confirm(translations[currentLanguage].confirmDeleteDriver || 'هل أنت متأكد أنك تريد حذف هذا السائق؟')) {
-                    drivers = drivers.filter(driver => driver.id !== id);
-                    localStorage.setItem('drivers', JSON.stringify(drivers));
-                    renderDrivers();
-                    showMessage('addDriverSuccess', 'deleteDriverSuccess', false); // Using addDriverSuccess for general success messages
-                }
+        function populateSettingsForm() {
+            if (currentLoggedInUser) {
+                settingsUserNameInput.value = currentLoggedInUser.fullName;
+                settingsEmailInput.value = currentLoggedInUser.email;
+                settingsUserAvatar.src = currentLoggedInUser.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(currentLoggedInUser.fullName)}&background=0D8ABC&color=fff`;
             }
+        }
 
-            // Initial render of drivers when drivers section is first shown
-            if (document.getElementById('driversSection').style.display === 'block') {
-                renderDrivers();
-            }
+        function isValidEmail(email) {
+            return /\S+@\S+\.\S+/.test(email);
+        }
 
-            // File Upload for Add Driver
-            const driverAvatarDropArea = document.getElementById('driverAvatarDropArea');
-            const driverAvatarUpload = document.getElementById('driverAvatarUpload');
-            const driverAvatarFileName = document.getElementById('driverAvatarFileName');
-            const driverAvatarBase64 = document.getElementById('driverAvatarBase64');
+        function isValidPhoneNumber(phone) {
+            // Basic validation for Mauritanian numbers: starts with +222 and 8 digits
+            return /^\+222\d{8}$/.test(phone);
+        }
 
-            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-                driverAvatarDropArea.addEventListener(eventName, preventDefaults, false);
-            });
+        // --- Event Listeners ---
 
-            function preventDefaults(e) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-
-            ['dragenter', 'dragover'].forEach(eventName => {
-                driverAvatarDropArea.addEventListener(eventName, () => driverAvatarDropArea.classList.add('highlight'), false);
-            });
-
-            ['dragleave', 'drop'].forEach(eventName => {
-                driverAvatarDropArea.addEventListener(eventName, () => driverAvatarDropArea.classList.remove('highlight'), false);
-            });
-
-            driverAvatarDropArea.addEventListener('drop', handleDrop, false);
-            driverAvatarDropArea.addEventListener('click', () => driverAvatarUpload.click(), false);
-            driverAvatarUpload.addEventListener('change', handleFiles, false);
-
-            function handleDrop(e) {
-                const dt = e.dataTransfer;
-                const files = dt.files;
-                handleFiles({ target: { files: files } });
-            }
-
-            function handleFiles(e) {
-                const files = e.target.files;
-                if (files.length > 0) {
-                    const file = files[0];
-                    driverAvatarFileName.textContent = file.name;
-                    const reader = new FileReader();
-                    reader.onloadend = () => {
-                        driverAvatarBase64.value = reader.result;
-                    };
-                    reader.readAsDataURL(file);
+        // Tab switching logic
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                loginTab.classList.remove('active');
+                signupTab.classList.remove('active');
+                
+                if (tab.dataset.tab === 'login') {
+                    loginTab.classList.add('active');
                 } else {
-                    driverAvatarFileName.textContent = translations[currentLanguage].browseText;
-                    driverAvatarBase64.value = '';
+                    signupTab.classList.add('active');
                 }
+                hideMessage(errorMessage);
+            });
+        });
+        
+        goToSignup.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelector('.tab[data-tab="signup"]').click();
+        });
+        
+        goToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelector('.tab[data-tab="login"]').click();
+        });
+        
+        // Login event
+        loginBtn.addEventListener('click', () => {
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+            
+            if (!username || !password) {
+                showMessage(errorMessage, 'الرجاء إدخال اسم المستخدم وكلمة المرور.', 'error');
+                if (!username) shakeInput(usernameInput);
+                if (!password) shakeInput(passwordInput);
+                return;
             }
 
-            // Profile Settings Logic
-            const settingsUsername = document.getElementById('settingsUsername');
-            const settingsEmail = document.getElementById('settingsEmail');
-            const settingsAvatarPreview = document.getElementById('settingsAvatarPreview');
-            const settingsAvatarUpload = document.getElementById('settingsAvatarUpload');
-            const settingsAvatarBase64 = document.getElementById('settingsAvatarBase64');
-            const changeAvatarText = document.getElementById('changeAvatarText');
+            const user = users.find(u => u.email === username && u.password === password);
 
-            document.getElementById('profileSettingsBtn').addEventListener('click', (e) => {
-                e.preventDefault();
-                showDashboardSection('settingsSection');
-                const user = JSON.parse(localStorage.getItem('loggedInUser'));
-                if (user) {
-                    settingsUsername.value = user.username;
-                    settingsEmail.value = user.email;
-                    settingsAvatarPreview.src = user.avatar || "https://via.placeholder.com/110/3499db/FFFFFF?text=A";
-                    settingsAvatarBase64.value = user.avatar || "";
-                    hideMessage('profileError');
-                    hideMessage('profileSuccess');
-                }
+            if (user) {
+                currentLoggedInUser = user;
+                saveLoggedInUser();
+                loginPage.style.display = 'none';
+                dashboard.style.display = 'block';
+                updateHeaderUserInfo();
+                showView(dashboardView);
+                loadDrivers();
+            } else {
+                showMessage(errorMessage, 'اسم المستخدم أو كلمة المرور غير صحيحة. الرجاء المحاولة مرة أخرى.', 'error');
+                shakeInput(usernameInput);
+                shakeInput(passwordInput);
+            }
+        });
+        
+        // Signup event
+        signupBtn.addEventListener('click', () => {
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phoneNumber').value.trim();
+            const newPassword = document.getElementById('newPassword').value.trim();
+            const confirmPassword = document.getElementById('confirmPassword').value.trim();
+            
+            hideMessage(errorMessage);
+
+            if (!fullName || !email || !phone || !newPassword || !confirmPassword) {
+                showMessage(errorMessage, 'الرجاء ملء جميع الحقول المطلوبة.', 'error');
+                return;
+            }
+
+            if (!isValidEmail(email)) {
+                showMessage(errorMessage, 'الرجاء إدخال بريد إلكتروني صحيح.', 'error', document.getElementById('email'));
+                return;
+            }
+
+            if (newPassword.length < 6) {
+                showMessage(errorMessage, 'يجب أن لا تقل كلمة المرور عن 6 أحرف.', 'error', document.getElementById('newPassword'));
+                return;
+            }
+            
+            if (newPassword !== confirmPassword) {
+                showMessage(errorMessage, 'كلمتا المرور غير متطابقتين.', 'error', document.getElementById('confirmPassword'));
+                shakeInput(document.getElementById('newPassword'));
+                return;
+            }
+
+            if (users.some(u => u.email === email)) {
+                showMessage(errorMessage, 'هذا البريد الإلكتروني مسجل بالفعل. الرجاء تسجيل الدخول أو استخدام بريد إلكتروني آخر.', 'error', document.getElementById('email'));
+                return;
+            }
+            
+            users.push({
+                id: users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1, // Assign a unique ID
+                fullName,
+                email,
+                phone,
+                password: newPassword,
+                avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(fullName)}&background=0D8ABC&color=fff`
             });
-
-            settingsAvatarPreview.addEventListener('click', () => settingsAvatarUpload.click());
-            changeAvatarText.addEventListener('click', () => settingsAvatarUpload.click());
-
-            settingsAvatarUpload.addEventListener('change', (e) => {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = (event) => {
-                        settingsAvatarPreview.src = event.target.result;
-                        settingsAvatarBase64.value = event.target.result;
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-
-            document.getElementById('profileSettingsForm').addEventListener('submit', (e) => {
-                e.preventDefault();
-                hideMessage('profileError');
-                hideMessage('profileSuccess');
-
-                const user = JSON.parse(localStorage.getItem('loggedInUser'));
-                if (user) {
-                    user.username = settingsUsername.value;
-                    user.email = settingsEmail.value;
-                    user.avatar = settingsAvatarBase64.value;
-
-                    users[user.username] = user; // Update in global users object
-                    localStorage.setItem('users', JSON.stringify(users));
-                    localStorage.setItem('loggedInUser', JSON.stringify(user)); // Update logged in user
-                    updateLoggedInUserInfo();
-                    showMessage('profileSuccess', 'profileUpdateSuccess', false);
-                } else {
-                    showMessage('profileError', 'profileUpdateError');
-                }
-            });
-
-            document.getElementById('changePasswordForm').addEventListener('submit', (e) => {
-                e.preventDefault();
-                hideMessage('passwordError');
-                hideMessage('passwordSuccess');
-
-                const currentPassword = document.getElementById('currentPassword').value;
-                const newPassword = document.getElementById('newPassword').value;
-                const confirmNewPassword = document.getElementById('confirmNewPassword').value;
-
-                const user = JSON.parse(localStorage.getItem('loggedInUser'));
-
-                if (!currentPassword || !newPassword || !confirmNewPassword) {
-                    showMessage('passwordError', 'allFieldsRequired');
-                    return;
-                }
-                if (user.password !== currentPassword) {
-                    showMessage('passwordError', 'passwordUpdateError', true); // Removed custom message string
-                    return;
-                }
-                if (newPassword !== confirmNewPassword) {
-                    showMessage('passwordError', 'passwordsDoNotMatch');
-                    return;
-                }
-                if (newPassword === currentPassword) {
-                   showMessage('passwordError', 'passwordUpdateError', true); // Removed custom message string
-                   return;
-                }
-
-                user.password = newPassword;
-                users[user.username] = user; // Update in global users object
-                localStorage.setItem('users', JSON.stringify(users));
-                localStorage.setItem('loggedInUser', JSON.stringify(user)); // Update logged in user
-                showMessage('passwordSuccess', 'passwordUpdateSuccess', false);
-                document.getElementById('changePasswordForm').reset();
-            });
-
-            // Ensure drivers are rendered when the drivers section is activated
-            const observer = new MutationObserver((mutationsList) => {
-                for (const mutation of mutationsList) {
-                    if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
-                        if (document.getElementById('driversSection').style.display === 'block') {
-                            renderDrivers();
+            saveUsers();
+            
+            alert(`تم إنشاء حساب بنجاح!\nيمكنك الآن تسجيل الدخول.`);
+            
+            document.querySelector('.tab[data-tab="login"]').click();
+            usernameInput.value = email;
+            passwordInput.value = newPassword;
+        });
+        
+        // Social login (mock)
+        googleLogin.addEventListener('click', () => {
+            alert('سيتم محاكاة تسجيل الدخول باستخدام Google. لن يتم تسجيل حساب جديد فعليًا.');
+            currentLoggedInUser = { id: Date.now(), fullName: 'مستخدم جوجل', email: 'google_user@example.com', avatar: 'https://ui-avatars.com/api/?name=مستخدم+جوجل&background=DB4437&color=fff' };
+            if (!users.some(u => u.email === currentLoggedInUser.email)) {
+                users.push(currentLoggedInUser);
+                saveUsers();
+            }
+            saveLoggedInUser();
+            loginPage.style.display = 'none';
+            dashboard.style.display = 'block';
+            updateHeaderUserInfo();
+            showView(dashboardView);
+            loadDrivers();
+        });
+        
+        facebookLogin.addEventListener('click', () => {
+            alert('سيتم محاكاة تسجيل الدخول باستخدام Facebook. لن يتم تسجيل حساب جديد فعليًا.');
+            currentLoggedInUser = { id: Date.now(), fullName: 'مستخدم فيسبوك', email: 'facebook_user@example.com', avatar: 'https://ui-avatars.com/api/?name=مستخدم+فيسبوك&background=4267B2&color=fff' };
+            if (!users.some(u => u.email === currentLoggedInUser.email)) {
+                users.push(currentLoggedInUser);
+                saveUsers();
+            }
+            saveLoggedInUser();
+            loginPage.style.display = 'none';
+            dashboard.style.display = 'block';
+            updateHeaderUserInfo();
+            showView(dashboardView);
+            loadDrivers();
+        });
+        
+        phoneLogin.addEventListener('click', () => {
+            const phoneNumber = prompt('الرجاء إدخال رقم الهاتف الموريتاني (مثال: +22212345678):');
+            if (phoneNumber) {
+                if (isValidPhoneNumber(phoneNumber)) {
+                    alert(`تم إرسال رمز التحقق إلى ${phoneNumber}`);
+                    const code = prompt('الرجاء إدخال رمز التحقق الذي تم إرساله (الكود التجريبي: 1234):');
+                    if (code === '1234') {
+                        currentLoggedInUser = { id: Date.now(), fullName: `مستخدم هاتف (${phoneNumber})`, email: `phone_${phoneNumber}@example.com`, avatar: `https://ui-avatars.com/api/?name=مستخدم+هاتف&background=25D366&color=fff` };
+                        if (!users.some(u => u.email === currentLoggedInUser.email)) {
+                            users.push(currentLoggedInUser);
+                            saveUsers();
                         }
+                        saveLoggedInUser();
+                        loginPage.style.display = 'none';
+                        dashboard.style.display = 'block';
+                        updateHeaderUserInfo();
+                        showView(dashboardView);
+                        loadDrivers();
+                    } else {
+                        alert('رمز التحقق غير صحيح');
+                    }
+                } else {
+                    alert('رقم الهاتف غير صالح. الرجاء استخدام تنسيق موريتاني صحيح (+222xxxxxxxx).');
+                }
+            }
+        });
+        
+        // Navigation events
+        navDashboard.addEventListener('click', () => showView(dashboardView));
+        navDrivers.addEventListener('click', () => {
+            showView(driversView);
+            loadDrivers();
+        });
+        navAddDriver.addEventListener('click', () => {
+            showView(addDriverView);
+            hideMessage(successAlert);
+            hideMessage(driverFormError);
+            driverForm.reset();
+            resetFileNames();
+        });
+        navReports.addEventListener('click', () => alert('صفحة التقارير والإحصائيات قيد الإنشاء. ترقبوا المزيد!'));
+        navSettings.addEventListener('click', () => {
+            showView(settingsView);
+            hideMessage(settingsSuccessAlert);
+            hideMessage(settingsErrorAlert);
+        });
+        // navSupport's href is already updated in HTML
+
+        addDriverBtn.addEventListener('click', () => {
+            showView(addDriverView);
+            hideMessage(successAlert);
+            hideMessage(driverFormError);
+            driverForm.reset();
+            resetFileNames();
+        });
+        startBtn.addEventListener('click', () => {
+            showView(driversView);
+            loadDrivers();
+        });
+        cancelBtn.addEventListener('click', () => {
+            showView(driversView);
+            driverForm.reset();
+            resetFileNames();
+            hideMessage(successAlert);
+            hideMessage(driverFormError);
+        });
+        
+        // User Info Dropdown Toggle
+        userInfo.addEventListener('click', (event) => {
+            event.stopPropagation();
+            userDropdownMenu.classList.toggle('show');
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!userInfo.contains(event.target) && !userDropdownMenu.contains(event.target)) {
+                userDropdownMenu.classList.remove('show');
+            }
+        });
+
+        dropdownSettingsBtn.addEventListener('click', () => {
+            showView(settingsView);
+            hideMessage(settingsSuccessAlert);
+            hideMessage(settingsErrorAlert);
+        });
+
+        dropdownLogoutBtn.addEventListener('click', () => {
+            handleLogout();
+        });
+
+        settingsLogoutBtn.addEventListener('click', () => {
+            handleLogout();
+        });
+
+        function handleLogout() {
+            if (confirm('هل أنت متأكد من تسجيل الخروج؟')) {
+                currentLoggedInUser = null;
+                localStorage.removeItem('currentLoggedInUser');
+                dashboard.style.display = 'none';
+                loginPage.style.display = 'flex';
+                usernameInput.value = '';
+                passwordInput.value = '';
+                hideMessage(errorMessage);
+                showView(dashboardView); 
+                updateHeaderUserInfo();
+            }
+        }
+        
+        // File upload event listeners (Add Driver Form)
+        profileUpload.addEventListener('click', () => profileInput.click());
+        profileInput.addEventListener('change', () => {
+            profileFileName.textContent = profileInput.files.length > 0 ? profileInput.files[0].name : 'لم يتم رفع أي ملف';
+        });
+        
+        idUpload.addEventListener('click', () => idInput.click());
+        idInput.addEventListener('change', () => {
+            idFileName.textContent = idInput.files.length > 0 ? idInput.files[0].name : 'لم يتم رفع أي ملف';
+        });
+        
+        licenseUpload.addEventListener('click', () => licenseInput.click());
+        licenseInput.addEventListener('change', () => {
+            licenseFileName.textContent = licenseInput.files.length > 0 ? licenseInput.files[0].name : 'لم يتم رفع أي ملف';
+        });
+        
+        bikeUpload.addEventListener('click', () => bikeInput.click());
+        bikeInput.addEventListener('change', () => {
+            bikeFileName.textContent = bikeInput.files.length > 0 ? bikeInput.files[0].name : 'لم يتم رفع أي ملف';
+        });
+        
+        // Driver form submission
+        driverForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            hideMessage(driverFormError);
+            hideMessage(successAlert);
+
+            const driverName = document.getElementById('driverName').value.trim();
+            const driverPhone = document.getElementById('driverPhone').value.trim();
+            const profilePicFile = profileInput.files[0];
+            const idPicFile = idInput.files[0];
+            const licensePicFile = licenseInput.files[0];
+            const bikePicFile = bikeInput.files[0];
+
+            if (!driverName || !driverPhone) {
+                showMessage(driverFormError, 'الرجاء ملء اسم السائق ورقم الهاتف.', 'error');
+                if (!driverName) shakeInput(document.getElementById('driverName'));
+                if (!driverPhone) shakeInput(document.getElementById('driverPhone'));
+                return;
+            }
+
+            if (!isValidPhoneNumber(driverPhone)) {
+                showMessage(driverFormError, 'الرجاء إدخال رقم هاتف موريتاني صالح (مثال: +222xxxxxxx).', 'error', document.getElementById('driverPhone'));
+                return;
+            }
+
+            // Client-side enforcement for required files (customize as needed)
+            if (!profilePicFile) {
+                showMessage(driverFormError, 'الرجاء رفع صورة شخصية للسائق.', 'error');
+                shakeInput(profileUpload);
+                return;
+            }
+            if (!idPicFile) {
+                showMessage(driverFormError, 'الرجاء رفع صورة هوية السائق.', 'error');
+                shakeInput(idUpload);
+                return;
+            }
+            if (!licensePicFile) {
+                showMessage(driverFormError, 'الرجاء رفع صورة رخصة قيادة السائق.', 'error');
+                shakeInput(licenseUpload);
+                return;
+            }
+            if (!bikePicFile) {
+                showMessage(driverFormError, 'الرجاء رفع صورة الدراجة.', 'error');
+                shakeInput(bikeUpload);
+                return;
+            }
+
+            const getFileURL = (file) => file ? URL.createObjectURL(file) : '';
+
+            const newDriver = {
+                id: driversData.length > 0 ? Math.max(...driversData.map(d => d.id)) + 1 : 1,
+                name: driverName,
+                phone: driverPhone,
+                profilePic: getFileURL(profilePicFile),
+                idPic: getFileURL(idPicFile),
+                licensePic: getFileURL(licensePicFile),
+                bikePic: getFileURL(bikePicFile),
+                status: "pending",
+                registrationDate: new Date().toISOString()
+            };
+            
+            driversData.push(newDriver);
+            saveDrivers();
+
+            showMessage(successAlert, 'تم إضافة السائق بنجاح إلى قاعدة البيانات.', 'success');
+            
+            setTimeout(() => {
+                hideMessage(successAlert);
+                showView(driversView);
+                driverForm.reset();
+                resetFileNames();
+                loadDrivers();
+            }, 2000); // Reduced delay
+        });
+
+        // Settings form submission
+        profileSettingsForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            hideMessage(settingsErrorAlert);
+            hideMessage(settingsSuccessAlert);
+
+            const newUserName = settingsUserNameInput.value.trim();
+            const newAvatarFile = settingsAvatarInput.files[0];
+
+            if (!newUserName) {
+                showMessage(settingsErrorAlert, 'الرجاء إدخال اسم المستخدم.', 'error', settingsUserNameInput);
+                return;
+            }
+
+            if (currentLoggedInUser) {
+                currentLoggedInUser.fullName = newUserName;
+                
+                if (newAvatarFile) {
+                    currentLoggedInUser.avatar = URL.createObjectURL(newAvatarFile);
+                }
+                
+                const userIndex = users.findIndex(u => u.email === currentLoggedInUser.email);
+                if (userIndex !== -1) {
+                    users[userIndex].fullName = currentLoggedInUser.fullName;
+                    if (newAvatarFile) {
+                        users[userIndex].avatar = currentLoggedInUser.avatar;
                     }
                 }
-            });
-            observer.observe(document.getElementById('driversSection'), { attributes: true });
 
+                saveUsers();
+                saveLoggedInUser();
+                updateHeaderUserInfo();
+                
+                showMessage(settingsSuccessAlert, 'تم تحديث إعدادات ملفك الشخصي.', 'success');
+                settingsAvatarInput.value = '';
+            } else {
+                showMessage(settingsErrorAlert, 'لم يتم تسجيل الدخول. لا يمكن حفظ الإعدادات.', 'error');
+            }
+
+            setTimeout(() => {
+                hideMessage(settingsSuccessAlert);
+                hideMessage(settingsErrorAlert);
+            }, 2000); // Reduced delay
+        });
+
+        settingsUserAvatar.addEventListener('click', () => settingsAvatarInput.click());
+        settingsAvatarText.addEventListener('click', () => settingsAvatarInput.click());
+        settingsAvatarInput.addEventListener('change', () => {
+            if (settingsAvatarInput.files.length > 0) {
+                const file = settingsAvatarInput.files[0];
+                settingsUserAvatar.src = URL.createObjectURL(file);
+                settingsAvatarText.textContent = file.name;
+            } else {
+                settingsAvatarText.textContent = 'تغيير الصورة الشخصية';
+            }
+        });
+
+
+        // Initial load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (loadLoggedInUser()) {
+                loginPage.style.display = 'none';
+                dashboard.style.display = 'block';
+                showView(dashboardView);
+                loadDrivers();
+            } else {
+                loginPage.style.display = 'flex';
+                dashboard.style.display = 'none';
+            }
+            updateHeaderUserInfo();
         });
     </script>
 </body>
